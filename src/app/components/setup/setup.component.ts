@@ -3,6 +3,7 @@ import { SetupData } from '../../models/setupData';
 import { FormBuilder } from '@angular/forms';
 import { WannabeDAOService } from '../../services/wannabe-dao.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { OwnerRecord } from 'src/app/models/ownerRecord';
 
 
 @Component({
@@ -11,7 +12,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   styleUrls: ['./setup.component.css']
 })
 export class SetupComponent implements OnInit {
-  draftData: SetupData = new SetupData('initial',0,0,[]);
+  draftData: SetupData;
   wannabeDAO: WannabeDAOService;
   index: number;
   draftOrderIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -19,13 +20,6 @@ export class SetupComponent implements OnInit {
 
   constructor(wannabeDAO: WannabeDAOService) {
       this.wannabeDAO = wannabeDAO;
-
-      this.draftData = wannabeDAO.getFakeSetup();
-      this.wannabeDAO.getDraftInfo().subscribe((response: SetupData) => {
-     this.draftData = response;
-      console.log('The draft name inside response is ' + this.draftData.draftName);
-     });
-      console.log('The draft name outside response is ' + this.draftData.draftName);
    }
 
    changeLeague() {
@@ -35,8 +29,12 @@ export class SetupComponent implements OnInit {
      this.wannabeDAO.storeSetupData(this.draftData);
    }
   ngOnInit() {
-     this.wannabeDAO.getDraftInfo().subscribe((response: SetupData) => {
-     this.draftData = response;
+     this.wannabeDAO.getDraftInfo().subscribe((response: OwnerRecord[]) => {
+      const teams = response;
+      this.draftData.draftName = teams[0].draftName;
+      this.draftData.budget = teams[0].remainingBudget;
+      this.draftData.leagueSize = teams.length;
+      this.draftData.teams = teams;
      });
   }
   drop(event: CdkDragDrop<string[]>) {
