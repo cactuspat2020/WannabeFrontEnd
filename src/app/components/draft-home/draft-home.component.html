@@ -1,0 +1,22 @@
+
+
+<mat-card align=center width=80% class="testCard">
+<p  class="welcomemessage"> Welcome to the Wannabe Draft App! </p>
+    <mat-card-content>
+        <mat-form-field>
+        <!-- <mat-label class="selectLabel">Select your Team</mat-label> -->
+        <select class = "select-css" (change)="selectChange()" [(ngModel)]="draftOwner">
+          <option hidden [value]=""  selected>Select your team </option>
+          <option  *ngFor="let team of teams" >
+            {{team.teamName}}
+          </option>
+        </select>
+      </mat-form-field>
+      <p></p>
+
+      <img class=raiders width=50% src="http://fantasy.img.cbssports.com/G/football/leagues/lbe/wannabbe/images/league-logo/32556800-8F81-11E9-9B43-D465D1DAD486-800x600.jpg" alt="Photo of a Shiba Inu">
+        <p></p>
+      <button mat-raised-button (click)="btnClick()" color="primary">Enter Draft</button>
+
+      </mat-card-content>
+</mat-card>

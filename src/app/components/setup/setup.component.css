@@ -1,0 +1,28 @@
+mat-form-field.inputFormField { padding-bottom: 1cm }
+
+label {padding-top: 10px}
+/* input {width:90px} */
+
+.draft-name-width {width:120px}
+.budget-width {width:80px}
+.league-size-width {
+  width:100px;
+  margin-bottom: 30px;
+}
+
+.btn-success { margin-top: 50px}
+
+table {
+  border: 1px;
+}
+/* table, th, tr, td {
+  border: none
+} */
+td, th {
+  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-right: 20px;
+  padding-left: 20px;
+  align-content: center;
+  align-self: center;
+}

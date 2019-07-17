@@ -1,0 +1,47 @@
+<div class="draft-status">
+    <label class="bid-information">Player: </label> &nbsp;&nbsp;     <label class="player-info"> {{currentBid.playerName}}</label><br>
+    <label class="bid-information">Bidding Team: </label> &nbsp; &nbsp;    <label class="player-info"> {{currentBid.teamName}}</label><br>
+    <label class="bid-information">Current Bid: </label> &nbsp; &nbsp;    <label class="player-info"> {{currentBid.amount}}</label><br>
+</div>
+<hr>
+<div align=center width=30%>
+<form (ngSubmit)="onSubmit()" #setupForm="ngForm" class="example-form">
+    <label for="position">Select Position</label>
+    <select width=30% (change)="selectPlayers()" type="string" class="form-control position-width" id="position"
+    [(ngModel)]="positionSelection" name="position" #position="ngModel">
+    <option value="QB">QB</option>
+    <option value="RB">RB</option>
+    <option value="WR">WR</option>
+    <option value="TE">TE</option>
+    <option value="K">K</option>
+    <option value="DST">DST</option>
+  </select>
+</form>
+</div>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Pick</th>
+      <th scope="col">Team</th>
+      <th scope="col">Pos</th>
+      <th scope="col">Player_Name</th>
+      <th scope="col">NFLTeam</th>
+      <th scope="col">Cost</th>
+      <th scope="col">FPoints</th>
+      <th scope="col">ByeWeek</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let result of playerList ; index as i">
+      <!-- <th scope="row">{{ i + 1 }}</th> -->
+      <td>{{ result.Pick }}</td>
+      <td>{{ result.owner }}</td>
+      <td>{{ result.position }}</td>
+      <td>{{ result.playerName }}</td>
+      <td>{{ result.NFLTeam }}</td>
+      <td>{{ result.wannabePrice | number }}</td>
+      <td>{{ result.fantasyPoints | number }}</td>
+      <td>{{ result.byeWeek | number }}</td>
+    </tr>
+    </tbody>
+  </table>

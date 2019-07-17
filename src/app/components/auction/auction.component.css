@@ -1,0 +1,19 @@
+
+.bid-information {
+  font-size: 24px;
+  font: Arial;
+  color: darkolivegreen;
+}
+.player-info {
+  font-size: 24px;
+  font: Arial;
+  color: black;
+}
+
+.draft-status {
+  margin-top: 30px;
+  margin-left: 30px;
+}
+.position-width {
+  width: 20%;
+}

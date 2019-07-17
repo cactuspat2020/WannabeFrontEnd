@@ -1,0 +1,86 @@
+<div align=center>
+  DraftName = {{draftData.draftName}}
+  <form (ngSubmit)="onSubmit()" #setupForm="ngForm" class="example-form">
+
+    <label for="draftName">Draft name</label>
+    <input width=150px type="text" class="form-control draft-name-width" id="draftName"
+      [(ngModel)]="draftData.draftName" name="draftName" #draftName="ngModel">
+
+    <label for="budget">Budget</label>
+    <input type="text" width=80px class="form-control budget-width" id="budget" [(ngModel)]="draftData.budget"
+      name="budget" #budget="ngModel">
+
+    <label for="leagueSize">League Size</label>
+    <select (change)="changeLeague()" type="number" class="form-control league-size-width" id="leagueSize"
+      [(ngModel)]="draftData.leagueSize" name="leagueSize" #leagueSize="ngModel">
+      <option value=8>8 teams</option>
+      <option value=10>10 teams</option>
+      <option value=12>12 teams</option>
+    </select>
+
+    <H3>League Teams</H3>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let owner of draftData.teams; let i = index" cdkDrag>
+      <table>
+        <ng-container *ngIf='0 == i'>
+          <tr>
+            <th width=192px>Team Name</th>
+            <th width=192px>Owner</th>
+            <th width=82px>Draft Order</th>
+            <th width=52px>Admin</th>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf='i <= draftData.leagueSize'>
+          <tr>
+            <td width=192px>
+              <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].teamName" name="team{{i}}"
+                #team[i]="ngModel">
+            </td>
+            <td width=192px>
+              <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].ownerName" name="owner{{i}}"
+                #owner[i]="ngModel">
+            </td>
+            <td width=82px>
+              <select type="number" width=40px id="{{i}}" [(ngModel)]="draftData.teams[i].draftOrder" name="order{{i}}"
+                #order[i]="ngModel">
+                <option [value]="position" *ngFor="let position of selectorIndex">{{position}}</option>
+              </select>
+            </td>
+            <td width=83px>
+              <input type="checkbox" id="{{i}}" [(ngModel)]="draftData.teams[i].isAdmin" name="admin{{i}}"
+                #admin[i]="ngModel">
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+
+
+      <!-- <label for={{i}}>Team{{i}}</label>
+    <input type="text" width=80px id="{{i}}"
+    [(ngModel)]="draftData.teams[i].teamName" name="{{i}}"
+    #[i]="ngModel"> -->
+
+
+    </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+
+
+<!-- <p align=center padding-bottom=1cm >
+ Enter the Draft Name:
+
+  <mat-form-field class="inputFormField">
+    <input matInput placeholder="draftName">
+  </mat-form-field>
+
+  <mat-form-field>
+  <mat-select with=30%>
+      <mat-option value="8">8 Team</mat-option>
+      <mat-option value="10">10 Team</mat-option>
+      <mat-option value="12">12 Team</mat-option>
+  </mat-select>
+  </mat-form-field>
+</p> -->
