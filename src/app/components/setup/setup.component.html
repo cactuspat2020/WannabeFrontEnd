@@ -19,19 +19,28 @@
     </select>
 
     <H3>League Teams</H3>
+    <table>
+        <ng-container>
+          <tr>
+            <th width=82px>Order</th>
+            <th width=192px>Team Name</th>
+            <th width=192px>Owner</th>
+            <!-- <th width=52px>Admin</th> -->
+          </tr>
+        </ng-container>
+    </table>
     <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
     <div *ngFor="let owner of draftData.teams; let i = index" cdkDrag>
       <table>
-        <ng-container *ngIf='0 == i'>
+        <ng-container *ngIf='i < draftData.leagueSize'>
           <tr>
-            <th width=192px>Team Name</th>
-            <th width=192px>Owner</th>
-            <th width=82px>Draft Order</th>
-            <th width=52px>Admin</th>
-          </tr>
-        </ng-container>
-        <ng-container *ngIf='i <= draftData.leagueSize'>
-          <tr>
+            <td align=center width=82px>
+            <mat-label width=82px>{{i+1}}</mat-label>
+              <!-- <select type="number" width=40px id="{{i}}" [(ngModel)]="draftData.teams[i].draftOrder" name="order{{i}}" -->
+                <!-- #order[i]="ngModel"> -->
+                <!-- <option [value]="position" *ngFor="let position of selectorIndex">{{position}}</option> -->
+              <!-- </select> -->
+            </td>
             <td width=192px>
               <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].teamName" name="team{{i}}"
                 #team[i]="ngModel">
@@ -40,16 +49,10 @@
               <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].ownerName" name="owner{{i}}"
                 #owner[i]="ngModel">
             </td>
-            <td width=82px>
-              <select type="number" width=40px id="{{i}}" [(ngModel)]="draftData.teams[i].draftOrder" name="order{{i}}"
-                #order[i]="ngModel">
-                <option [value]="position" *ngFor="let position of selectorIndex">{{position}}</option>
-              </select>
-            </td>
-            <td width=83px>
-              <input type="checkbox" id="{{i}}" [(ngModel)]="draftData.teams[i].isAdmin" name="admin{{i}}"
-                #admin[i]="ngModel">
-            </td>
+            <!-- <td width=83px> -->
+              <!-- <input type="checkbox" id="{{i}}" [(ngModel)]="draftData.teams[i].isAdmin" name="admin{{i}}" -->
+                <!-- #admin[i]="ngModel"> -->
+            <!-- </td> -->
           </tr>
         </ng-container>
       </table>

@@ -13,35 +13,26 @@ export class DraftHomeComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
   router: Router;
   teams: OwnerRecord[];
-  draftStatus: SetupData;
   draftOwner: string;
 
   constructor(wannabeDAO: WannabeDAOService, router: Router ) {
     this.wannabeDAO = wannabeDAO;
     this.router = router;
     this.draftOwner = 'none';
-    this.draftStatus = new SetupData('', 0, 0, []);
   }
   ngOnInit() {
-    // this.playerList = this.wannabeDAO.getPlayers('all', 'all');
-    this.wannabeDAO.getDraftInfo().subscribe((response: OwnerRecord[]) => {
-    this.teams = response;
-    this.draftStatus.draftName = this.teams[0].draftName;
-    this.draftStatus.budget = this.teams[0].remainingBudget;
-    this.draftStatus.leagueSize = this.teams.length;
-    this.draftStatus.teams = this.teams;
-    });
+    this.teams = this.wannabeDAO.getTeams();
   }
 
   selectChange() {
-    let a = this.draftOwner;
-    let b = a;
+      this.wannabeDAO.setDraftOwner(this.draftOwner);
   }
+
   btnClick() {
-    if(this.draftOwner == 'none') {
+    if (this.draftOwner === 'none') {
       alert ('Please choose your team before proceeding');
     } else {
-    this.router.navigate(['/auction']);
+      this.router.navigate(['/auction']);
     }
 }
 

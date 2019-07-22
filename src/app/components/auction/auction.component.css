@@ -1,11 +1,11 @@
 
 .bid-information {
-  font-size: 24px;
+  font-size: 16px;
   font: Arial;
   color: darkolivegreen;
 }
 .player-info {
-  font-size: 24px;
+  font-size: 16px;
   font: Arial;
   color: black;
 }
@@ -16,4 +16,48 @@
 }
 .position-width {
   width: 20%;
+}
+.head-label {
+  padding-right: 8px;
+  text-align: right;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  vertical-align: top;
+}
+.head-value {
+  padding-right: 8px;
+  text-align: left;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 14px;
+  /* font-weight: 800; */
+  vertical-align: top;
+}
+.ontheblock {
+  vertical-align: top;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+.top-table {
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+td.mat-cell {
+  padding-left: 20px;
+}
+
+th.mat-header-cell {
+  padding-left: 20px;
+}
+
+.tst {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.highlight{
+  background: antiquewhite;
 }

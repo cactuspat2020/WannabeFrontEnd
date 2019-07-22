@@ -14,9 +14,13 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatTableModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
+import { MatSortModule } from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 
 
@@ -25,13 +29,17 @@ import { WannabeDAOService } from './services/wannabe-dao.service';
 import { SetupComponent } from './components/setup/setup.component';
 import { RouterModule } from '@angular/router';
 import { AuctionComponent } from './components/auction/auction.component';
+import { DraftSelectionsComponent } from './components/draft-selections/draft-selections.component';
+import { TeamStatisticsComponent } from './components/team-statistics/team-statistics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DraftHomeComponent,
     SetupComponent,
-    AuctionComponent
+    AuctionComponent,
+    DraftSelectionsComponent,
+    TeamStatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +50,9 @@ import { AuctionComponent } from './components/auction/auction.component';
     DragDropModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatAutocompleteModule,
+    MatSortModule,
+    MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
@@ -56,6 +67,8 @@ import { AuctionComponent } from './components/auction/auction.component';
       { path: 'setup', component: SetupComponent },
       { path: 'auction', component: AuctionComponent },
       { path: 'login', component: DraftHomeComponent },
+      { path: 'status', component: DraftSelectionsComponent },
+      { path: 'stats', component: TeamStatisticsComponent },
     ])
   ],
   providers: [WannabeDAOService],

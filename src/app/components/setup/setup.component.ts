@@ -12,7 +12,7 @@ import { OwnerRecord } from 'src/app/models/ownerRecord';
   styleUrls: ['./setup.component.css']
 })
 export class SetupComponent implements OnInit {
-  draftData: SetupData;
+  draftData: SetupData = new SetupData('Initial', 200, 12, []);
   wannabeDAO: WannabeDAOService;
   index: number;
   draftOrderIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -29,16 +29,15 @@ export class SetupComponent implements OnInit {
      this.wannabeDAO.storeSetupData(this.draftData);
    }
   ngOnInit() {
-     this.wannabeDAO.getDraftInfo().subscribe((response: OwnerRecord[]) => {
-      const teams = response;
-      this.draftData.draftName = teams[0].draftName;
-      this.draftData.budget = teams[0].remainingBudget;
-      this.draftData.leagueSize = teams.length;
-      this.draftData.teams = teams;
-     });
+    this.draftData = this.wannabeDAO.getDraftInfo();
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.draftData.teams, event.previousIndex, event.currentIndex);
+    let index = 1;
+    this.draftData.teams.forEach(function (value) {
+      value.draftOrder = index;
+      index++;
+    })
   }
 
 }
