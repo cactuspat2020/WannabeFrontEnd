@@ -119,24 +119,35 @@ export class WannabeDAOService {
   public getTestPlayers(): PlayerRecord[] {
     return this.playerTest;
   }
-  public getPlayers(position): PlayerRecord[] {
-    let names = [];
 
-    for ( let player of this.draftedPlayers) {
+
+  // Get players by position
+  public getPlayers(position): PlayerRecord[] {
+    const names = [];
+
+    for ( const player of this.draftedPlayers) {
       names.push(player.playerName);
     }
 
     const filteredList = this.players.filter(availablePlayer => !names.includes(availablePlayer.playerName));
     let finalList = filteredList;
 
-    if (position != 'all') {
+    if (position !== 'all') {
       finalList = filteredList.filter(availablePlayer => availablePlayer.position === position);
     }
-
     return finalList;
-
   }
 
+  // Get Drafted players
+  public getDraftedPlayers(teamName): DraftedPlayerRecord[] {
+
+    if (teamName === 'all') {
+      return this.draftedPlayers;
+    }
+    return this.draftedPlayers.filter(player => player.ownerName === teamName);
+  }
+
+  // Get all the teams for the draft
   public getTeams(): OwnerRecord[] {
       return this.owners;
     }

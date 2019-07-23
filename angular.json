@@ -23,7 +23,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/minireset.css/minireset.css",
+              "src/styles.css",
+              "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -80,7 +82,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/igniteui-angular/styles/igniteui-angular.css"
             ],
             "scripts": [],
             "assets": [

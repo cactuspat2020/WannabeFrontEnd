@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';  // replaces previous Http service
+import { HttpClientModule } from '@angular/common/http'; // replaces previous Http service
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -15,15 +15,15 @@ import { MatTableModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTabsModule} from '@angular/material/tabs';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { IgxExcelExporterService } from "igniteui-angular";
+import { IgxGridModule } from "igniteui-angular";
 
-
-
-
+//I keep the new line
 import { DraftHomeComponent } from './components/draft-home/draft-home.component';
 import { WannabeDAOService } from './services/wannabe-dao.service';
 import { SetupComponent } from './components/setup/setup.component';
@@ -31,6 +31,7 @@ import { RouterModule } from '@angular/router';
 import { AuctionComponent } from './components/auction/auction.component';
 import { DraftSelectionsComponent } from './components/draft-selections/draft-selections.component';
 import { TeamStatisticsComponent } from './components/team-statistics/team-statistics.component';
+import { PlayersComponent } from './components/players/players.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TeamStatisticsComponent } from './components/team-statistics/team-stati
     SetupComponent,
     AuctionComponent,
     DraftSelectionsComponent,
-    TeamStatisticsComponent
+    TeamStatisticsComponent,
+    PlayersComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ import { TeamStatisticsComponent } from './components/team-statistics/team-stati
     MatToolbarModule,
     MatTabsModule,
     MatSelectModule,
+    IgxGridModule,
     RouterModule.forRoot([
       { path: '', component: DraftHomeComponent },
       { path: 'setup', component: SetupComponent },
@@ -69,9 +72,11 @@ import { TeamStatisticsComponent } from './components/team-statistics/team-stati
       { path: 'login', component: DraftHomeComponent },
       { path: 'status', component: DraftSelectionsComponent },
       { path: 'stats', component: TeamStatisticsComponent },
+      { path: 'players', component: PlayersComponent },
     ])
   ],
-  providers: [WannabeDAOService],
+  providers: [WannabeDAOService, IgxExcelExporterService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,4 +1,5 @@
 export class DraftedPlayerRecord {
+  draftOrder: number;
   position: string;
   playerName: string;
   NFLTeam: string;

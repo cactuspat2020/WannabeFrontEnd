@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'wannabe';
-  links = ['setup', 'Login', 'auction', 'status', 'stats'];
+  links = ['setup', 'Login', 'auction', 'status', 'players', 'stats'];
   activeLink = this.links[0];
   background = 'primary';
 }
