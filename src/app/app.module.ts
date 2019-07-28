@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatDialogModule} from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -32,6 +33,7 @@ import { AuctionComponent } from './components/auction/auction.component';
 import { DraftSelectionsComponent } from './components/draft-selections/draft-selections.component';
 import { TeamStatisticsComponent } from './components/team-statistics/team-statistics.component';
 import { PlayersComponent } from './components/players/players.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { PlayersComponent } from './components/players/players.component';
     AuctionComponent,
     DraftSelectionsComponent,
     TeamStatisticsComponent,
-    PlayersComponent
+    PlayersComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { PlayersComponent } from './components/players/players.component';
     DragDropModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatDialogModule,
     MatAutocompleteModule,
     MatSortModule,
     MatGridListModule,

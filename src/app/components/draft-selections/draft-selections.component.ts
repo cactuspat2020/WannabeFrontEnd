@@ -22,6 +22,7 @@ export class DraftSelectionsComponent implements OnInit {
   teams: OwnerRecord[];
   totalCount = 0;
   selectedCount = 0;
+  budgetMessage = ' ';
   public playerList: PlayerRecord[] = [];
   excelExportService: IgxExcelExporterService;
   @ViewChild(MatSort) sort: MatSort;
@@ -38,10 +39,14 @@ export class DraftSelectionsComponent implements OnInit {
   ngOnInit() {
     this.draftedPlayers = this.wannabeDAO.getDraftedPlayers('all');
     this.selectedCount = this.draftedPlayers.length;
-    this.teams = this.wannabeDAO.getTeams();
-    this.totalCount = this.teams.length * 15;
+    this.wannabeDAO.fetchTeams().subscribe((response: OwnerRecord[]) => {
+      this.teams = response;
+      this.totalCount = this.teams.length * 15;
+    });
+    // this.teams = this.wannabeDAO.getTeams();
     this.dataSource = new MatTableDataSource(this.draftedPlayers);
     this.dataSource.sort = this.sort;
+    this.budgetMessage = '-';
   }
   selectPlayers() {
     this.draftedPlayers = this.wannabeDAO.getDraftedPlayers(this.playerFilter);
@@ -49,6 +54,13 @@ export class DraftSelectionsComponent implements OnInit {
     this.totalCount = this.playerFilter === 'all' ? this.teams.length * 15 : 15;
     this.dataSource = new MatTableDataSource(this.draftedPlayers);
     this.dataSource.sort = this.sort;
+    if ( this.playerFilter !== 'all') {
+      const budget = this.wannabeDAO.getMaxBid(this.playerFilter);
+      this.budgetMessage = 'Max Bid = $' + budget;
+    } else {
+      this.budgetMessage = '-';
+    }
+
   }
   exportToExcel() {
     const igxExcelExportOptions = new IgxExcelExporterOptions('Wannabe');

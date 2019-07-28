@@ -42,7 +42,8 @@ export class PlayersComponent implements OnInit {
 
   // Table Variables
   dataSource = new MatTableDataSource(this.playerList);
-  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints', 'percentOwn', 'percentStart', 'byeWeek'];
+  // displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints', 'percentOwn', 'percentStart', 'byeWeek'];
+  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek'];
 
   constructor(wannabeDAO: WannabeDAOService) {
     this.wannabeDAO = wannabeDAO;

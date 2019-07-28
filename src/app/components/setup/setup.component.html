@@ -1,6 +1,8 @@
+<app-menu></app-menu>
+
 <div align=center>
-  DraftName = {{draftData.draftName}}
-  <form (ngSubmit)="onSubmit()" #setupForm="ngForm" class="example-form">
+  <H2><B>Draft Setup</B></H2>
+  <form   #setupForm="ngForm" class="example-form">
 
     <label for="draftName">Draft name</label>
     <input width=150px type="text" class="form-control draft-name-width" id="draftName"
@@ -11,7 +13,7 @@
       name="budget" #budget="ngModel">
 
     <label for="leagueSize">League Size</label>
-    <select (change)="changeLeague()" type="number" class="form-control league-size-width" id="leagueSize"
+    <select (change)="changeLeagueSize()" type="number" class="form-control league-size-width" id="leagueSize"
       [(ngModel)]="draftData.leagueSize" name="leagueSize" #leagueSize="ngModel">
       <option value=8>8 teams</option>
       <option value=10>10 teams</option>
@@ -66,7 +68,7 @@
 
     </div>
     </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" (click)="submit()" class="btn btn-success">Start Draft</button>
   </form>
 </div>
 

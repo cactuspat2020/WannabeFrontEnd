@@ -5,3 +5,26 @@ select.form-control {
 .selectStat {
   margin-bottom: 1cm;
 }
+.quarterback {
+  background: lightgreen;
+}
+
+.runningback {
+  background: lightblue;
+}
+
+.widereceiver {
+  background: lightgoldenrodyellow;
+}
+
+.tightend {
+  background: lightgray;
+}
+
+.kicker {
+  background: lightcoral;
+}
+
+.defense {
+  background: cyan;
+}

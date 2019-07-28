@@ -21,6 +21,9 @@ export class AuctionComponent implements OnInit {
   selectedPlayer;
   selectedTeam;
   currentBid;
+  onTheClock;
+  draftRound;
+  remainingPlayersToDraft;
 
   // Lists used for form elements
   playerList: PlayerRecord[] = [];
@@ -63,6 +66,9 @@ export class AuctionComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource(this.playerList);
     this.dataSource.sort = this.sort;
+    this.onTheClock = this.wannabeDAO.getOnTheClock();
+    this.draftRound = this.wannabeDAO.getRound();
+    this.remainingPlayersToDraft = this.wannabeDAO.getRemainingPlayerCount();
   }
 
   selectPlayers() {
@@ -97,11 +103,15 @@ export class AuctionComponent implements OnInit {
         console.log("POST call in error", response); },
        () => {
         // success condition
-        this.playerList = this.wannabeDAO.getPlayers(this.selectPlayers);
+        this.playerList = this.playerList.filter(player => player.playerName !== draftedPlayer.playerName);
         this.currentBid = '';
         this.selectedPlayer = '';
         this.selectedTeam = '';
         console.log("Success in action");
+        this.dataSource = new MatTableDataSource(this.playerList);
+        this.onTheClock = this.wannabeDAO.getOnTheClock();
+        this.draftRound = this.wannabeDAO.getRound();
+        this.remainingPlayersToDraft = this.wannabeDAO.getRemainingPlayerCount();
       });
   }
 

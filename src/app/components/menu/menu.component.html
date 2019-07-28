@@ -1,0 +1,10 @@
+<nav mat-tab-nav-bar [backgroundColor]="background">
+    <a mat-tab-link *ngFor="let link of links" [routerLink]=link.link [disabled]=link.disabled tabindex=$index+10> {{link.label}} </a>
+    <!-- <a mat-tab-link [routerLink]="['/login']"> Login </a> -->
+    <!-- <a mat-tab-link [routerLink]="['/setup']"> Setup </a> -->
+    <!-- <a mat-tab-link [routerLink]="['/auction']">Auction</a> -->
+    <!-- <a mat-tab-link [routerLink]="['/status']">Draft List</a> -->
+    <!-- <a mat-tab-link [routerLink]="['/stats']"> Stats</a> -->
+    <!-- <a mat-tab-link [routerLink]="['/players']"> Players</a> -->
+    <!-- <a mat-tab-link disabled>Disabled Link</a> -->
+  </nav>

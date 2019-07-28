@@ -12,8 +12,24 @@ import { SetupData } from '../../models/setupData';
 export class DraftHomeComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
   router: Router;
-  teams: OwnerRecord[];
+  teams: OwnerRecord[] = [];
   draftOwner: string;
+  password;
+  passwordList: {[user: string]: string } =
+     {
+       'Gunslingers': 'owner',
+       'Smack': 'admin',
+       'Diablos': 'wannabe',
+       'En Vogue': 'wannabe',
+       'Davids Revenge': 'wannabe',
+       'Smokey': 'wannabe',
+       'Bud Light Man': 'wannabe',
+       'SKOL': 'wannabe',
+       'Boss Man II': 'wannabe',
+       'Corn Bread': 'wannabe',
+       'Bud Heavy': 'wannabe',
+       'Big Daddy': 'wannabe',
+      };
 
   constructor(wannabeDAO: WannabeDAOService, router: Router ) {
     this.wannabeDAO = wannabeDAO;
@@ -21,6 +37,9 @@ export class DraftHomeComponent implements OnInit {
     this.draftOwner = 'none';
   }
   ngOnInit() {
+    // this.wannabeDAO.fetchTeams().subscribe((response: OwnerRecord[]) => {
+    //   this.teams = response;
+    // });
     this.teams = this.wannabeDAO.getTeams();
   }
 
@@ -31,9 +50,16 @@ export class DraftHomeComponent implements OnInit {
   btnClick() {
     if (this.draftOwner === 'none') {
       alert ('Please choose your team before proceeding');
+    } else if (this.passwordList[this.draftOwner] !== this.password) {
+      alert ('Invalid Password. Please try again');
     } else {
-      this.router.navigate(['/auction']);
-    }
-}
+      const isAdmin = this.teams.filter(team => team.teamName === this.draftOwner)[0].isAdmin;
 
+      if ( isAdmin ) {
+        this.router.navigate(['/setup']);
+      } else {
+        this.router.navigate(['/status']);
+      }
+    }
+  }
 }

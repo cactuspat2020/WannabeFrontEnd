@@ -1,0 +1,9 @@
+.example-action-button {
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.mat-background-primary {
+  ng-reflect-background-color: primary
+}
+

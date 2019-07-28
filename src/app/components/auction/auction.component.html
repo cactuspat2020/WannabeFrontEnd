@@ -1,14 +1,17 @@
+<app-menu></app-menu>
 <mat-card>
   <mat-card-title>
     Player Selection
   </mat-card-title>
   <mat-card-content>
     <div align=center>
-
+      <h3><b>Round {{draftRound}} </b></h3>
+      {{remainingPlayersToDraft}} players remaining<br>
+      <h4><b>{{onTheClock}} is on the Clock</b></h4>
       <!-- Player: -->
       <mat-form-field class="example-form">
         <input [(ngModel)]="selectedPlayer" type="text" placeholder="Player" aria-label="Player" matInput
-          [formControl]="playerControl" [matAutocomplete]="auto1">
+          [formControl]="playerControl" [matAutocomplete]="auto1" [autofocus]=true >
         <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayPlayerFn">
           <mat-option *ngFor="let player of playerFilteredOptions| async" [value]="player">
             {{player.playerName}}
@@ -19,7 +22,7 @@
       <!-- Team: -->
       <mat-form-field class="example-full-width">
         <input [(ngModel)]="selectedTeam" type="text" placeholder="Team" aria-label="Team" matInput [formControl]="teamControl"
-          [matAutocomplete]="auto">
+          [matAutocomplete]="auto" >
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayTeamFn">
           <mat-option *ngFor="let team of teamFilteredOptions| async" [value]="team">
             {{team.teamName}}
@@ -30,10 +33,11 @@
 
       <!-- Amount: -->
       <mat-form-field>
-        <input [(ngModel)]="currentBid" matInput placeholder="Amount">
+        <input [(ngModel)]="currentBid" matInput placeholder="Amount" >
+        <span matPrefix>$&nbsp;</span>
       </mat-form-field><br>
 
-      <button (click)="submit()" mat-raised-button color="primary">Submit</button>
+      <button (click)="submit()" mat-raised-button color="primary" >Submit</button>
 
       <mat-label [(ngModel)]="statusMessage"> </mat-label><br>
     </div>
@@ -42,11 +46,17 @@
 </mat-card>
 
 <hr>
+    <mat-card>
+        <mat-card-title>
+          Available Players
+        </mat-card-title>
+        <mat-card-content>
+
 <div align=center width=30%>
   <form (ngSubmit)="onSubmit()" #setupForm="ngForm" class="example-form">
     <label for="position">Select Position</label>
     <select width=30% (change)="selectPlayers()" type="string" class="form-control position-width" id="position"
-      [(ngModel)]="positionSelection" name="position" #position="ngModel">
+      [(ngModel)]="positionSelection" name="position" #position="ngModel" >
       <option value="all">all</option>
       <option value="QB">QB</option>
       <option value="RB">RB</option>
@@ -56,10 +66,9 @@
       <option value="DST">DST</option>
     </select>
   </form>
-</div>
 <!-- <table class="table table-stripped table-hover"> -->
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter"   >
 </mat-form-field>
 
 <table mat-table [dataSource]="dataSource" matSort matSortActive="fantasyPoints" matSortDirection="desc"
@@ -111,3 +120,6 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"
     [ngClass]="{'highlight': row.playerName === selectedPlayer}" (click)="selectRow(row)"></tr>
 </table>
+</div>
+</mat-card-content>
+</mat-card  >
