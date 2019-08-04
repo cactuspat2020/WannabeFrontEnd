@@ -1,3 +1,5 @@
+<div *ngIf="isLoaded">
+
 <app-menu></app-menu>
 <mat-card>
   <mat-card-title>
@@ -37,7 +39,8 @@
         <span matPrefix>$&nbsp;</span>
       </mat-form-field><br>
 
-      <button (click)="submit()" mat-raised-button color="primary" >Submit</button>
+      <button (click)="submit()" mat-raised-button color="primary" >Submit</button><br>
+      <a (click)="undoLastSelection()">Undo last selection</a>
 
       <mat-label [(ngModel)]="statusMessage"> </mat-label><br>
     </div>
@@ -123,3 +126,5 @@
 </div>
 </mat-card-content>
 </mat-card  >
+
+</div>

@@ -3,6 +3,8 @@ import { WannabeDAOService } from '../../services/wannabe-dao.service';
 import { OwnerRecord } from '../../models/ownerRecord';
 import { Router } from '@angular/router';
 import { SetupData } from '../../models/setupData';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-draft-home',
@@ -12,9 +14,11 @@ import { SetupData } from '../../models/setupData';
 export class DraftHomeComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
   router: Router;
+  cookieService: CookieService;
   teams: OwnerRecord[] = [];
   draftOwner: string;
   password;
+  isLoaded = false;
   passwordList: {[user: string]: string } =
      {
        'Gunslingers': 'owner',
@@ -31,20 +35,22 @@ export class DraftHomeComponent implements OnInit {
        'Big Daddy': 'wannabe',
       };
 
-  constructor(wannabeDAO: WannabeDAOService, router: Router ) {
+  constructor(wannabeDAO: WannabeDAOService, cookieService: CookieService, router: Router ) {
     this.wannabeDAO = wannabeDAO;
     this.router = router;
     this.draftOwner = 'none';
+    this.cookieService = cookieService;
   }
   ngOnInit() {
-    // this.wannabeDAO.fetchTeams().subscribe((response: OwnerRecord[]) => {
-    //   this.teams = response;
-    // });
-    this.teams = this.wannabeDAO.getTeams();
+    this.wannabeDAO.fetchTeams().subscribe((response: OwnerRecord[]) => {
+      this.teams = response;
+      this.isLoaded = true;
+    });
   }
 
   selectChange() {
       this.wannabeDAO.setDraftOwner(this.draftOwner);
+      this.cookieService.set('loginTeam', this.draftOwner, 1);
   }
 
   btnClick() {

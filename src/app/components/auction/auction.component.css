@@ -64,3 +64,9 @@ th.mat-header-cell {
 h4 {
   margin-bottom: 40px;
 }
+tr.mat-row {
+  height: 32px;
+}
+tr.mat-header-row {
+  height: 32px;
+}

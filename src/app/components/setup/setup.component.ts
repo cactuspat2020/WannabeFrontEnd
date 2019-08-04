@@ -23,6 +23,7 @@ export class SetupComponent implements OnInit {
   draftOrderIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   selectorIndex = this.draftOrderIndex;
   dialog: MatDialog;
+  isLoaded = false;
 
   constructor(wannabeDAO: WannabeDAOService, dialog: MatDialog, router: Router) {
       this.wannabeDAO = wannabeDAO;
@@ -74,11 +75,12 @@ export class SetupComponent implements OnInit {
         this.draftData.teams = response;
 
         // Just to jumpstart. Comment otherwise
-        this.draftData.teams = this.wannabeDAO.getTeams();
+        // this.draftData.teams = this.wannabeDAO.getTeams();
 
         this.draftData.budget = response[0].budget;
         this.draftData.leagueSize = response.length;
         this.draftData.draftName = response[0].draftName;
+        this.isLoaded = true;
       }
     });
   }

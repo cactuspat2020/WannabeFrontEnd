@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -24,7 +25,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IgxExcelExporterService } from "igniteui-angular";
 import { IgxGridModule } from "igniteui-angular";
 
-//I keep the new line
 import { DraftHomeComponent } from './components/draft-home/draft-home.component';
 import { WannabeDAOService } from './services/wannabe-dao.service';
 import { SetupComponent } from './components/setup/setup.component';
@@ -34,6 +34,8 @@ import { DraftSelectionsComponent } from './components/draft-selections/draft-se
 import { TeamStatisticsComponent } from './components/team-statistics/team-statistics.component';
 import { PlayersComponent } from './components/players/players.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { CookieService } from 'ngx-cookie-service';
+import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players/owner-drafted-players.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { MenuComponent } from './components/menu/menu.component';
     DraftSelectionsComponent,
     TeamStatisticsComponent,
     PlayersComponent,
-    MenuComponent
+    MenuComponent,
+    OwnerDraftedPlayersComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { MenuComponent } from './components/menu/menu.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
+    MatExpansionModule,
     MatAutocompleteModule,
     MatSortModule,
     MatGridListModule,
@@ -77,9 +81,11 @@ import { MenuComponent } from './components/menu/menu.component';
       { path: 'status', component: DraftSelectionsComponent },
       { path: 'stats', component: TeamStatisticsComponent },
       { path: 'players', component: PlayersComponent },
-    ])
+      { path: 'owner', component: OwnerDraftedPlayersComponent }
+    ],
+    {onSameUrlNavigation: 'reload'})
   ],
-  providers: [WannabeDAOService, IgxExcelExporterService],
+  providers: [WannabeDAOService, IgxExcelExporterService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

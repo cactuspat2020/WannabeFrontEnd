@@ -18,7 +18,7 @@ import { IgxExcelExporterService, IgxExcelExporterOptions } from 'igniteui-angul
 export class DraftSelectionsComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
   draftedPlayers: DraftedPlayerRecord[] = [];
-  playerFilter: string;
+  playerFilter = 'all';
   teams: OwnerRecord[];
   totalCount = 0;
   selectedCount = 0;
@@ -26,6 +26,8 @@ export class DraftSelectionsComponent implements OnInit {
   public playerList: PlayerRecord[] = [];
   excelExportService: IgxExcelExporterService;
   @ViewChild(MatSort) sort: MatSort;
+  dataAvailable = false;
+  isLoaded = false;
 
   // Table Variables
   dataSource = new MatTableDataSource(this.draftedPlayers);
@@ -37,16 +39,48 @@ export class DraftSelectionsComponent implements OnInit {
     this.excelExportService = excelExportService;
   }
   ngOnInit() {
-    this.draftedPlayers = this.wannabeDAO.getDraftedPlayers('all');
-    this.selectedCount = this.draftedPlayers.length;
-    this.wannabeDAO.fetchTeams().subscribe((response: OwnerRecord[]) => {
-      this.teams = response;
-      this.totalCount = this.teams.length * 15;
-    });
-    // this.teams = this.wannabeDAO.getTeams();
-    this.dataSource = new MatTableDataSource(this.draftedPlayers);
-    this.dataSource.sort = this.sort;
-    this.budgetMessage = '-';
+    if (this.wannabeDAO.dataAvalable() ) {
+      // this.draftedPlayers = this.wannabeDAO.getDraftedPlayers('all');
+      this.teams = this.wannabeDAO.getTeams();
+      this.isLoaded = true;
+      // this.totalCount = this.teams.length * 15;
+      // this.selectedCount = this.draftedPlayers.length;
+      // this.dataSource = new MatTableDataSource(this.draftedPlayers);
+      // this.dataSource.sort = this.sort;
+      // this.budgetMessage = '-';
+      this.selectPlayers();
+    } else {
+        // this.fetchData();
+        this.wannabeDAO.fetchDraftedPlayers()
+        .subscribe((response: DraftedPlayerRecord[]) => {
+          this.draftedPlayers = response;
+          this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
+            this.teams = response2;
+            this.isLoaded = true;
+            // this.totalCount = response2.length * 15;
+            // this.selectedCount = this.draftedPlayers.length;
+            // this.dataSource = new MatTableDataSource(this.draftedPlayers);
+            // this.dataSource.sort = this.sort;
+            // this.budgetMessage = '-';
+            this.selectPlayers();
+          });
+        });
+    }
+  }
+  fetchData() {
+    this.wannabeDAO.fetchDraftedPlayers()
+      .subscribe((response: DraftedPlayerRecord[]) => {
+        this.draftedPlayers = response;
+        this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
+          this.teams = response2;
+          this.totalCount = response2.length * 15;
+          this.selectedCount = this.draftedPlayers.length;
+          this.dataSource = new MatTableDataSource(this.draftedPlayers);
+          this.dataSource.sort = this.sort;
+          this.budgetMessage = '-';
+          this.isLoaded = true;
+        });
+      });
   }
   selectPlayers() {
     this.draftedPlayers = this.wannabeDAO.getDraftedPlayers(this.playerFilter);
@@ -67,5 +101,9 @@ export class DraftSelectionsComponent implements OnInit {
     const jsonData = JSON.parse(JSON.stringify(this.draftedPlayers));
 
     this.excelExportService.exportData(jsonData, igxExcelExportOptions);
+  }
+
+  refresh() {
+    this.fetchData();
   }
 }

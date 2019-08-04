@@ -23,11 +23,16 @@ export class WannabeDAOService {
   saveDraftInfoURL = this.baseURL + 'saveDraftInfo';
   saveDraftPickURL = this.baseURL + 'saveDraftPick';
   undoLastPickURL = this.baseURL + 'undoLastPick';
+
+  fullPlayerListInitialized = false;
+  draftedPlayerListInitialized = false;
+  draftInfoInitialized = false;
+
   players: PlayerRecord[] = [];
   playerTest: PlayerRecord[] = [];
   draftedPlayers: DraftedPlayerRecord[] = [];
   owners: OwnerRecord[] = [];
-  setupData: SetupData;
+  setupData: SetupData = new SetupData(' ', 0, 0, []);
   bidCount = 0;
   draftOwner: string;
   ROUNDS = 15;
@@ -36,34 +41,27 @@ export class WannabeDAOService {
     this.http = httpClient;
 
     this.http.get(this.getPlayersURL).subscribe((response: PlayerRecord[]) => {
-      this.players = response; });
+      this.players = response;
+      this.fullPlayerListInitialized = true;
+    });
 
     this.http.get(this.getDraftInfoURL).subscribe((response: OwnerRecord[]) => {
       this.setupData.teams = response;
-      this.setupData.budget = this.owners[0].budget;
-      this.setupData.draftName = this.owners[0].draftName;
-      this.setupData.leagueSize = this.owners.length;
+      this.setupData.budget = response[0].budget;
+      this.setupData.draftName = response[0].draftName;
+      this.setupData.leagueSize = response.length;
       this.owners = response;
+      this.draftInfoInitialized = true;
       });
 
     this.http.get(this.getDraftedPlayersURL).subscribe((response: DraftedPlayerRecord[]) => {
-      this.draftedPlayers = response; });
+      this.draftedPlayers = response;
+      this.draftedPlayerListInitialized = true;
+    });
+  }
 
-      this.owners = JSON.parse('[' +
-      '{\"ownerName\":\"Pat Vessels\", \"teamName\":\"Gunslingers\", \"budget\":200, \"draftOrder\":1, \"isAdmin\":true },' +
-      '{\"ownerName\":\"Wayne Bryan\", \"teamName\":\"Smack\", \"budget\":200, \"draftOrder\":2, \"isAdmin\":true },' +
-      '{\"ownerName\":\"Tim Bryan\", \"teamName\":\"Diablos\", \"budget\":200, \"draftOrder\":3, \"isAdmin\":false },' +
-      '{\"ownerName\":\"Dan Mayer \", \"teamName\":\"Bud Light Man\", \"budget\":200, \"draftOrder\":4, \"isAdmin\":false },' +
-      '{\"ownerName\":\"Max Fregoso\", \"teamName\":\"Corn Bread\", \"budget\":200, \"draftOrder\":5, \"isAdmin\":false },' +
-      '{\"ownerName\":\"Ed Garcia\", \"teamName\":\"Davids Revenge\", \"budget\":200, \"draftOrder\":6, \"isAdmin\":false },' +
-      '{\"ownerName\":\"Weston Bryant\", \"teamName\":\"En Vogue\", \"budget\":200, \"draftOrder\":7, \"isAdmin\":false },' +
-      '{\"ownerName\":\"Jeff Fregoso \", \"teamName\":\"SKOL\", \"budget\":200, \"draftOrder\":8, \"isAdmin\":false },' +
-      '{\"ownerName\":\"David Turner\", \"teamName\":\"Boss Man II\", \"budget\":200, \"draftOrder\":9, \"isAdmin\":false },' +
-      '{\"ownerName\":\"Randy Fregoso\", \"teamName\":\"Smokey\", \"budget\":200, \"draftOrder\":10, \"isAdmin\":false },' +
-      '{\"ownerName\":\"Scott Mayer\", \"teamName\":\"Bud Heavy\", \"budget\":200, \"draftOrder\":11, \"isAdmin\":false },' +
-      '{\"ownerName\":\"Lee Bryan\", \"teamName\":\"Big Daddy\", \"budget\":200, \"draftOrder\":12, \"isAdmin\":false }' +
-      ']');
-
+  public dataAvalable() {
+    return (this.fullPlayerListInitialized && this.draftInfoInitialized && this.draftedPlayerListInitialized);
   }
 
   public storeDraftPick(record: DraftedPlayerRecord): Observable<any> {
@@ -123,7 +121,8 @@ export class WannabeDAOService {
     if (teamName === 'all') {
       return this.draftedPlayers;
     }
-    return this.draftedPlayers.filter(player => player.ownerName === teamName);
+    const filteredList = this.draftedPlayers.filter(player => player.ownerName === teamName);
+    return filteredList;
   }
 
   // Get Max Bid
@@ -174,6 +173,34 @@ export class WannabeDAOService {
     return this.http.get(this.getDraftInfoURL);
   }
 
+  public undoLastSelection(): Observable<object> {
+    const observable = this.http.get(this.undoLastPickURL);
+    observable.subscribe((response: DraftedPlayerRecord[]) => {
+      this.draftedPlayers = response;
+    });
+    return observable;
+  }
+
+  public fetchDraftedPlayers(): Observable<object> {
+    const observable = this.http.get(this.getDraftedPlayersURL);
+    observable.subscribe((response: DraftedPlayerRecord[]) => {
+      this.draftedPlayers = response;
+    });
+    return observable;
+  }
+
+  public fetchPlayers(): Observable<object> {
+    const names = [];
+
+    const observable = this.http.get(this.getPlayersURL);
+
+    observable.subscribe((response: PlayerRecord[]) => {
+      this.players = response;
+      this.fullPlayerListInitialized = true;
+    });
+    return observable;
+  }
+
   // get a specfic team record
   public getTeamRecord(teamName): OwnerRecord {
     return this.owners.filter(owner => owner.teamName === teamName)[0];
@@ -182,7 +209,7 @@ export class WannabeDAOService {
   public setDraftOwner(owner: string) {
     this.draftOwner = owner;
   }
-  public getDraftOwner() {
+  public getDraftOwner(): string {
     return this.draftOwner;
   }
   public getDraftInfo(): SetupData {

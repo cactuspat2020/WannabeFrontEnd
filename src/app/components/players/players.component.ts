@@ -9,7 +9,6 @@ import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import { DraftedPlayerRecord } from 'src/app/models/draftedPlayerRecord';
 
-
 @Component({
   selector: 'app-players',
   templateUrl: './players.component.html',
@@ -23,14 +22,18 @@ export class PlayersComponent implements OnInit {
   selectedPlayer;
   selectedTeam;
   currentBid;
+  PlayersTakenLabel;
+
 
   // Lists used for form elements
   playerList: PlayerRecord[] = [];
+  draftedPlayers: DraftedPlayerRecord[] = [];
   // playerFilterValues: string[] = [];
   teamLookAheadValues: string[] = [];
   teams: OwnerRecord[];
   positionSelection: string;
   maxBid;
+  owner;
   statusMessage = 'Initializing...';
 
   // AutoSelect Configurations
@@ -42,7 +45,7 @@ export class PlayersComponent implements OnInit {
 
   // Table Variables
   dataSource = new MatTableDataSource(this.playerList);
-  // displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints', 'percentOwn', 'percentStart', 'byeWeek'];
+  // displayedColumns2: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints', 'percentOwn', 'percentStart', 'byeWeek'];
   displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek'];
 
   constructor(wannabeDAO: WannabeDAOService) {
@@ -50,22 +53,49 @@ export class PlayersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.teams = this.wannabeDAO.getTeams();
-    this.playerList = this.wannabeDAO.getPlayers('all');
+    if (this.wannabeDAO.dataAvalable()) {
+      this.teams = this.wannabeDAO.getTeams();
+      this.playerList = this.wannabeDAO.getPlayers('all');
+      this.playerFilteredOptions = this.playerControl.valueChanges
+        .pipe(startWith<string | PlayerRecord>(''),
+          map(value => typeof value === 'string' ? value : value.playerName),
+          map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
+        );
+      this.teamFilteredOptions = this.teamControl.valueChanges
+        .pipe(startWith<string | OwnerRecord>(''),
+          map(value => typeof value === 'string' ? value : value.teamName),
+          map(teamName => teamName ? this._filterTeams(teamName) : this.teams.slice())
+        );
 
-    this.playerFilteredOptions = this.playerControl.valueChanges
-      .pipe( startWith<string | PlayerRecord>(''),
-        map(value => typeof value === 'string' ? value : value.playerName),
-        map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
-      );
-    this.teamFilteredOptions = this.teamControl.valueChanges
-      .pipe( startWith<string | OwnerRecord>(''),
-        map(value => typeof value === 'string' ? value : value.teamName),
-        map(teamName => teamName ? this._filterTeams(teamName) : this.teams.slice())
-      );
+      this.dataSource = new MatTableDataSource(this.playerList);
+      this.dataSource.sort = this.sort;
+      this.owner = this.wannabeDAO.getDraftOwner();
+      this.PlayersTakenLabel = this.wannabeDAO.getDraftedPlayers(this.owner).length + ' of 15';
+      this.maxBid = this.wannabeDAO.getMaxBid(this.owner);
+    } else {
+      this.wannabeDAO.fetchPlayers().subscribe((response: PlayerRecord[]) => {
+        this.playerList = response;
+        this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
+          this.teams = response2;
+          this.playerFilteredOptions = this.playerControl.valueChanges
+            .pipe(startWith<string | PlayerRecord>(''),
+              map(value => typeof value === 'string' ? value : value.playerName),
+              map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
+            );
+          this.teamFilteredOptions = this.teamControl.valueChanges
+            .pipe(startWith<string | OwnerRecord>(''),
+              map(value => typeof value === 'string' ? value : value.teamName),
+              map(teamName => teamName ? this._filterTeams(teamName) : this.teams.slice())
+            );
 
-    this.dataSource = new MatTableDataSource(this.playerList);
-    this.dataSource.sort = this.sort;
+          this.dataSource = new MatTableDataSource(this.playerList);
+          this.dataSource.sort = this.sort;
+          this.owner = this.wannabeDAO.getDraftOwner();
+          this.PlayersTakenLabel = this.wannabeDAO.getDraftedPlayers(this.owner).length + ' of 15';
+          this.maxBid = this.wannabeDAO.getMaxBid(this.owner);
+        });
+      });
+    }
   }
 
   selectPlayers() {

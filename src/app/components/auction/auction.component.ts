@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { PlayerRecord } from '../../models/playerRecord';
 import { MatTableDataSource } from '@angular/material';
-import {MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { OwnerRecord } from '../../models/ownerRecord';
-import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
 import { DraftedPlayerRecord } from 'src/app/models/draftedPlayerRecord';
 
 @Component({
@@ -33,6 +33,7 @@ export class AuctionComponent implements OnInit {
   positionSelection: string;
   maxBid;
   statusMessage = 'Initializing...';
+  isLoaded = false;
 
   // AutoSelect Configurations
   teamControl = new FormControl();
@@ -50,16 +51,30 @@ export class AuctionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.teams = this.wannabeDAO.getTeams();
-    this.playerList = this.wannabeDAO.getPlayers('all');
+    // this.teams = this.wannabeDAO.getTeams();
+    if (this.wannabeDAO.dataAvalable()) {
+      this.playerList = this.wannabeDAO.getPlayers('all');
+      this.teams = this.wannabeDAO.getTeams();
+      this.initVariables();
+    } else {
+      this.wannabeDAO.fetchPlayers().subscribe((response: PlayerRecord[]) => {
+        this.playerList = this.wannabeDAO.getPlayers('all');
+        this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
+          this.teams = response2;
+          this.initVariables();
+        });
+      });
+    }
+  }
 
+  private initVariables() {
     this.playerFilteredOptions = this.playerControl.valueChanges
-      .pipe( startWith<string | PlayerRecord>(''),
+      .pipe(startWith<string | PlayerRecord>(''),
         map(value => typeof value === 'string' ? value : value.playerName),
         map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
       );
     this.teamFilteredOptions = this.teamControl.valueChanges
-      .pipe( startWith<string | OwnerRecord>(''),
+      .pipe(startWith<string | OwnerRecord>(''),
         map(value => typeof value === 'string' ? value : value.teamName),
         map(teamName => teamName ? this._filterTeams(teamName) : this.teams.slice())
       );
@@ -69,6 +84,7 @@ export class AuctionComponent implements OnInit {
     this.onTheClock = this.wannabeDAO.getOnTheClock();
     this.draftRound = this.wannabeDAO.getRound();
     this.remainingPlayersToDraft = this.wannabeDAO.getRemainingPlayerCount();
+    this.isLoaded = true;
   }
 
   selectPlayers() {
@@ -78,10 +94,10 @@ export class AuctionComponent implements OnInit {
 
     // Update the team auto complete
     this.playerFilteredOptions = this.playerControl.valueChanges
-    .pipe( startWith<string | PlayerRecord>(''),
-      map(value => typeof value === 'string' ? value : value.playerName),
-      map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
-    );
+      .pipe(startWith<string | PlayerRecord>(''),
+        map(value => typeof value === 'string' ? value : value.playerName),
+        map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
+      );
 
   }
   submit() {
@@ -97,11 +113,12 @@ export class AuctionComponent implements OnInit {
     draftedPlayer.position = record.position;
 
     this.wannabeDAO.storeDraftPick(draftedPlayer).subscribe(
-      next => {},
+      next => { },
       response => {
         // error condition
-        console.log("POST call in error", response); },
-       () => {
+        console.log("POST call in error", response);
+      },
+      () => {
         // success condition
         this.playerList = this.playerList.filter(player => player.playerName !== draftedPlayer.playerName);
         this.currentBid = '';
@@ -115,6 +132,12 @@ export class AuctionComponent implements OnInit {
       });
   }
 
+  undoLastSelection() {
+    this.wannabeDAO.undoLastSelection().subscribe((response2: OwnerRecord[]) => {
+      this.initVariables();
+      alert ('Last selection successfully removed');
+    });
+  }
   // Callback when keys are pressed on the table filter
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

@@ -27,6 +27,7 @@
     "igniteui-angular": "^7.3.11",
     "jszip": "^3.1.5",
     "minireset.css": "~0.0.4",
+    "ngx-cookie-service": "^2.2.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "web-animations-js": "^2.3.1",
