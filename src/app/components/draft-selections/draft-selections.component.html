@@ -7,9 +7,9 @@
   </mat-card-title>
   <mat-card-content>
 
-    <div align=center width=30%>
+    <div align=center>
       <form #setupForm="ngForm" class="example-form">
-        <label for="position">Filter by Owner</label>
+        <label for="position">Filter by Owner</label><br>
         <select width=30% (change)="selectPlayers()" type="string" class="form-control position-width" id="position"
           [(ngModel)]="playerFilter" name="position" #position="ngModel">
           <option value="all">all</option>
@@ -69,6 +69,13 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
         <td mat-cell *matCellDef="let element"> {{element.fantasyPoints}} </td>
       </ng-container>
+
+      <!-- Assessment Column -->
+      <ng-container matColumnDef="assessment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Assessment </th>
+        <td mat-cell *matCellDef="let element"> {{element.assessment}} </td>
+      </ng-container>
+
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="[

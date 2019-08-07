@@ -1,16 +1,16 @@
 
-/* p.welcomemessage {font-size: 30px; text-align: center;  margin-bottom: 1cm; margin-top: 1cm}
+/* /* p.welcomemessage {font-size: 30px; text-align: center;  margin-bottom: 1cm; margin-top: 1cm} */
 img.raiders {margin-bottom: 1cm} */
 
-/* mat-card {align-content: center} */
-/* mat-card-title.testCard {page-break-after: always} */
-/* mat-label.selectLabel {font-size: 20px} */
+mat-card {align-content: center}
+mat-card-title.testCard {page-break-after: always}
+mat-label.selectLabel {font-size: 20px}
 
-/* mat-select { page-break-after: always} */
+mat-select { page-break-after: always}
 
-/* mat-form-field {align-content: center} */
+mat-form-field {align-content: center}
 
-/* .select-css {
+.select-css {
 	display: block;
 	font-size: 16px;
 	font-family: sans-serif;
@@ -47,4 +47,4 @@ img.raiders {margin-bottom: 1cm} */
 	box-shadow: 0 0 0 3px -moz-mac-focusring;
 	color: #222;
 	outline: none;
-} */
+}

@@ -39,7 +39,7 @@
         <span matPrefix>$&nbsp;</span>
       </mat-form-field><br>
 
-      <button (click)="submit()" mat-raised-button color="primary" >Submit</button><br>
+      <button (click)="submit()" name="btn" ngDefaultControl mat-raised-button color="primary" >Submit</button><br>
       <a (click)="undoLastSelection()">Undo last selection</a>
 
       <mat-label [(ngModel)]="statusMessage"> </mat-label><br>
@@ -117,6 +117,12 @@
   <ng-container matColumnDef="fantasyPoints">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
     <td mat-cell *matCellDef="let element"> {{element.fantasyPoints}} </td>
+  </ng-container>
+
+  <!-- Assessment Column -->
+  <ng-container matColumnDef="assessment">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Assessment </th>
+    <td mat-cell *matCellDef="let element"> {{element.assessment}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns" class="tst"></tr>

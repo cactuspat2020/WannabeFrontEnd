@@ -44,7 +44,8 @@ export class AuctionComponent implements OnInit {
 
   // Table Variables
   dataSource = new MatTableDataSource(this.playerList);
-  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints', 'percentOwn', 'percentStart', 'byeWeek'];
+  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints',
+    'percentOwn', 'percentStart', 'byeWeek', 'assessment'];
 
   constructor(wannabeDAO: WannabeDAOService) {
     this.wannabeDAO = wannabeDAO;
@@ -52,18 +53,25 @@ export class AuctionComponent implements OnInit {
 
   ngOnInit() {
     // this.teams = this.wannabeDAO.getTeams();
-    if (this.wannabeDAO.dataAvalable()) {
-      this.playerList = this.wannabeDAO.getPlayers('all');
-      this.teams = this.wannabeDAO.getTeams();
-      this.initVariables();
-    } else {
-      this.wannabeDAO.fetchPlayers().subscribe((response: PlayerRecord[]) => {
+    if (!this.isLoaded) {
+      console.log("need to reload data");
+      if (this.wannabeDAO.dataAvalable()) {
+        console.log("data is available - just pulling it");
         this.playerList = this.wannabeDAO.getPlayers('all');
-        this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
-          this.teams = response2;
-          this.initVariables();
+        this.teams = this.wannabeDAO.getTeams();
+        this.initVariables();
+      } else {
+        console.log("oops -- need to fetch data");
+        this.wannabeDAO.fetchPlayers().subscribe((response: PlayerRecord[]) => {
+          this.playerList = this.wannabeDAO.getPlayers('all');
+          this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
+            this.teams = response2;
+            this.initVariables();
+          });
         });
-      });
+      }
+    } else {
+      console.log("Luck me. Data is already here!");
     }
   }
 
@@ -135,7 +143,7 @@ export class AuctionComponent implements OnInit {
   undoLastSelection() {
     this.wannabeDAO.undoLastSelection().subscribe((response2: OwnerRecord[]) => {
       this.initVariables();
-      alert ('Last selection successfully removed');
+      alert('Last selection successfully removed');
     });
   }
   // Callback when keys are pressed on the table filter

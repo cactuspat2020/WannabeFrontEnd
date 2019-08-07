@@ -31,7 +31,7 @@ export class DraftSelectionsComponent implements OnInit {
 
   // Table Variables
   dataSource = new MatTableDataSource(this.draftedPlayers);
-  displayedColumns: string[] = ['draftOrder', 'position', 'playerName', 'NFLTeam', 'ownerName', 'price', 'fantasyPoints' ];
+  displayedColumns: string[] = ['draftOrder', 'position', 'playerName', 'NFLTeam', 'ownerName', 'price', 'fantasyPoints', 'assessment' ];
 
 
   constructor(wannabeDAO: WannabeDAOService, excelExportService: IgxExcelExporterService) {
@@ -93,6 +93,10 @@ export class DraftSelectionsComponent implements OnInit {
       this.budgetMessage = 'Max Bid = $' + budget;
     } else {
       this.budgetMessage = '-';
+    }
+
+    for (const player of this.draftedPlayers) {
+      player.assessment = this.wannabeDAO.getPlayerRating(player);
     }
 
   }

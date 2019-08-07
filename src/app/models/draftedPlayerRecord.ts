@@ -7,4 +7,5 @@ export class DraftedPlayerRecord {
   fantasyPoints: number;
   ownerName: string;
   price: number;
+  assessment: string;
 }

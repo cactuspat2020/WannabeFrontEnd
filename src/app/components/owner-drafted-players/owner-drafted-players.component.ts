@@ -13,7 +13,7 @@ export class OwnerDraftedPlayersComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
   draftedPlayers: DraftedPlayerRecord[] = [];
   dataSource2 = new MatTableDataSource(this.draftedPlayers);
-  displayedColumns2: string[] = ['draftOrder', 'position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'price'];
+  displayedColumns2: string[] = ['draftOrder', 'position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'price', 'rating'];
   isLoaded = false;
 
   @ViewChild(MatSort) sort2: MatSort;
@@ -27,18 +27,29 @@ export class OwnerDraftedPlayersComponent implements OnInit {
       this.draftedPlayers = this.wannabeDAO.getDraftedPlayers(this.wannabeDAO.getDraftOwner());
       this.dataSource2 = new MatTableDataSource(this.draftedPlayers);
       this.dataSource2.sort = this.sort2;
+
+      for (const player of this.draftedPlayers) {
+        player.assessment = this.wannabeDAO.getPlayerRating(player);
+      }
     } else {
       this.fetchData();
     }
   }
 
   fetchData() {
-      this.wannabeDAO.fetchDraftedPlayers().subscribe((response2: DraftedPlayerRecord[]) => {
-        this.draftedPlayers = response2
-          .filter(record => record.ownerName === this.wannabeDAO.getDraftOwner());
-        this.dataSource2 = new MatTableDataSource(this.draftedPlayers);
-        this.dataSource2.sort = this.sort2;
+    this.wannabeDAO.fetchDraftedPlayers().subscribe((response2: DraftedPlayerRecord[]) => {
+      this.draftedPlayers = response2
+        .filter(record => record.ownerName === this.wannabeDAO.getDraftOwner());
+      this.dataSource2 = new MatTableDataSource(this.draftedPlayers);
+      this.dataSource2.sort = this.sort2;
+
+      this.wannabeDAO.fetchPlayerRankings().subscribe((response3) => {
+        for (const player of this.draftedPlayers) {
+          player.assessment = this.wannabeDAO.getPlayerRating(player);
+        }
+
       });
+    });
   }
 
 }

@@ -6,4 +6,5 @@ export interface PlayerRecord {
   byeWeek: number;
   position: string;
   fantasyPoints: number;
+  assessment: string;
 }

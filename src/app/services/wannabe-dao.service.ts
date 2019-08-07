@@ -20,6 +20,7 @@ export class WannabeDAOService {
   getPlayersURL = this.baseURL + 'getPlayers';
   getDraftInfoURL = this.baseURL + 'getDraftInfo';
   getDraftedPlayersURL = this.baseURL + 'getDraftedPlayers';
+  getPlayerRankingsURL = this.baseURL + 'getPlayerRankings';
   saveDraftInfoURL = this.baseURL + 'saveDraftInfo';
   saveDraftPickURL = this.baseURL + 'saveDraftPick';
   undoLastPickURL = this.baseURL + 'undoLastPick';
@@ -27,7 +28,9 @@ export class WannabeDAOService {
   fullPlayerListInitialized = false;
   draftedPlayerListInitialized = false;
   draftInfoInitialized = false;
+  playerRankingsInitialized = false;
 
+  playerRankings;
   players: PlayerRecord[] = [];
   playerTest: PlayerRecord[] = [];
   draftedPlayers: DraftedPlayerRecord[] = [];
@@ -43,6 +46,13 @@ export class WannabeDAOService {
     this.http.get(this.getPlayersURL).subscribe((response: PlayerRecord[]) => {
       this.players = response;
       this.fullPlayerListInitialized = true;
+      this.http.get(this.getPlayerRankingsURL).subscribe((response2) => {
+        this.playerRankings = this.getRankingMap(response2);
+        for ( const player of this.players) {
+          player.assessment = this.getPlayerRating(player);
+        }
+        this.playerRankingsInitialized = true;
+      });
     });
 
     this.http.get(this.getDraftInfoURL).subscribe((response: OwnerRecord[]) => {
@@ -52,16 +62,57 @@ export class WannabeDAOService {
       this.setupData.leagueSize = response.length;
       this.owners = response;
       this.draftInfoInitialized = true;
-      });
+    });
 
     this.http.get(this.getDraftedPlayersURL).subscribe((response: DraftedPlayerRecord[]) => {
       this.draftedPlayers = response;
       this.draftedPlayerListInitialized = true;
     });
+
+  }
+
+  public getPlayerRankings() {
+    return this.playerRankings;
+  }
+
+  public fetchPlayerRankings(): Observable<object> {
+    const observable = this.http.get(this.getPlayerRankingsURL);
+    observable.subscribe((response) => {
+      this.playerRankings = this.getRankingMap(response);
+    });
+    return observable;
+  }
+
+  public getRankingMap( response ) {
+    const rankingMap = new Map();
+
+    for (const row of response) {
+      const position = row.Position;
+      const rank = row.Rank;
+      const threshold = +row.Threshold;
+      rankingMap.set(position + rank, threshold);
+    }
+    return rankingMap;
+  }
+
+  public getPlayerRating( playerRecord ) {
+    const fantasyPoints = playerRecord.fantasyPoints;
+    const position = playerRecord.position;
+
+    if (fantasyPoints >= this.playerRankings.get(position + 'ELITE')) {
+      return 'Elite';
+    } else if (fantasyPoints >= this.playerRankings.get(position + 'ALL_PRO')) {
+      return 'All Pro';
+    } else if (fantasyPoints >= this.playerRankings.get(position + 'STARTER')) {
+      return 'Starter';
+    } else {
+      return 'Bench';
+    }
   }
 
   public dataAvalable() {
-    return (this.fullPlayerListInitialized && this.draftInfoInitialized && this.draftedPlayerListInitialized);
+    return (this.fullPlayerListInitialized && this.draftInfoInitialized
+      && this.draftedPlayerListInitialized && this.playerRankingsInitialized);
   }
 
   public storeDraftPick(record: DraftedPlayerRecord): Observable<any> {
@@ -189,6 +240,7 @@ export class WannabeDAOService {
     return observable;
   }
 
+
   public fetchPlayers(): Observable<object> {
     const names = [];
 
@@ -197,6 +249,13 @@ export class WannabeDAOService {
     observable.subscribe((response: PlayerRecord[]) => {
       this.players = response;
       this.fullPlayerListInitialized = true;
+      this.http.get(this.getPlayerRankingsURL).subscribe((response2) => {
+        this.playerRankings = this.getRankingMap(response2);
+        for (const player of this.players) {
+          player.assessment = this.getPlayerRating(player);
+        }
+        this.playerRankingsInitialized = true;
+      });
     });
     return observable;
   }

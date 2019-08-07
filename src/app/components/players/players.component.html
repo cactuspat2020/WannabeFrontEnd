@@ -22,14 +22,25 @@
           <tr>
             <th class="stat-table">Pos</th>
             <th class="stat-table">Taken</th>
-            <th class="stat-table">Rating</th>
+            <th class="stat-table">Assessment</th>
             <th class="stat-table">Legal</th>
           </tr>
-          <tr><td class="stat-table">QB</td><td class="stat-table">2</td><td class="stat-table">Elite</td><td class="stat-table">Yes</td></tr>
-          <tr><td class="stat-table">RB</td><td class="stat-table">3</td><td class="stat-table">Strong</td><td class="stat-table">Yes</td></tr>
-          <tr><td class="stat-table">WR/TE</td><td class="stat-table">4</td><td class="stat-table">Strong</td><td class="stat-table">Yes</td></tr>
-          <tr><td class="stat-table">K</td><td class="stat-table">2</td><td class="stat-table">Elite</td><td class="stat-table">Yes</td></tr>
-          <tr><td class="stat-table">DST</td><td class="stat-table">0</td><td class="stat-table">n/a</td><td class="stat-table">no</td></tr>
+          <ng-container *ngFor="let row of summary">
+          <tr>
+          <td class="stat-table">{{row.position}}</td>
+          <td class="stat-table">{{row.count}}</td>
+          <td class="stat-table">{{row.rating}}</td>
+          <td class="stat-table">{{row.legal}}</td>
+          </tr>
+          </ng-container>
+
+
+          <!-- <tr><td class="stat-table">QB</td> -->
+            <!-- <td class="stat-table">{{qbTaken}}</td><td class="stat-table">{{qbRating}}</td><td class="stat-table">{{qbLegal}}</td></tr> -->
+          <!-- <tr><td class="stat-table">RB</td><td class="stat-table">3</td><td class="stat-table">Strong</td><td class="stat-table">Yes</td></tr> -->
+          <!-- <tr><td class="stat-table">WR/TE</td><td class="stat-table">4</td><td class="stat-table">Strong</td><td class="stat-table">Yes</td></tr> -->
+          <!-- <tr><td class="stat-table">K</td><td class="stat-table">2</td><td class="stat-table">Elite</td><td class="stat-table">Yes</td></tr> -->
+          <!-- <tr><td class="stat-table">DST</td><td class="stat-table">0</td><td class="stat-table">n/a</td><td class="stat-table">no</td></tr> -->
         </table>
       </div>
 
