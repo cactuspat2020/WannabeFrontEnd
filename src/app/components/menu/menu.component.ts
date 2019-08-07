@@ -21,19 +21,19 @@ export class MenuComponent implements OnInit {
     {label: 'Setup', link: '/setup', disabled: false},
     {label: 'Auction', link: '/auction', disabled: false},
     {label: 'Status', link: '/status', disabled: false},
-    {label: 'Players', link: '/players', disabled: false},
+    {label: 'Summary', link: '/summary', disabled: false},
   ];
   adminLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
     {label: 'Setup', link: '/setup', disabled: false},
     {label: 'Auction', link: '/auction', disabled: false},
     {label: 'Status', link: '/status', disabled: false},
-    {label: 'Players', link: '/players', disabled: false},
+    {label: 'Summary', link: '/summary', disabled: false},
   ];
   userLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
     {label: 'Status', link: '/status', disabled: false},
-    {label: 'Players', link: '/players', disabled: false},
+    {label: 'Summary', link: '/summary', disabled: false},
   ];
   links: MenuItem[] = [];
   activeLink = this.links[0];

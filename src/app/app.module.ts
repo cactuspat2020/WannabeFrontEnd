@@ -32,7 +32,7 @@ import { RouterModule } from '@angular/router';
 import { AuctionComponent } from './components/auction/auction.component';
 import { DraftSelectionsComponent } from './components/draft-selections/draft-selections.component';
 import { TeamStatisticsComponent } from './components/team-statistics/team-statistics.component';
-import { PlayersComponent } from './components/players/players.component';
+import { PlayersComponent, OwnerSummaryComponent } from './components/owner-summary/owner-summary.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { CookieService } from 'ngx-cookie-service';
 import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players/owner-drafted-players.component';
@@ -45,7 +45,7 @@ import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players
     AuctionComponent,
     DraftSelectionsComponent,
     TeamStatisticsComponent,
-    PlayersComponent,
+    OwnerSummaryComponent,
     MenuComponent,
     OwnerDraftedPlayersComponent
   ],
@@ -80,7 +80,7 @@ import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players
       { path: 'login', component: DraftHomeComponent },
       { path: 'status', component: DraftSelectionsComponent },
       { path: 'stats', component: TeamStatisticsComponent },
-      { path: 'players', component: PlayersComponent },
+      { path: 'summary', component: OwnerSummaryComponent },
       { path: 'owner', component: OwnerDraftedPlayersComponent }
     ],
     {onSameUrlNavigation: 'reload'})

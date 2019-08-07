@@ -17,11 +17,11 @@ class Summary {
 }
 
 @Component({
-  selector: 'app-players',
-  templateUrl: './players.component.html',
-  styleUrls: ['./players.component.css']
+  selector: 'app-owner-summary',
+  templateUrl: './owner-summary.component.html',
+  styleUrls: ['./owner-summary.component.css']
 })
-export class PlayersComponent implements OnInit {
+export class OwnerSummaryComponent implements OnInit {
 
   wannabeDAO: WannabeDAOService;
   summary: Summary[] = [];
