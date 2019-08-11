@@ -2,6 +2,10 @@
 /* /* p.welcomemessage {font-size: 30px; text-align: center;  margin-bottom: 1cm; margin-top: 1cm} */
 img.raiders {margin-bottom: 1cm} */
 
+.spacer {
+  margin-bottom: 30px;
+}
+
 mat-card {align-content: center}
 mat-card-title.testCard {page-break-after: always}
 mat-label.selectLabel {font-size: 20px}

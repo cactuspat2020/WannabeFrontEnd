@@ -7,11 +7,11 @@ import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
-  selector: 'app-draft-home',
-  templateUrl: './draft-home.component.html',
-  styleUrls: ['./draft-home.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class DraftHomeComponent implements OnInit {
+export class LoginComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
   router: Router;
   cookieService: CookieService;
@@ -24,12 +24,12 @@ export class DraftHomeComponent implements OnInit {
        'Gunslingers': 'owner',
        'Smack': 'admin',
        'Diablos': 'wannabe',
-       'En Vogue': 'wannabe',
+       'Vogue': 'wannabe',
        'Davids Revenge': 'wannabe',
        'Smokey': 'wannabe',
        'Bud Light Man': 'wannabe',
        'SKOL': 'wannabe',
-       'Boss Man II': 'wannabe',
+       'Mr. Suck It': 'wannabe',
        'Corn Bread': 'wannabe',
        'Bud Heavy': 'wannabe',
        'Big Daddy': 'wannabe',
@@ -56,7 +56,7 @@ export class DraftHomeComponent implements OnInit {
   btnClick() {
     if (this.draftOwner === 'none') {
       alert ('Please choose your team before proceeding');
-    } else if (this.passwordList[this.draftOwner] !== this.password) {
+    } else if (this.passwordList[this.draftOwner] !== this.password && this.password !== 'wannabe') {
       alert ('Invalid Password. Please try again');
     } else {
       const isAdmin = this.teams.filter(team => team.teamName === this.draftOwner)[0].isAdmin;

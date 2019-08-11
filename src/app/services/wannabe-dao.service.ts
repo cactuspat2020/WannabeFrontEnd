@@ -225,7 +225,12 @@ export class WannabeDAOService {
   }
 
   public undoLastSelection(): Observable<object> {
-    const observable = this.http.get(this.undoLastPickURL);
+    const player = this.draftedPlayers[this.draftedPlayers.length - 1];
+
+    const jsonBody = JSON.stringify(player);
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', }) };
+    const observable =  this.http.post(this.undoLastPickURL, jsonBody, httpOptions);
+
     observable.subscribe((response: DraftedPlayerRecord[]) => {
       this.draftedPlayers = response;
     });

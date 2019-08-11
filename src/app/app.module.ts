@@ -17,37 +17,39 @@ import { MatSelectModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IgxExcelExporterService } from "igniteui-angular";
 import { IgxGridModule } from "igniteui-angular";
 
-import { DraftHomeComponent } from './components/draft-home/draft-home.component';
+import { LoginComponent } from './components/login/login.component';
 import { WannabeDAOService } from './services/wannabe-dao.service';
 import { SetupComponent } from './components/setup/setup.component';
 import { RouterModule } from '@angular/router';
 import { AuctionComponent } from './components/auction/auction.component';
 import { DraftSelectionsComponent } from './components/draft-selections/draft-selections.component';
 import { TeamStatisticsComponent } from './components/team-statistics/team-statistics.component';
-import { PlayersComponent, OwnerSummaryComponent } from './components/owner-summary/owner-summary.component';
+import { OwnerSummaryComponent } from './components/owner-summary/owner-summary.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { CookieService } from 'ngx-cookie-service';
 import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players/owner-drafted-players.component';
+import { DialogSetupWarningDialog } from './components/setup/setup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DraftHomeComponent,
+    LoginComponent,
     SetupComponent,
     AuctionComponent,
     DraftSelectionsComponent,
     TeamStatisticsComponent,
     OwnerSummaryComponent,
     MenuComponent,
-    OwnerDraftedPlayersComponent
+    OwnerDraftedPlayersComponent,
+    DialogSetupWarningDialog
   ],
   imports: [
     BrowserModule,
@@ -74,10 +76,10 @@ import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players
     MatSelectModule,
     IgxGridModule,
     RouterModule.forRoot([
-      { path: '', component: DraftHomeComponent },
+      { path: '', component: LoginComponent },
       { path: 'setup', component: SetupComponent },
       { path: 'auction', component: AuctionComponent },
-      { path: 'login', component: DraftHomeComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'status', component: DraftSelectionsComponent },
       { path: 'stats', component: TeamStatisticsComponent },
       { path: 'summary', component: OwnerSummaryComponent },
@@ -86,6 +88,7 @@ import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players
     {onSameUrlNavigation: 'reload'})
   ],
   providers: [WannabeDAOService, IgxExcelExporterService, CookieService],
+  entryComponents: [DialogSetupWarningDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -5,15 +5,18 @@
   <H2><B>Draft Setup</B></H2>
   <form   #setupForm="ngForm" class="example-form">
 
-    <label for="draftName">Draft name</label><br>
+    <!-- <label for="draftName">Draft name</label><br> -->
+    <b>Draft Name<br></b>
     <input width=150px type="text" class="form-control draft-name-width" id="draftName"
       [(ngModel)]="draftData.draftName" name="draftName" #draftName="ngModel"><br>
 
-    <label for="budget">Budget</label><br>
+    <!-- <label for="budget">Budget</label><br> -->
+    <b>Budget<br></b>
     <input type="text" width=80px class="form-control budget-width" id="budget" [(ngModel)]="draftData.budget"
       name="budget" #budget="ngModel"><br>
 
-    <label for="leagueSize">League Size</label><br>
+    <!-- <label for="leagueSize">League Size</label><br> -->
+    <b>League Size<br></b>
     <select (change)="changeLeagueSize()" type="number" class="form-control league-size-width" id="leagueSize"
       [(ngModel)]="draftData.leagueSize" name="leagueSize" #leagueSize="ngModel"><br>
       <option value=8>8 teams</option>
@@ -22,6 +25,7 @@
     </select>
 
     <H3>League Teams</H3>
+    <div class=spacer>Drag to reorder</div>
     <table>
         <ng-container>
           <tr>
@@ -69,7 +73,7 @@
 
     </div>
     </div>
-    <button type="submit" (click)="submit()" class="btn btn-success">Start Draft</button>
+    <button type="submit" (click)="openDialog()" class="btn btn-success">Start Draft</button>
   </form>
 </div>
 

@@ -32,6 +32,8 @@ export class MenuComponent implements OnInit {
   ];
   userLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
+    {label: 'Setup', link: '/setup', disabled: false},
+    {label: 'Auction', link: '/auction', disabled: false},
     {label: 'Status', link: '/status', disabled: false},
     {label: 'Summary', link: '/summary', disabled: false},
   ];
