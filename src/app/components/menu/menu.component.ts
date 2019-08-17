@@ -22,6 +22,7 @@ export class MenuComponent implements OnInit {
     {label: 'Auction', link: '/auction', disabled: false},
     {label: 'Status', link: '/status', disabled: false},
     {label: 'Summary', link: '/summary', disabled: false},
+    {label: 'Watchlist', link: '/watchlist', disabled: false},
   ];
   adminLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
@@ -29,6 +30,7 @@ export class MenuComponent implements OnInit {
     {label: 'Auction', link: '/auction', disabled: false},
     {label: 'Status', link: '/status', disabled: false},
     {label: 'Summary', link: '/summary', disabled: false},
+    {label: 'Watchlist', link: '/watchlist', disabled: false},
   ];
   userLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
@@ -36,6 +38,7 @@ export class MenuComponent implements OnInit {
     {label: 'Auction', link: '/auction', disabled: false},
     {label: 'Status', link: '/status', disabled: false},
     {label: 'Summary', link: '/summary', disabled: false},
+    {label: 'Watchlist', link: '/watchlist', disabled: false},
   ];
   links: MenuItem[] = [];
   activeLink = this.links[0];

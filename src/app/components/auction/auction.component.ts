@@ -52,29 +52,24 @@ export class AuctionComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.teams = this.wannabeDAO.getTeams();
-    if (!this.isLoaded) {
-      console.log("need to reload data");
-      if (this.wannabeDAO.dataAvalable()) {
-        console.log("data is available - just pulling it");
-        this.playerList = this.wannabeDAO.getPlayers('all');
-        this.teams = this.wannabeDAO.getTeams();
-        this.initVariables();
-      } else {
-        console.log("oops -- need to fetch data");
-        this.wannabeDAO.fetchPlayers().subscribe((response: PlayerRecord[]) => {
-          this.playerList = this.wannabeDAO.getPlayers('all');
-          this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
-            this.teams = response2;
-            this.initVariables();
-          });
+    this.wannabeDAO.fetchPlayers().subscribe(playerList => {
+      this.wannabeDAO.draftedPlayerListInitialized = false;
+      this.wannabeDAO.fetchDraftedPlayers().subscribe((draftedPlayers: DraftedPlayerRecord[]) => {
+        for (const player of draftedPlayers) {
+          playerList = playerList.filter(x => x.playerName !== player.playerName);
+        }
+        this.playerList = playerList;
+        this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
+          this.teams = response2;
+          this.initVariables();
         });
-      }
-    } else {
-      console.log("Luck me. Data is already here!");
-    }
+      });
+    });
   }
 
+  refresh() {
+    this.ngOnInit();
+  }
   private initVariables() {
     this.playerFilteredOptions = this.playerControl.valueChanges
       .pipe(startWith<string | PlayerRecord>(''),

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WannabeDAOService } from '../../services/wannabe-dao.service';
+import { WannabeCsvDAOService } from '../../services/wannabe-csv-dao.service';
 import { OwnerRecord } from '../../models/ownerRecord';
 import { Router } from '@angular/router';
 import { SetupData } from '../../models/setupData';
@@ -13,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
+  wannabeCsvDAO: WannabeCsvDAOService;
   router: Router;
   cookieService: CookieService;
   teams: OwnerRecord[] = [];
@@ -35,8 +37,9 @@ export class LoginComponent implements OnInit {
        'Big Daddy': 'wannabe',
       };
 
-  constructor(wannabeDAO: WannabeDAOService, cookieService: CookieService, router: Router ) {
+  constructor(wannabeDAO: WannabeDAOService, cookieService: CookieService, router: Router, csvDao: WannabeCsvDAOService ) {
     this.wannabeDAO = wannabeDAO;
+    this.wannabeCsvDAO = csvDao;
     this.router = router;
     this.draftOwner = 'none';
     this.cookieService = cookieService;
@@ -53,13 +56,14 @@ export class LoginComponent implements OnInit {
       this.cookieService.set('loginTeam', this.draftOwner, 1);
   }
 
-  btnClick() {
+  login() {
     if (this.draftOwner === 'none') {
       alert ('Please choose your team before proceeding');
     } else if (this.passwordList[this.draftOwner] !== this.password && this.password !== 'wannabe') {
       alert ('Invalid Password. Please try again');
     } else {
       const isAdmin = this.teams.filter(team => team.teamName === this.draftOwner)[0].isAdmin;
+      this.wannabeDAO.forceNewWatchList();
 
       if ( isAdmin ) {
         this.router.navigate(['/setup']);

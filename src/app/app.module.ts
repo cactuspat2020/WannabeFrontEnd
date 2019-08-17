@@ -37,6 +37,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { CookieService } from 'ngx-cookie-service';
 import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players/owner-drafted-players.component';
 import { DialogSetupWarningDialog } from './components/setup/setup.component';
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { DialogSetupWarningDialog } from './components/setup/setup.component';
     OwnerSummaryComponent,
     MenuComponent,
     OwnerDraftedPlayersComponent,
-    DialogSetupWarningDialog
+    DialogSetupWarningDialog,
+    WatchlistComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,8 @@ import { DialogSetupWarningDialog } from './components/setup/setup.component';
       { path: 'status', component: DraftSelectionsComponent },
       { path: 'stats', component: TeamStatisticsComponent },
       { path: 'summary', component: OwnerSummaryComponent },
-      { path: 'owner', component: OwnerDraftedPlayersComponent }
+      { path: 'owner', component: OwnerDraftedPlayersComponent },
+      { path: 'watchlist', component: WatchlistComponent }
     ],
     {onSameUrlNavigation: 'reload'})
   ],

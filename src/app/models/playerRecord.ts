@@ -1,4 +1,4 @@
-export interface PlayerRecord {
+export class PlayerRecord {
   playerName: string;
   percentOwn: number;
   NFLTeam: string;

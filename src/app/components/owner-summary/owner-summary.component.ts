@@ -35,7 +35,6 @@ export class OwnerSummaryComponent implements OnInit {
   qbRating;
   qbLegal;
 
-
   // Lists used for form elements
   playerList: PlayerRecord[] = [];
   draftedPlayers: DraftedPlayerRecord[] = [];
@@ -48,12 +47,16 @@ export class OwnerSummaryComponent implements OnInit {
   owner;
   statusMessage = 'Initializing...';
 
+  dataSource2 = new MatTableDataSource(this.draftedPlayers);
+  displayedColumns2: string[] = ['draftOrder', 'position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'price', 'rating'];
+
   // AutoSelect Configurations
   teamControl = new FormControl();
   playerControl = new FormControl();
   teamFilteredOptions: Observable<OwnerRecord[]>;
   playerFilteredOptions: Observable<PlayerRecord[]>;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort2: MatSort;
 
   // Table Variables
   dataSource = new MatTableDataSource(this.playerList);
@@ -65,69 +68,50 @@ export class OwnerSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.wannabeDAO.dataAvalable()) {
-      this.teams = this.wannabeDAO.getTeams();
-      this.draftedPlayers = this.wannabeDAO.getDraftedPlayers(this.wannabeDAO.getDraftOwner());
-      this.playerList = this.wannabeDAO.getPlayers('all');
-      this.playerFilteredOptions = this.playerControl.valueChanges
-        .pipe(startWith<string | PlayerRecord>(''),
-          map(value => typeof value === 'string' ? value : value.playerName),
-          map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
-        );
-      this.teamFilteredOptions = this.teamControl.valueChanges
-        .pipe(startWith<string | OwnerRecord>(''),
-          map(value => typeof value === 'string' ? value : value.teamName),
-          map(teamName => teamName ? this._filterTeams(teamName) : this.teams.slice())
-        );
+    // First get all the players
+    this.wannabeDAO.fetchPlayers().subscribe((response: PlayerRecord[]) => {
+      this.playerList = response;
 
-      this.playerRankings = this.wannabeDAO.getPlayerRankings();
+      // Next get the player rankings
+      this.wannabeDAO.fetchPlayerRankings().subscribe((response2) => {
+        this.playerRankings = this.wannabeDAO.getRankingMap(response2);
 
-      this.dataSource = new MatTableDataSource(this.playerList);
-      this.dataSource.sort = this.sort;
-      this.owner = this.wannabeDAO.getDraftOwner();
-      this.PlayersTakenLabel = this.wannabeDAO.getDraftedPlayers(this.owner).length + ' of 15';
-      this.maxBid = this.wannabeDAO.getMaxBid(this.owner);
-      this.generateSummary();
-    } else {
-      // First get all the players
-      this.wannabeDAO.fetchPlayers().subscribe((response: PlayerRecord[]) => {
-        this.playerList = response;
+        // Next get all the team names
+        this.wannabeDAO.fetchTeams().subscribe((response3: OwnerRecord[]) => {
+          this.teams = response3;
+          this.playerFilteredOptions = this.playerControl.valueChanges
+            .pipe(startWith<string | PlayerRecord>(''),
+              map(value => typeof value === 'string' ? value : value.playerName),
+              map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
+            );
+          this.teamFilteredOptions = this.teamControl.valueChanges
+            .pipe(startWith<string | OwnerRecord>(''),
+              map(value => typeof value === 'string' ? value : value.teamName),
+              map(teamName => teamName ? this._filterTeams(teamName) : this.teams.slice())
+            );
 
-        // Next get the player rankings
-        this.wannabeDAO.fetchPlayerRankings().subscribe((response2) => {
-          this.playerRankings = this.wannabeDAO.getRankingMap(response2);
+          this.dataSource = new MatTableDataSource(this.playerList);
+          this.dataSource.sort = this.sort;
+          this.owner = this.wannabeDAO.getDraftOwner();
+          this.PlayersTakenLabel = this.wannabeDAO.getDraftedPlayers(this.owner).length + ' of 15';
+          this.maxBid = this.wannabeDAO.getMaxBid(this.owner);
 
-          // Next get all the team names
-          this.wannabeDAO.fetchTeams().subscribe((response3: OwnerRecord[]) => {
-            this.teams = response3;
-            this.playerFilteredOptions = this.playerControl.valueChanges
-              .pipe(startWith<string | PlayerRecord>(''),
-                map(value => typeof value === 'string' ? value : value.playerName),
-                map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
-              );
-            this.teamFilteredOptions = this.teamControl.valueChanges
-              .pipe(startWith<string | OwnerRecord>(''),
-                map(value => typeof value === 'string' ? value : value.teamName),
-                map(teamName => teamName ? this._filterTeams(teamName) : this.teams.slice())
-              );
-
-            this.dataSource = new MatTableDataSource(this.playerList);
-            this.dataSource.sort = this.sort;
-            this.owner = this.wannabeDAO.getDraftOwner();
-            this.PlayersTakenLabel = this.wannabeDAO.getDraftedPlayers(this.owner).length + ' of 15';
-            this.maxBid = this.wannabeDAO.getMaxBid(this.owner);
-
-            // Finaly get the drafted players and generate the summary.
-            this.wannabeDAO.fetchDraftedPlayers().subscribe((draftedPlayers: DraftedPlayerRecord[]) => {
-              this.draftedPlayers = draftedPlayers.filter(x => x.ownerName === this.wannabeDAO.getDraftOwner());
-              this.generateSummary();
-            });
+          // Finaly get the drafted players and generate the summary.
+          this.wannabeDAO.fetchDraftedPlayers().subscribe((draftedPlayers: DraftedPlayerRecord[]) => {
+            this.draftedPlayers = draftedPlayers.filter(x => x.ownerName === this.wannabeDAO.getDraftOwner());
+            this.dataSource2 = new MatTableDataSource(this.draftedPlayers);
+            this.dataSource2.sort = this.sort2;
+            this.generateSummary();
           });
         });
       });
-    }
+    });
   }
 
+  refresh() {
+   this.wannabeDAO.draftedPlayerListInitialized = false;
+   this.ngOnInit();
+  }
   generateSummary() {
     const positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DST'];
     const legalMap: Map<string, number> = new Map([
