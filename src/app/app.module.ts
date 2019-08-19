@@ -24,6 +24,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IgxExcelExporterService } from "igniteui-angular";
 import { IgxGridModule } from "igniteui-angular";
+import { ChartsModule } from 'ng2-charts';
+
 
 import { LoginComponent } from './components/login/login.component';
 import { WannabeDAOService } from './services/wannabe-dao.service';
@@ -38,6 +40,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players/owner-drafted-players.component';
 import { DialogSetupWarningDialog } from './components/setup/setup.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { StatisticsService } from './services/statistics.service';
+import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +56,8 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
     MenuComponent,
     OwnerDraftedPlayersComponent,
     DialogSetupWarningDialog,
-    WatchlistComponent
+    WatchlistComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +83,7 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
     MatTabsModule,
     MatSelectModule,
     IgxGridModule,
+    ChartsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'setup', component: SetupComponent },
@@ -86,11 +93,17 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
       { path: 'stats', component: TeamStatisticsComponent },
       { path: 'summary', component: OwnerSummaryComponent },
       { path: 'owner', component: OwnerDraftedPlayersComponent },
-      { path: 'watchlist', component: WatchlistComponent }
+      { path: 'watchlist', component: WatchlistComponent },
+      { path: 'statistics', component: StatisticsComponent }
     ],
     {onSameUrlNavigation: 'reload'})
   ],
-  providers: [WannabeDAOService, IgxExcelExporterService, CookieService],
+  providers: [
+    WannabeDAOService,
+    WannabeCsvDAOService,
+    IgxExcelExporterService,
+    CookieService,
+    StatisticsService],
   entryComponents: [DialogSetupWarningDialog],
   bootstrap: [AppComponent]
 })

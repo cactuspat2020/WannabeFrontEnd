@@ -1,0 +1,57 @@
+<app-menu></app-menu>
+<a (click)="refresh()"> click here to refresh </a>
+
+<H3>Draft Statistics</H3>
+
+<div align=center>
+  <mat-card>
+    <mat-card-title>
+      Players remaining by category
+    </mat-card-title>
+    <mat-card-content>
+      <div class="summaryStats">
+        <table class="mat-elevation-z8">
+          <tr>
+            <th class="stat-table">Pos</th>
+            <th class="stat-table">Elite</th>
+            <th class="stat-table">All-Pro</th>
+            <th class="stat-table">Starters</th>
+            <th class="stat-table">Reserves</th>
+          </tr>
+          <ng-container *ngFor="let pos of playerMap.keys()">
+            <tr>
+              <td class="stat-table">{{playerMap.get(pos).position}}</td>
+              <td class="stat-table">{{playerMap.get(pos).elite}}</td>
+              <td class="stat-table">{{playerMap.get(pos).allPro}}</td>
+              <td class="stat-table">{{playerMap.get(pos).starter}}</td>
+              <td class="stat-table">{{playerMap.get(pos).reserve}}</td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>
+      Post-Draft Power Rankings
+    </mat-card-title>
+    <mat-card-content>
+      <div>
+        <canvas width=600px id="myChart"></canvas>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>
+      Performance against the average
+    </mat-card-title>
+    <mat-card-content>
+      <div>
+        <canvas width=800px id="spiderChart"></canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

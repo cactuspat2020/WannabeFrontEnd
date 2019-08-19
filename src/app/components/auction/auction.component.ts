@@ -47,6 +47,7 @@ export class AuctionComponent implements OnInit {
   displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints',
     'percentOwn', 'percentStart', 'byeWeek', 'assessment'];
 
+  limitedDisplayColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek' ];
   constructor(wannabeDAO: WannabeDAOService) {
     this.wannabeDAO = wannabeDAO;
   }
@@ -87,6 +88,10 @@ export class AuctionComponent implements OnInit {
     this.onTheClock = this.wannabeDAO.getOnTheClock();
     this.draftRound = this.wannabeDAO.getRound();
     this.remainingPlayersToDraft = this.wannabeDAO.getRemainingPlayerCount();
+
+    if (this.wannabeDAO.getDraftOwner() !== 'Gunslingers') {
+      this.displayedColumns = this.limitedDisplayColumns;
+    }
     this.isLoaded = true;
   }
 

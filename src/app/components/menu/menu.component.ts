@@ -23,6 +23,7 @@ export class MenuComponent implements OnInit {
     {label: 'Status', link: '/status', disabled: false},
     {label: 'Summary', link: '/summary', disabled: false},
     {label: 'Watchlist', link: '/watchlist', disabled: false},
+    {label: 'Statistics', link: '/statistics', disabled: false},
   ];
   adminLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
@@ -31,14 +32,15 @@ export class MenuComponent implements OnInit {
     {label: 'Status', link: '/status', disabled: false},
     {label: 'Summary', link: '/summary', disabled: false},
     {label: 'Watchlist', link: '/watchlist', disabled: false},
+    {label: 'Statistics', link: '/statistics', disabled: false},
   ];
   userLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
-    {label: 'Setup', link: '/setup', disabled: false},
     {label: 'Auction', link: '/auction', disabled: false},
     {label: 'Status', link: '/status', disabled: false},
     {label: 'Summary', link: '/summary', disabled: false},
     {label: 'Watchlist', link: '/watchlist', disabled: false},
+    {label: 'Statistics', link: '/statistics', disabled: false},
   ];
   links: MenuItem[] = [];
   activeLink = this.links[0];
@@ -53,7 +55,6 @@ export class MenuComponent implements OnInit {
     this.cookieService = cookieService;
 
     const loggedInOwner = this.cookieService.get('loginTeam');
-    this.wannabeDAO.setDraftOwner(loggedInOwner);
   }
 
   ngOnInit() {

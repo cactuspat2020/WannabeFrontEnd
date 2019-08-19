@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
+import { StatisticsService } from '../../services/statistics.service';
 import { Observable } from 'rxjs';
 import { PlayerRecord } from '../../models/playerRecord';
 import { MatTableDataSource } from '@angular/material';
@@ -12,7 +13,7 @@ import { DraftedPlayerRecord } from 'src/app/models/draftedPlayerRecord';
 class Summary {
   position: string;
   count: number;
-  rating: string;
+  rating: number;
   legal: boolean;
 }
 
@@ -24,6 +25,7 @@ class Summary {
 export class OwnerSummaryComponent implements OnInit {
 
   wannabeDAO: WannabeDAOService;
+  statisticsService: StatisticsService;
   summary: Summary[] = [];
 
   // 2-Way data binding
@@ -38,6 +40,7 @@ export class OwnerSummaryComponent implements OnInit {
   // Lists used for form elements
   playerList: PlayerRecord[] = [];
   draftedPlayers: DraftedPlayerRecord[] = [];
+  allDraftedPlayers: DraftedPlayerRecord[] = [];
   playerRankings;
   // playerFilterValues: string[] = [];
   teamLookAheadValues: string[] = [];
@@ -63,8 +66,9 @@ export class OwnerSummaryComponent implements OnInit {
   // displayedColumns2: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints', 'percentOwn', 'percentStart', 'byeWeek'];
   displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek'];
 
-  constructor(wannabeDAO: WannabeDAOService) {
+  constructor(wannabeDAO: WannabeDAOService, statService: StatisticsService) {
     this.wannabeDAO = wannabeDAO;
+    this.statisticsService = statService;
   }
 
   ngOnInit() {
@@ -98,10 +102,14 @@ export class OwnerSummaryComponent implements OnInit {
 
           // Finaly get the drafted players and generate the summary.
           this.wannabeDAO.fetchDraftedPlayers().subscribe((draftedPlayers: DraftedPlayerRecord[]) => {
+            this.allDraftedPlayers = draftedPlayers;
             this.draftedPlayers = draftedPlayers.filter(x => x.ownerName === this.wannabeDAO.getDraftOwner());
             this.dataSource2 = new MatTableDataSource(this.draftedPlayers);
             this.dataSource2.sort = this.sort2;
-            this.generateSummary();
+
+            this.statisticsService.getSpiderData().subscribe((spiderData: Map<string, Map<string, number>>) => {
+              const spiderChart = this.generateSummary(this.wannabeDAO.getDraftOwner(), spiderData);
+            });
           });
         });
       });
@@ -109,64 +117,99 @@ export class OwnerSummaryComponent implements OnInit {
   }
 
   refresh() {
-   this.wannabeDAO.draftedPlayerListInitialized = false;
-   this.ngOnInit();
+    this.wannabeDAO.draftedPlayerListInitialized = false;
+    this.ngOnInit();
   }
-  generateSummary() {
+  generateSummary(teamName: string, draftRankingMap: Map<string, Map<string, number>>) {
     const positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DST'];
     const legalMap: Map<string, number> = new Map([
       ['QB', 1], ['RB', 2], ['WR', 3], ['TE', 3], ['K', 1], ['DST', 1]]);
 
-    for (const player of this.draftedPlayers) {
-      player.assessment = this.wannabeDAO.getPlayerRating(player);
-    }
     for (const position of positions) {
       const record = new Summary();
       record.count = 0;
       record.legal = false;
       record.position = position;
       record.rating = null;
+
+      // work through all the players drafted by this owner
       for (const player of this.draftedPlayers) {
         if (player.position === position) {
           record.count++;
           record.legal = record.count >= legalMap.get(position) ? true : false;
-          if (record.rating === null) {
-            record.rating = player.assessment;
-          } else if (player.assessment === 'Elite') {
-            record.rating = 'Elite';
-          } else if (player.assessment === 'All Pro' && record.rating !== 'Elite') {
-            record.rating = player.assessment;
-          } else if (player.assessment === 'Starter' && record.rating !== 'Elite' && record.rating !== 'All Pro') {
-            record.rating = player.assessment;
-          } else {
-            record.rating = player.assessment;
-          }
         }
       }
       this.summary.push(record);
     }
-    const wrRecord = this.summary.filter(x => x.position === 'WR')[0];
-    const teRecord = this.summary.filter(x => x.position === 'TE')[0];
-    let receiverRecord = new Summary();
-    if (teRecord != null) {
-      receiverRecord.position = 'WR/TE';
-      receiverRecord.count = wrRecord.count + teRecord.count;
-      receiverRecord.legal = wrRecord.legal || teRecord.legal;
-      receiverRecord.rating = wrRecord.rating;
-    } else {
-      receiverRecord.position = 'WR/TE';
-      receiverRecord = wrRecord;
+
+    // Combine WR/TE records
+    this.combineReceivers();
+
+    // Update Rankings
+    this.updateRankings(teamName, draftRankingMap);
+
+    // Reorder
+    this.reOrderSummary();
+  }
+
+  // Determine where this player ranks against the others
+  updateRankings(teamName: string, draftRankingMap: Map<string, Map<string, number>>) {
+    const teamRankings = draftRankingMap.get(teamName);
+
+    for (let position of Array.from(this.summary.map(x => x.position))) {
+      let ranking = 1;
+      position = position === 'WR/TE' ? 'Rec' : position;
+
+      const ratedValue = teamRankings.get(position);
+
+      for (const team of Array.from(draftRankingMap.keys()).filter(x => x !== 'averages')) {
+        if (draftRankingMap.get(team).get(position) > ratedValue) {
+          ranking++;
+        }
+      }
+
+      // update the ranking
+      position = position ===  'Rec' ? 'WR/TE' : position;
+
+      const record = this.summary.filter( x => x.position === position)[0];
+      record.rating = ranking;
+
+      // replace the record in the array
+      const tmpSummary = this.summary.filter( x => x.position !== position);
+      tmpSummary.push(record);
+      this.summary = tmpSummary;
     }
-    this.summary = this.summary.filter(x => x.position !== 'WR' && x.position !== 'TE');
-    this.summary.push(receiverRecord);
+  }
+
+  // this is just a helper function to put the summary entries into order (too lazy to do a custom sort)
+  reOrderSummary() {
     const tmpRecord: Summary[] = [];
     tmpRecord.push(this.summary.filter(x => x.position === 'QB')[0]);
     tmpRecord.push(this.summary.filter(x => x.position === 'RB')[0]);
     tmpRecord.push(this.summary.filter(x => x.position === 'WR/TE')[0]);
     tmpRecord.push(this.summary.filter(x => x.position === 'K')[0]);
     tmpRecord.push(this.summary.filter(x => x.position === 'DST')[0]);
-
     this.summary = tmpRecord;
+  }
+
+  // combine the WR and TE into a common receivers
+  combineReceivers() {
+    const wrRecord = this.summary.filter(x => x.position === 'WR')[0];
+    const teRecord = this.summary.filter(x => x.position === 'TE')[0];
+
+    let receiverRecord = new Summary();
+    if (teRecord != null) {
+      receiverRecord.position = 'WR/TE';
+      receiverRecord.count = wrRecord.count + teRecord.count;
+      receiverRecord.legal = receiverRecord.count >= 3 ? true : false;
+      receiverRecord.rating = wrRecord.rating;
+    } else {
+      receiverRecord.position = 'WR/TE';
+      receiverRecord = wrRecord;
+    }
+
+    this.summary = this.summary.filter(x => x.position !== 'WR' && x.position !== 'TE');
+    this.summary.push(receiverRecord);
   }
 
   selectPlayers() {

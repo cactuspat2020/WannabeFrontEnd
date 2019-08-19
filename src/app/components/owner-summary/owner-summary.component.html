@@ -30,16 +30,16 @@
         <table class="mat-elevation-z8">
           <tr>
             <th class="stat-table">Pos</th>
-            <th class="stat-table">Taken</th>
-            <th class="stat-table">Assessment</th>
-            <th class="stat-table">Legal</th>
+            <th class="stat-table" text-align=center>Taken</th>
+            <th class="stat-table" text-align=center>Rank</th>
+            <th class="stat-table" text-align=center>Legal</th>
           </tr>
           <ng-container *ngFor="let row of summary">
             <tr>
               <td class="stat-table">{{row.position}}</td>
-              <td class="stat-table">{{row.count}}</td>
-              <td class="stat-table">{{row.rating}}</td>
-              <td class="stat-table">{{row.legal}}</td>
+              <td class="stat-table" text-align=center>{{row.count}}</td>
+              <td class="stat-table" text-align=center>{{row.rating}}</td>
+              <td class="stat-table" text-align=center>{{row.legal}}</td>
             </tr>
           </ng-container>
 

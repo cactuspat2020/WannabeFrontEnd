@@ -6,6 +6,8 @@ import { OwnerRecord } from '../models/ownerRecord';
 import { SetupData } from '../models/setupData';
 import { DraftedPlayerRecord } from '../models/draftedPlayerRecord';
 import { WannabeCsvDAOService } from './wannabe-csv-dao.service';
+import { CookieService } from 'ngx-cookie-service';
+
 import { delay } from 'q';
 import { ObserversModule } from '@angular/cdk/observers';
 
@@ -19,6 +21,7 @@ import { ObserversModule } from '@angular/cdk/observers';
 export class WannabeDAOService {
   http: HttpClient;
   csvDaoService: WannabeCsvDAOService;
+  cookieService: CookieService;
   baseURL = 'https://u4oe9qvb4k.execute-api.us-west-2.amazonaws.com/default/';
   getPlayersURL = this.baseURL + 'getPlayers';
   getDraftInfoURL = this.baseURL + 'getDraftInfo';
@@ -48,9 +51,10 @@ export class WannabeDAOService {
   draftOwner: string;
   ROUNDS = 15;
 
-  constructor(private httpClient: HttpClient, csvService: WannabeCsvDAOService) {
+  constructor(private httpClient: HttpClient, csvService: WannabeCsvDAOService, cookieService: CookieService) {
     this.http = httpClient;
     this.csvDaoService = csvService;
+    this.cookieService = cookieService;
 
     this.fetchPlayers().subscribe();
     this.fetchWatchList().subscribe();
@@ -329,7 +333,7 @@ export class WannabeDAOService {
     this.draftOwner = owner;
   }
   public getDraftOwner(): string {
-    return this.draftOwner;
+    return this.cookieService.get('loginTeam');
   }
   public getDraftInfo(): SetupData {
     return this.setupData;
