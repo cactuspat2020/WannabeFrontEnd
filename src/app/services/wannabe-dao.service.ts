@@ -67,7 +67,7 @@ export class WannabeDAOService {
 
   public fetchWatchList(): Observable<object> {
     const returnVal = new Observable<DraftedPlayerRecord[]>(observer => {
-      if (this.watchlistInitialized) {
+        if (this.watchlistInitialized) {
         observer.next(this.watchlistPlayers);
       } else {
         this.http.get(this.getWatchlistURL).subscribe((response: DraftedPlayerRecord[]) => {

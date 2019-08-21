@@ -18,7 +18,7 @@
             <th class="stat-table">Starters</th>
             <th class="stat-table">Reserves</th>
           </tr>
-          <ng-container *ngFor="let pos of playerMap.keys()">
+          <ng-container *ngFor="let pos of playerMapKeys">
             <tr>
               <td class="stat-table">{{playerMap.get(pos).position}}</td>
               <td class="stat-table">{{playerMap.get(pos).elite}}</td>
@@ -49,6 +49,18 @@
       Performance against the average
     </mat-card-title>
     <mat-card-content>
+      <div align=center>
+      <form #setupForm="ngForm" class="example-form">
+        <label for="position">Filter by Owner</label><br>
+        <select width=30% (change)="selectPlayers()" type="string" class="form-control position-width" id="position"
+          [(ngModel)]="spiderTeamSelection" name="position" #position="ngModel" >
+          <option value="all">---</option>
+          <option *ngFor="let team of teams">
+            {{team.teamName}}
+          </option>
+        </select>
+      </form>
+    </div>
       <div>
         <canvas width=800px id="spiderChart"></canvas>
       </div>

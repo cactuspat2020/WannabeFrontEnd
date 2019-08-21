@@ -4,6 +4,7 @@ import { WannabeDAOService } from '../../services/wannabe-dao.service';
 import { Ranking } from '../../services/statistics.service';
 import { PlayersRemaining } from '../../services/statistics.service';
 import { Chart } from '../../../../node_modules/chart.js';
+import { OwnerRecord } from '../../models/ownerRecord';
 
 
 @Component({
@@ -16,7 +17,12 @@ export class StatisticsComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
   ranking: Ranking[];
   myBarChart: Chart;
+  teams: OwnerRecord[];
+  spiderTeamSelection = 'all';
+  spiderData: Map<string, Map<string, number>>;
+
   playerMap: Map<string, PlayersRemaining>;
+  playerMapKeys;
 
   dataLoaded = true;
 
@@ -26,8 +32,13 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.wannabeDAO.fetchTeams().subscribe((teamList: OwnerRecord[]) => {
+      this.teams = teamList;
+    });
+
     this.statasticsService.getRemainingByStatus().subscribe((remainingPlayers: Map<string, PlayersRemaining>) => {
       this.playerMap = remainingPlayers;
+      this.playerMapKeys = Array.from(remainingPlayers.keys());
     });
 
     this.statasticsService.getPowerRankings().subscribe((draftData: Ranking[]) => {
@@ -35,12 +46,19 @@ export class StatisticsComponent implements OnInit {
     });
 
     this.statasticsService.getSpiderData().subscribe((spiderData: Map<string, Map<string, number>>) => {
+      this.spiderData = spiderData;
       const spiderChart = this.buildSpiderChart(this.wannabeDAO.getDraftOwner(), spiderData);
     });
   }
 
   refresh() {
    this.ngOnInit();
+  }
+
+  selectPlayers() {
+    if (this.spiderTeamSelection !== 'all') {
+      this.buildSpiderChart(this.spiderTeamSelection, this.spiderData);
+    }
   }
 
   /************************************/

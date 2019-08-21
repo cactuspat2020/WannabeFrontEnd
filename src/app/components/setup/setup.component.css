@@ -3,6 +3,11 @@ mat-form-field.inputFormField { padding-bottom: 1cm }
 label {padding-top: 10px}
 /* input {width:90px} */
 
+h3 {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-weight: 600;
+}
+
 .spacer {
   margin-bottom: 30px;
 }
@@ -14,7 +19,7 @@ label {padding-top: 10px}
   margin-bottom: 30px;
 }
 
-.btn-success { margin-top: 50px}
+.mat-raised-button { margin-top: 50px}
 
 table {
   border: 1px;

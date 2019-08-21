@@ -37,3 +37,7 @@ h3 {
 .summaryStats {
   margin-bottom: 60px;
 }
+
+.form-control {
+  width: 150px;
+}

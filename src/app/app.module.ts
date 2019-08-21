@@ -9,7 +9,8 @@ import { AppComponent } from './app.component';
 import { MatButtonModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
-import { MatRippleModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material';
 import { MatTableModule } from '@angular/material';
 import { MatCardModule } from '@angular/material';
@@ -25,6 +26,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IgxExcelExporterService } from "igniteui-angular";
 import { IgxGridModule } from "igniteui-angular";
 import { ChartsModule } from 'ng2-charts';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 import { LoginComponent } from './components/login/login.component';
@@ -57,7 +59,7 @@ import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
     OwnerDraftedPlayersComponent,
     DialogSetupWarningDialog,
     WatchlistComponent,
-    StatisticsComponent
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,8 +76,9 @@ import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
     MatSortModule,
     MatGridListModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
-    MatRippleModule,
+    MatMenuModule,
     MatCheckboxModule,
     MatTableModule,
     MatCardModule,
@@ -84,6 +87,7 @@ import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
     MatSelectModule,
     IgxGridModule,
     ChartsModule,
+    DeviceDetectorModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'setup', component: SetupComponent },

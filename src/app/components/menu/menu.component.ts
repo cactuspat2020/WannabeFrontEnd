@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { MatButtonModule } from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
 
 interface MenuItem {
   label: string;
@@ -48,12 +51,19 @@ export class MenuComponent implements OnInit {
   wannabeDAO: WannabeDAOService;
   router: Router;
   cookieService: CookieService;
+  isMobile = false;
+  isDesktop = false;
+  isTablet = false;
 
-  constructor(wannabeDAO: WannabeDAOService, router: Router, cookieService: CookieService) {
+  constructor(wannabeDAO: WannabeDAOService, router: Router, cookieService: CookieService,
+              deviceService: DeviceDetectorService) {
     this.wannabeDAO = wannabeDAO;
     this.router = router;
     this.cookieService = cookieService;
-
+    this.isMobile = deviceService.isMobile();
+    this.isDesktop = deviceService.isDesktop();
+    this.isTablet = deviceService.isTablet();
+    console.log('Detected ' + this.isMobile ? ' Mobile' : '' + this.isDesktop ? ' Desktop' : '' + this.isTablet ? ' Tablet' : '');
     const loggedInOwner = this.cookieService.get('loginTeam');
   }
 

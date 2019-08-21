@@ -2,7 +2,7 @@
 
 <div *ngIf="isLoaded">
 <div align=center>
-  <H2><B>Draft Setup</B></H2>
+  <H3>Draft Setup</H3>
   <form   #setupForm="ngForm" class="example-form">
 
     <!-- <label for="draftName">Draft name</label><br> -->
@@ -73,7 +73,7 @@
 
     </div>
     </div>
-    <button type="submit" (click)="openDialog()" class="btn btn-success">Start Draft</button>
+    <button mat-raised-button color="primary" (click)="openDialog()">Start Draft</button>
   </form>
 </div>
 

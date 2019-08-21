@@ -35,13 +35,14 @@ export class WatchlistComponent implements OnInit {
 
   constructor(wannabeDAO: WannabeDAOService) {
     this.wannabeDAO = wannabeDAO;
+  }
+
+  ngOnInit() {
+    this.wannabeDAO.watchlistInitialized = false;
     this.wannabeDAO.fetchPlayers().subscribe((players: PlayerRecord[]) => {
       this.playerList = players;
     });
     this.fetchTableData();
-  }
-
-  ngOnInit() {
     this.playerFilteredOptions = this.playerControl.valueChanges
       .pipe(startWith<string | PlayerRecord>(''),
         map(value => typeof value === 'string' ? value : value.playerName),
@@ -96,6 +97,7 @@ export class WatchlistComponent implements OnInit {
 
     this.wannabeDAO.storeWatchlistPlayer(watchedPlayer).subscribe((x: any) => {
       this.selectedPlayer.playerName = '';
+      this.wannabeDAO.watchlistInitialized = false;
       this.wannabeDAO.fetchWatchList().subscribe((players: DraftedPlayerRecord[]) => {
         this.watchList = players;
         for (const player of this.watchList) {
@@ -110,7 +112,7 @@ export class WatchlistComponent implements OnInit {
 
   refresh() {
     this.wannabeDAO.watchlistInitialized = false;
-   this.fetchTableData();
+    this.fetchTableData();
   }
   playerIsDrafted(row: DraftedPlayerRecord): boolean {
     const isAMatch = this.draftedPlayerList.filter(x => x.playerName === row.playerName).length > 0;
@@ -118,6 +120,7 @@ export class WatchlistComponent implements OnInit {
   }
 
   fetchTableData() {
+    this.wannabeDAO.watchlistInitialized = false;
     this.wannabeDAO.fetchWatchList().subscribe((response2: DraftedPlayerRecord[]) => {
       this.watchList = response2;
       this.watchlistDataSource = new MatTableDataSource(this.watchList);
