@@ -3,7 +3,7 @@ import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
 import { StatisticsService } from '../../services/statistics.service';
 import { Observable } from 'rxjs';
 import { PlayerRecord } from '../../models/playerRecord';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { OwnerRecord } from '../../models/ownerRecord';
 import { FormControl } from '@angular/forms';
@@ -58,8 +58,8 @@ export class OwnerSummaryComponent implements OnInit {
   playerControl = new FormControl();
   teamFilteredOptions: Observable<OwnerRecord[]>;
   playerFilteredOptions: Observable<PlayerRecord[]>;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatSort) sort2: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort2: MatSort;
 
   // Table Variables
   dataSource = new MatTableDataSource(this.playerList);
@@ -104,6 +104,9 @@ export class OwnerSummaryComponent implements OnInit {
           this.wannabeDAO.fetchDraftedPlayers().subscribe((draftedPlayers: DraftedPlayerRecord[]) => {
             this.allDraftedPlayers = draftedPlayers;
             this.draftedPlayers = draftedPlayers.filter(x => x.ownerName === this.wannabeDAO.getDraftOwner());
+            for (const player of draftedPlayers) {
+              player.assessment = this.wannabeDAO.getPlayerRating(player);
+            }
             this.dataSource2 = new MatTableDataSource(this.draftedPlayers);
             this.dataSource2.sort = this.sort2;
 

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
 import {Observable} from 'rxjs';
 import { PlayerRecord } from '../../models/playerRecord';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { OwnerRecord } from '../../models/ownerRecord';
 import {FormControl} from '@angular/forms';
@@ -25,7 +25,7 @@ export class DraftSelectionsComponent implements OnInit {
   budgetMessage = ' ';
   public playerList: PlayerRecord[] = [];
   excelExportService: IgxExcelExporterService;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   dataAvailable = false;
   isLoaded = false;
 

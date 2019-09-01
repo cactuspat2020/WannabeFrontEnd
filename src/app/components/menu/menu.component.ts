@@ -3,7 +3,7 @@ import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 
 interface MenuItem {

@@ -7,4 +7,6 @@ export class PlayerRecord {
   position: string;
   fantasyPoints: number;
   assessment: string;
+  rank: number;
+  costEstimate: number;
 }

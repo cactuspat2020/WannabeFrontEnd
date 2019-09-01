@@ -21,23 +21,23 @@ export class LoginComponent implements OnInit {
   draftOwner: string;
   password;
   isLoaded = false;
-  passwordList: {[user: string]: string } =
-     {
-       'Gunslingers': 'owner',
-       'Smack': 'admin',
-       'Diablos': 'wannabe',
-       'Vogue': 'wannabe',
-       'Davids Revenge': 'wannabe',
-       'Smokey': 'wannabe',
-       'Bud Light Man': 'wannabe',
-       'SKOL': 'wannabe',
-       'Mr. Suck It': 'wannabe',
-       'Corn Bread': 'wannabe',
-       'Bud Heavy': 'wannabe',
-       'Big Daddy': 'wannabe',
-      };
+  passwordList: { [user: string]: string } =
+    {
+      'Gunslingers': 'owner',
+      'Smack': 'admin',
+      'Diablos': 'wannabe',
+      'Vogue': 'wannabe',
+      'Davids Revenge': 'wannabe',
+      'Smokey': 'wannabe',
+      'Bud Light Man': 'wannabe',
+      'SKOL': 'wannabe',
+      'Mr. Suck It': 'wannabe',
+      'Corn Bread': 'wannabe',
+      'Bud Heavy': 'wannabe',
+      'Big Daddy': 'wannabe',
+    };
 
-  constructor(wannabeDAO: WannabeDAOService, cookieService: CookieService, router: Router, csvDao: WannabeCsvDAOService ) {
+  constructor(wannabeDAO: WannabeDAOService, cookieService: CookieService, router: Router, csvDao: WannabeCsvDAOService) {
     this.wannabeDAO = wannabeDAO;
     this.wannabeCsvDAO = csvDao;
     this.router = router;
@@ -52,24 +52,25 @@ export class LoginComponent implements OnInit {
   }
 
   selectChange() {
-      this.wannabeDAO.setDraftOwner(this.draftOwner);
-      this.cookieService.set('loginTeam', this.draftOwner, 1);
+    this.wannabeDAO.setDraftOwner(this.draftOwner);
+    this.cookieService.set('loginTeam', this.draftOwner, 1);
   }
 
   login() {
     if (this.draftOwner === 'none') {
-      alert ('Please choose your team before proceeding');
-    } else if (this.passwordList[this.draftOwner] !== this.password && this.password !== 'wannabe') {
-      alert ('Invalid Password. Please try again');
-    } else {
+      alert('Please choose your team before proceeding');
+    } else if (this.passwordList[this.draftOwner] === this.password ||
+      (this.password === 'wannabe' && this.draftOwner !== 'Gunslingers')) {
       const isAdmin = this.teams.filter(team => team.teamName === this.draftOwner)[0].isAdmin;
       this.wannabeDAO.forceNewWatchList();
 
-      if ( isAdmin ) {
+      if (isAdmin) {
         this.router.navigate(['/setup']);
       } else {
         this.router.navigate(['/status']);
       }
+    } else {
+      alert('Invalid Password. Please try again');
     }
   }
 }

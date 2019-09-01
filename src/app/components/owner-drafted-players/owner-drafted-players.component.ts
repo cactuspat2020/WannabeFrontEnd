@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
 import { DraftedPlayerRecord } from 'src/app/models/draftedPlayerRecord';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
@@ -16,7 +16,7 @@ export class OwnerDraftedPlayersComponent implements OnInit {
   displayedColumns2: string[] = ['draftOrder', 'position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'price', 'rating'];
   isLoaded = false;
 
-  @ViewChild(MatSort) sort2: MatSort;
+  @ViewChild(MatSort, { static: true }) sort2: MatSort;
 
   constructor(wannabeDAO: WannabeDAOService) {
     this.wannabeDAO = wannabeDAO;

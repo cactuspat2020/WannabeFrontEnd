@@ -92,7 +92,9 @@ export class WannabeCsvDAOService {
         percentStart: +elements[6],
         byeWeek: +elements[4],
         fantasyPoints: +elements[elements.length - 1],
-        assessment: ' '
+        assessment: ' ',
+        costEstimate: 0,
+        rank: 0
       };
       records.push(playerRecord);
     }

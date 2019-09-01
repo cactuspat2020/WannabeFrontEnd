@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { PlayerRecord } from '../models/playerRecord';
 import { OwnerRecord } from '../models/ownerRecord';
 import { SetupData } from '../models/setupData';
+import { AveragePlayerCost } from '../models/avePlayerCostRecord';
 import { DraftedPlayerRecord } from '../models/draftedPlayerRecord';
 import { WannabeCsvDAOService } from './wannabe-csv-dao.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -33,12 +34,14 @@ export class WannabeDAOService {
   saveWatchlistPlayerURL = this.baseURL + 'saveWatchlistPlayer';
   deleteWatchPlayerURL = this.baseURL + 'deleteWatchlistPlayer';
   getWatchlistURL = this.baseURL + 'getWatchlists';
+  getAveragePlayercostURL = this.baseURL + 'getAveragePlayerCost';
 
   fullPlayerListInitialized = false;
   draftedPlayerListInitialized = false;
   draftInfoInitialized = false;
   playerRankingsInitialized = false;
   watchlistInitialized = false;
+  averagePlayerCostInitialized = false;
 
   playerRankings;
   players: PlayerRecord[] = [];
@@ -46,6 +49,7 @@ export class WannabeDAOService {
   draftedPlayers: DraftedPlayerRecord[] = [];
   watchlistPlayers: DraftedPlayerRecord[] = [];
   owners: OwnerRecord[] = [];
+  averagePlayerCost: AveragePlayerCost[] = [];
   setupData: SetupData = new SetupData(' ', 0, 0, []);
   bidCount = 0;
   draftOwner: string;
@@ -59,6 +63,7 @@ export class WannabeDAOService {
     this.fetchPlayers().subscribe();
     this.fetchWatchList().subscribe();
     this.fetchTeams().subscribe();
+    this.fetchAveragePlayerCost().subscribe();
   }
 
   public forceNewWatchList() {
@@ -272,6 +277,41 @@ export class WannabeDAOService {
     return returnVal;
   }
 
+public getAveCost(pick: number, position: string): number {
+    const record = this.averagePlayerCost.filter(x => x.pick === pick)[0];
+    if (record) {
+    if ( position === 'qb') {
+      return record.qb;
+    } else if (position === 'rb') {
+      return record.rb;
+    } else if (position === 'rec') {
+      return record.rec;
+    } else if (position === 'k') {
+      return record.k;
+    } else if (position === 'dst') {
+      return record.dst;
+    } else {
+      return 1;
+    }
+  } else {
+    return 1;
+  }
+}
+
+  public fetchAveragePlayerCost() {
+    const returnVal = new Observable<AveragePlayerCost[]>(observer => {
+      if ( this.averagePlayerCostInitialized ) {
+        observer.next(this.averagePlayerCost);
+      } else {
+        this.http.get(this.getAveragePlayercostURL).subscribe((response: AveragePlayerCost[]) => {
+          this.averagePlayerCost = response;
+          this.averagePlayerCostInitialized = true;
+          observer.next(this.averagePlayerCost);
+        });
+      }
+    });
+    return returnVal;
+  }
   public undoLastSelection(): Observable<object> {
     const player = this.draftedPlayers[0];
 

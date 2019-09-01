@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
 import { Observable } from 'rxjs';
 import { PlayerRecord } from '../../models/playerRecord';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { OwnerRecord } from '../../models/ownerRecord';
 import { FormControl } from '@angular/forms';
@@ -24,13 +24,13 @@ export class WatchlistComponent implements OnInit {
   dataSource = new MatTableDataSource(this.playerList);
   removeButtonEnabled = false;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   // Table Variables
   watchList: DraftedPlayerRecord[] = [];
   watchlistDataSource = new MatTableDataSource(this.watchList);
   displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'rating', 'ownerName'];
-  @ViewChild(MatSort) tableSort: MatSort;
+  @ViewChild(MatSort, { static: true }) tableSort: MatSort;
 
 
   constructor(wannabeDAO: WannabeDAOService) {

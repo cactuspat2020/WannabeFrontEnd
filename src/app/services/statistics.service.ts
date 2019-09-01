@@ -190,12 +190,12 @@ export class StatisticsService {
       this.wannabeDAO.fetchDraftedPlayers().subscribe((players: DraftedPlayerRecord[]) => {
         this.wannabeDAO.fetchTeams().subscribe((teams: OwnerRecord[]) => {
           for (const team of teams) {
-            const QBs = players.filter(x => x.position === 'QB' && x.ownerName === team.teamName).sort(sortOnFantasy).slice(0, 1);
-            const RBs = players.filter(x => x.position === 'RB' && x.ownerName === team.teamName).sort(sortOnFantasy).slice(0, 2);
-            const DSTs = players.filter(x => x.position === 'DST' && x.ownerName === team.teamName).sort(sortOnFantasy).slice(0, 1);
-            const Ks = players.filter(x => x.position === 'K' && x.ownerName === team.teamName).sort(sortOnFantasy).slice(0, 1);
+            const QBs = players.filter(x => x.position === 'QB' && x.ownerName === team.teamName).sort(sortOnFantasy).slice(0, 0);
+            const RBs = players.filter(x => x.position === 'RB' && x.ownerName === team.teamName).sort(sortOnFantasy).slice(0, 1);
+            const DSTs = players.filter(x => x.position === 'DST' && x.ownerName === team.teamName).sort(sortOnFantasy).slice(0, 0);
+            const Ks = players.filter(x => x.position === 'K' && x.ownerName === team.teamName).sort(sortOnFantasy).slice(0, 0);
             const rec = players.filter(x => (x.position === 'WR' || x.position === 'TE') && x.ownerName === team.teamName)
-              .sort(sortOnFantasy).slice(0, 3);
+              .sort(sortOnFantasy).slice(0, 2);
 
             const ranking: Ranking = { fantasyPoints: 0, teamName: team.teamName };
             QBs.map(x => ranking.fantasyPoints += x.fantasyPoints);

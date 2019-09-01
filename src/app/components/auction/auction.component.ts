@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { WannabeDAOService } from 'src/app/services/wannabe-dao.service';
 import { Observable } from 'rxjs';
 import { PlayerRecord } from '../../models/playerRecord';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { OwnerRecord } from '../../models/ownerRecord';
 import { FormControl } from '@angular/forms';
@@ -40,12 +40,12 @@ export class AuctionComponent implements OnInit {
   playerControl = new FormControl();
   teamFilteredOptions: Observable<OwnerRecord[]>;
   playerFilteredOptions: Observable<PlayerRecord[]>;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   // Table Variables
   dataSource = new MatTableDataSource(this.playerList);
   displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints',
-    'percentOwn', 'percentStart', 'byeWeek', 'assessment'];
+    'percentOwn', 'percentStart', 'byeWeek', 'assessment', 'cost'];
 
   limitedDisplayColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek' ];
   constructor(wannabeDAO: WannabeDAOService) {
@@ -63,6 +63,7 @@ export class AuctionComponent implements OnInit {
         this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
           this.teams = response2;
           this.initVariables();
+          this.assessCosts();
         });
       });
     });
@@ -89,10 +90,27 @@ export class AuctionComponent implements OnInit {
     this.draftRound = this.wannabeDAO.getRound();
     this.remainingPlayersToDraft = this.wannabeDAO.getRemainingPlayerCount();
 
-    if (this.wannabeDAO.getDraftOwner() !== 'Gunslingers') {
+    if (this.wannabeDAO.getDraftOwner() !== 'Gunslingers' && this.wannabeDAO.getDraftOwner() !== 'Diablos') {
       this.displayedColumns = this.limitedDisplayColumns;
     }
     this.isLoaded = true;
+  }
+
+  assessCosts() {
+    const positions: string[] = ['QB', 'RB', 'K', 'DST'];
+    for (const pos of positions) {
+      const playerList = this.playerList.filter(x => x.position === pos);
+      let rank = 1;
+      for (const player of playerList) {
+        player.costEstimate = this.wannabeDAO.getAveCost(rank++, pos.toLowerCase());
+      }
+    }
+    const receiverList = this.playerList.filter(x => x.position === 'WR' || x.position === 'TE');
+    receiverList.sort((a, b) => b.fantasyPoints - a.fantasyPoints);
+    let i = 1;
+    for (const player of receiverList) {
+      player.costEstimate = this.wannabeDAO.getAveCost(i++, 'rec');
+    }
   }
 
   selectPlayers() {

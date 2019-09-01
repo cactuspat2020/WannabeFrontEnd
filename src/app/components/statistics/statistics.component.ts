@@ -133,8 +133,8 @@ export class StatisticsComponent implements OnInit {
     const ctx = document.getElementById('spiderChart');
     const myChart = new Chart(ctx, {
       type: 'radar',
-      // showTooltips: true,
-      // multiTooltipTemplate: "<%= value %>",
+      showTooltips: true,
+      multiTooltipTemplate: "<%= value %>",
       data: {
         labels: ['QB', 'RB', 'Rec', 'DST', 'K'],
         datasets: [{
@@ -147,7 +147,7 @@ export class StatisticsComponent implements OnInit {
         }, {
           data: Array.from(teamData.values()),
           // data: [3, 2, 1.5, 2, 3.5],
-          // labels: averages.keys,
+          labels: Array.from(teamData.values()),
           backgroundColor: [ 'rgba(0, 255, 0, 0.2)' ],
           borderColor: [ 'rgba(0, 0, 255, 1)' ],
           borderWidth: 1,
