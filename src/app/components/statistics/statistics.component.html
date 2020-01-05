@@ -38,7 +38,12 @@
     </mat-card-title>
     <mat-card-content>
       <div>
-        <canvas width=600px id="myChart"></canvas>
+          <select (change)="setStatScope()" [(ngModel)]="startersOnlySelection">
+            <option hidden [value]="" selected>Select Analysis Option</option>
+            <option value=true> Starters Only </option>
+            <option value=false> Starters + 1 Reserve per position </option>
+          </select>
+          <canvas width=600px id="myChart"></canvas>
       </div>
 
     </mat-card-content>
@@ -50,19 +55,19 @@
     </mat-card-title>
     <mat-card-content>
       <div align=center>
-      <form #setupForm="ngForm" class="example-form">
-        <label for="position">Filter by Owner</label><br>
-        <select width=30% (change)="selectPlayers()" type="string" class="form-control position-width" id="position"
-          [(ngModel)]="spiderTeamSelection" name="position" #position="ngModel" >
-          <option value="all">---</option>
-          <option *ngFor="let team of teams">
-            {{team.teamName}}
-          </option>
-        </select>
-      </form>
-    </div>
+        <form #setupForm="ngForm" class="example-form">
+          <label for="position">Filter by Owner</label><br>
+          <select width=30% (change)="selectPlayers()" type="string" class="form-control position-width" id="position"
+            [(ngModel)]="spiderTeamSelection" name="position" #position="ngModel">
+            <option value="all">---</option>
+            <option *ngFor="let team of teams">
+              {{team.teamName}}
+            </option>
+          </select>
+        </form>
+      </div>
       <div>
-        <canvas id="spiderChart"></canvas>
+        <canvas width=600px id="spiderChart"></canvas>
       </div>
     </mat-card-content>
   </mat-card>

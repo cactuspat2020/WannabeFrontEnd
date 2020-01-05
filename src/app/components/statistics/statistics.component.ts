@@ -25,6 +25,8 @@ export class StatisticsComponent implements OnInit {
   playerMapKeys;
 
   dataLoaded = true;
+  startersOnly = false;
+  startersOnlySelection;
 
   constructor(stasticsService: StatisticsService, wannabe: WannabeDAOService) {
     this.statasticsService = stasticsService;
@@ -41,11 +43,11 @@ export class StatisticsComponent implements OnInit {
       this.playerMapKeys = Array.from(remainingPlayers.keys());
     });
 
-    this.statasticsService.getPowerRankings().subscribe((draftData: Ranking[]) => {
+    this.statasticsService.getPowerRankings(this.startersOnly).subscribe((draftData: Ranking[]) => {
       const barChart = this.buildPowerRankingChart(draftData);
     });
 
-    this.statasticsService.getSpiderData().subscribe((spiderData: Map<string, Map<string, number>>) => {
+    this.statasticsService.getSpiderData(this.startersOnly).subscribe((spiderData: Map<string, Map<string, number>>) => {
       this.spiderData = spiderData;
       const spiderChart = this.buildSpiderChart(this.wannabeDAO.getDraftOwner(), spiderData);
     });
@@ -53,6 +55,18 @@ export class StatisticsComponent implements OnInit {
 
   refresh() {
    this.ngOnInit();
+  }
+
+  setStatScope() {
+    this.startersOnly = this.startersOnlySelection === 'true';
+    this.statasticsService.getPowerRankings(this.startersOnly).subscribe((draftData: Ranking[]) => {
+      const barChart = this.buildPowerRankingChart(draftData);
+    });
+
+    this.statasticsService.getSpiderData(this.startersOnly).subscribe((spiderData: Map<string, Map<string, number>>) => {
+      this.spiderData = spiderData;
+      const spiderChart = this.buildSpiderChart(this.wannabeDAO.getDraftOwner(), spiderData);
+    });
   }
 
   selectPlayers() {
@@ -133,7 +147,7 @@ export class StatisticsComponent implements OnInit {
     const ctx = document.getElementById('spiderChart');
     const myChart = new Chart(ctx, {
       type: 'radar',
-      showTooltips: true,
+      showTooltips: false,
       multiTooltipTemplate: "<%= value %>",
       data: {
         labels: ['QB', 'RB', 'Rec', 'DST', 'K'],
@@ -158,6 +172,7 @@ export class StatisticsComponent implements OnInit {
       options: {
         responsive: false,
         legend: { display: true },
+        events: [],
         scale: {
           ticks: {
             min: 0,

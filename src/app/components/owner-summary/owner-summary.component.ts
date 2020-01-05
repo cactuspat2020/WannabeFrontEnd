@@ -110,7 +110,7 @@ export class OwnerSummaryComponent implements OnInit {
             this.dataSource2 = new MatTableDataSource(this.draftedPlayers);
             this.dataSource2.sort = this.sort2;
 
-            this.statisticsService.getSpiderData().subscribe((spiderData: Map<string, Map<string, number>>) => {
+            this.statisticsService.getSpiderData(false).subscribe((spiderData: Map<string, Map<string, number>>) => {
               const spiderChart = this.generateSummary(this.wannabeDAO.getDraftOwner(), spiderData);
             });
           });
