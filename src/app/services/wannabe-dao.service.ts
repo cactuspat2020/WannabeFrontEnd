@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, range } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { PlayerRecord } from '../models/playerRecord';
 import { OwnerRecord } from '../models/ownerRecord';
@@ -284,7 +284,7 @@ public getAveCost(pick: number, position: string): number {
       return record.qb;
     } else if (position === 'rb') {
       return record.rb;
-    } else if (position === 'rec') {
+    } else if (position === 'wr' || position === 'te') {
       return record.rec;
     } else if (position === 'k') {
       return record.k;
@@ -313,7 +313,7 @@ public getAveCost(pick: number, position: string): number {
     return returnVal;
   }
   public undoLastSelection(): Observable<object> {
-    const player = this.draftedPlayers[0];
+    const player = this.getLastPlayerDrafted();
 
     const jsonBody = JSON.stringify(player);
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', }) };
@@ -323,6 +323,16 @@ public getAveCost(pick: number, position: string): number {
       this.draftedPlayers = response;
     });
     return observable;
+  }
+  private getLastPlayerDrafted() {
+    let lastPlayer = this.draftedPlayers[0];
+
+    this.draftedPlayers.forEach( player => {
+      if (player.draftOrder > lastPlayer.draftOrder) {
+        lastPlayer = player;
+      }
+    });
+    return lastPlayer;
   }
 
   public fetchDraftedPlayers(): Observable<object> {
@@ -349,6 +359,7 @@ public getAveCost(pick: number, position: string): number {
       } else {
         this.csvDaoService.fetchPlayerRecords().subscribe((response: PlayerRecord[]) => {
           this.players = response;
+          this.setEstimatedCosts();
           this.fullPlayerListInitialized = true;
           this.http.get(this.getPlayerRankingsURL).subscribe((response2) => {
             this.playerRankings = this.getRankingMap(response2);
@@ -364,6 +375,24 @@ public getAveCost(pick: number, position: string): number {
     return returnVal;
   }
 
+  private setEstimatedCosts() {
+    const positions = ['QB', 'RB', 'DST', 'K'];
+
+    positions.forEach( position => {
+        const playerArray = this.players.filter(x => x.position === position);
+        this.assignCosts(playerArray);
+      });
+
+    const receivers = this.players.filter(x => x.position === 'WR' || x.position === 'TE');
+    this.assignCosts(receivers);
+  }
+
+  private assignCosts(playerArray: PlayerRecord[]) {
+    playerArray.sort((a, b) => b.fantasyPoints - a.fantasyPoints);
+    for (let i = 0; i < playerArray.length; i++) {
+      playerArray[i].costEstimate = this.getAveCost(i + 1, playerArray[i].position.toLowerCase());
+    }
+  }
   // get a specfic team record
   public getTeamRecord(teamName): OwnerRecord {
     return this.owners.filter(owner => owner.teamName === teamName)[0];

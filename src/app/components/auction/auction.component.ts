@@ -63,7 +63,7 @@ export class AuctionComponent implements OnInit {
         this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
           this.teams = response2;
           this.initVariables();
-          this.assessCosts();
+          // this.assessCosts();
         });
       });
     });
@@ -160,7 +160,8 @@ export class AuctionComponent implements OnInit {
 
   undoLastSelection() {
     this.wannabeDAO.undoLastSelection().subscribe((response2: OwnerRecord[]) => {
-      this.initVariables();
+      // this.initVariables();
+      this.ngOnInit();
       alert('Last selection successfully removed');
     });
   }
