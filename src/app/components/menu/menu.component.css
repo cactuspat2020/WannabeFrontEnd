@@ -7,3 +7,7 @@
   ng-reflect-background-color: primary
 }
 
+.mat-tab-link {
+  min-width: 10px;
+}
+

@@ -62,11 +62,11 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns2;" [ngClass]="[
-                    row.position == 'QB' ? 'quarterback': 'none',
-                    row.position == 'RB' ? 'runningback': 'none',
-                    row.position == 'WR' ? 'widereceiver': 'none',
-                    row.position == 'TE' ? 'tightend': 'none',
-                    row.position == 'K' ? 'kicker': 'none',
+                    row.position == 'QB' ? 'quarterback':
+                    row.position == 'RB' ? 'runningback':
+                    row.position == 'WR' ? 'widereceiver':
+                    row.position == 'TE' ? 'tightend':
+                    row.position == 'K' ? 'kicker':
                     row.position == 'DST' ? 'defense': 'none'
                     ]"></tr>
       </table>

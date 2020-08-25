@@ -1,0 +1,95 @@
+.mat-table {
+  border-bottom: darkgray;
+  border-left: darkgray;
+  border-right: darkgray;
+}
+
+.tableData {
+  width: 200px;
+  font-size: 16pt;
+  text-align: left;
+}
+
+.stat-table {
+  width:  80px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom: 1px solid lightslategray;
+  text-align: center;
+}
+
+tr.mat-row {
+  height: 32px;
+}
+tr.mat-header-row {
+  height: 32px;
+}
+.elite {
+  background: gold;
+}
+
+.allPro {
+  background: lightblue;
+}
+.starter {
+  background: burlywood;
+}
+.bench {
+  background: salmon;
+}
+.none {
+  background: lightgrey;
+}
+.tableData {
+  width: 200px;
+  font-size: 16pt;
+  text-align: left;
+}
+.stat-table {
+  width:  80px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom: 1px solid lightslategray;
+}
+
+.legend {
+  margin-top: 30px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+td {
+  padding-left:10px;
+  padding-right:10px;
+  /* height: 20px; */
+  /* width: 20px; */
+
+}
+
+.mat-column-budget{
+  width: 40px;
+  padding-left: 10px;
+  padding-right: 30px;
+  text-align: right;
+}
+.mat-column-team{
+  /* width: 80px; */
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+td.mat-header-cell {
+  width: 30px;
+  padding-left: 20px;
+  padding-right: 200px;
+}
+
+td.mat-cell {
+  /* width: 50px; */
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+teamnames {
+  text-align: left;
+}

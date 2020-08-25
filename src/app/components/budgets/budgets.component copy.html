@@ -1,0 +1,158 @@
+<app-menu></app-menu>
+
+<!-- <H3>Remaining Budgets</H3> -->
+
+<div align=center>
+  <mat-card>
+    <mat-card-title>
+      Remaining Budgets
+    </mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="dataSource" >
+
+      <ng-container matColumnDef="team">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Team</th>
+        <td mat-cell *matCellDef="let element"> {{element.team}} </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="budget">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Remaining Budget </th>
+        <td mat-cell *matCellDef="let element"> {{element.remainingBudget}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="QB">
+        <th mat-header-cell *matHeaderCellDef > QBs </th>
+        <td mat-cell *matCellDef="let element"> {{element.qbCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="RB">
+        <th mat-header-cell *matHeaderCellDef > RBs </th>
+        <td mat-cell *matCellDef="let element"> {{element.rbCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="WR">
+        <th mat-header-cell *matHeaderCellDef > WRs </th>
+        <td mat-cell *matCellDef="let element"> {{element.wrCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="TE">
+        <th mat-header-cell *matHeaderCellDef > TEs </th>
+        <td mat-cell *matCellDef="let element"> {{element.teCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="K">
+        <th mat-header-cell *matHeaderCellDef > Ks </th>
+        <td mat-cell *matCellDef="let element"> {{element.kCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="DST">
+        <th mat-header-cell *matHeaderCellDef > DSTs </th>
+        <td mat-cell *matCellDef="let element"> {{element.dstCount}} </td>
+      </ng-container> -->
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="[ -->
+      <!-- row.position == 'QB' ? 'quarterback': 'none', -->
+      <!-- row.position == 'RB' ? 'runningback': 'none', -->
+      <!-- row.position == 'WR' ? 'widereceiver': 'none', -->
+      <!-- row.position == 'TE' ? 'tightend': 'none', -->
+      <!-- row.position == 'K' ? 'kicker': 'none', -->
+      <!-- row.position == 'DST' ? 'defense': 'none' -->
+      <!-- ]"></tr> -->
+
+    </table>
+
+
+
+      <!-- <div class="summaryStats">
+        <table class="mat-elevation-z8">
+          <tr>
+            <th class="stat-table">Owner</th>
+            <th class="stat-table">Max Bid</th>
+            <th class="stat-table">QB</th>
+            <th class="stat-table">RB</th>
+            <th class="stat-table">WR</th>
+            <th class="stat-table">TE</th>
+            <th class="stat-table">K</th>
+            <th class="stat-table">DST</th>
+          </tr>
+            <tr>
+              <td class="stat-table">Gunslingers</td>
+              <td class="stat-table">$43</td>
+              <td class="elite">2</td>
+              <td class="allPro">1</td>
+              <td class="starter">3</td>
+              <td class="starter">2</td>
+              <td class="bench">0</td>
+              <td class="allPro">1</td>
+            </tr>
+            <tr>
+              <td class="stat-table">Smack</td>
+              <td class="stat-table">$43</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">1</td>
+              <td class="stat-table">3</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">0</td>
+              <td class="stat-table">1</td>
+            </tr>
+            <tr>
+              <td class="stat-table">SKOL</td>
+              <td class="stat-table">$43</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">1</td>
+              <td class="stat-table">3</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">0</td>
+              <td class="stat-table">1</td>
+            </tr>
+            <tr>
+              <td class="stat-table">Mr. Suckit</td>
+              <td class="stat-table">$43</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">1</td>
+              <td class="stat-table">3</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">0</td>
+              <td class="stat-table">1</td>
+            </tr>
+            <tr>
+              <td class="stat-table">En Vogue</td>
+              <td class="stat-table">$43</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">1</td>
+              <td class="stat-table">3</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">0</td>
+              <td class="stat-table">1</td>
+            </tr>
+            <tr>
+              <td class="stat-table">Gunslingers</td>
+              <td class="stat-table">$43</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">1</td>
+              <td class="stat-table">3</td>
+              <td class="stat-table">2</td>
+              <td class="stat-table">0</td>
+              <td class="stat-table">1</td>
+            </tr>
+        </table>
+        <br>
+        <table>
+          <tr>
+            <td bgcolor="gold" width=30></td>
+            <td padding-left="25px" >Elite</td>
+            <td bgcolor="lightBlue" width=30></td>
+            <td>All Pro</td>
+            <td bgcolor="burlywood" width=30></td>
+            <td>Starter</td>
+            <td bgcolor="lightgrey" width=30></td>
+            <td>Bench</td>
+
+          </tr>
+        </table>
+      </div> -->
+    </mat-card-content>
+  </mat-card>
+</div>

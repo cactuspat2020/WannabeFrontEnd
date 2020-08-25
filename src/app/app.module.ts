@@ -45,6 +45,7 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { StatisticsService } from './services/statistics.service';
 import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
+import { BudgetsComponent } from './components/budgets/budgets.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
     DialogSetupWarningDialog,
     WatchlistComponent,
     StatisticsComponent,
+    BudgetsComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +98,7 @@ import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
       { path: 'status', component: DraftSelectionsComponent },
       { path: 'stats', component: TeamStatisticsComponent },
       { path: 'summary', component: OwnerSummaryComponent },
+      { path: 'budgets', component: BudgetsComponent },
       { path: 'owner', component: OwnerDraftedPlayersComponent },
       { path: 'watchlist', component: WatchlistComponent },
       { path: 'statistics', component: StatisticsComponent }
