@@ -110,7 +110,7 @@ export class BudgetsComponent implements OnInit {
 
     owners.forEach(owner => {
       const record = this.draftMap.get(owner);
-      const maxBid = record.remainingBudget - (15 - record.totalDraftedPlayers) + 1;
+      const maxBid = record.remainingBudget - Math.max(0, (15 - record.totalDraftedPlayers - 1));
 
       this.budgetTable.push({
         team: owner,

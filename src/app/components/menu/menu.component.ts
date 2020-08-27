@@ -23,29 +23,29 @@ export class MenuComponent implements OnInit {
     {label: 'Login', link: '/login', disabled: false},
     {label: 'Setup', link: '/setup', disabled: false},
     {label: 'Auction', link: '/auction', disabled: false},
-    {label: 'Status', link: '/status', disabled: false},
+    {label: 'DraftBoard', link: '/status', disabled: false},
+    {label: 'MyDraft', link: '/summary', disabled: false},
+    {label: 'MyWatchlist', link: '/watchlist', disabled: false},
     {label: 'Budgets', link: '/budgets', disabled: false},
-    {label: 'Summary', link: '/summary', disabled: false},
-    {label: 'Watchlist', link: '/watchlist', disabled: false},
     {label: 'Statistics', link: '/statistics', disabled: false},
   ];
   adminLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
     {label: 'Setup', link: '/setup', disabled: false},
     {label: 'Auction', link: '/auction', disabled: false},
-    {label: 'Status', link: '/status', disabled: false},
+    {label: 'DraftBoard', link: '/status', disabled: false},
+    {label: 'MyDraft', link: '/summary', disabled: false},
+    {label: 'MyWatchlist', link: '/watchlist', disabled: false},
     {label: 'Budgets', link: '/budgets', disabled: false},
-    {label: 'Summary', link: '/summary', disabled: false},
-    {label: 'Watchlist', link: '/watchlist', disabled: false},
     {label: 'Statistics', link: '/statistics', disabled: false},
   ];
   userLinks: MenuItem[] = [
     {label: 'Login', link: '/login', disabled: false},
     {label: 'Auction', link: '/auction', disabled: true},
-    {label: 'Status', link: '/status', disabled: false},
+    {label: 'DraftBoard', link: '/status', disabled: false},
+    {label: 'MyDraft', link: '/summary', disabled: false},
+    {label: 'MyWatchlist', link: '/watchlist', disabled: false},
     {label: 'Budgets', link: '/budgets', disabled: false},
-    {label: 'Summary', link: '/summary', disabled: false},
-    {label: 'Watchlist', link: '/watchlist', disabled: false},
     {label: 'Statistics', link: '/statistics', disabled: false},
   ];
   links: MenuItem[] = [];
