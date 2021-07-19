@@ -51,7 +51,7 @@ export class OwnerSummaryComponent implements OnInit {
   statusMessage = 'Initializing...';
 
   dataSource2 = new MatTableDataSource(this.draftedPlayers);
-  displayedColumns2: string[] = ['draftOrder', 'position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'price', 'rating'];
+  displayedColumns2: string[] = ['draftOrder', 'position', 'playerName', 'NFLTeam', 'price', 'byeWeek', 'fantasyPoints', 'rating'];
 
   // AutoSelect Configurations
   teamControl = new FormControl();
@@ -63,7 +63,6 @@ export class OwnerSummaryComponent implements OnInit {
 
   // Table Variables
   dataSource = new MatTableDataSource(this.playerList);
-  // displayedColumns2: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints', 'percentOwn', 'percentStart', 'byeWeek'];
   displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek'];
 
   constructor(wannabeDAO: WannabeDAOService, statService: StatisticsService) {

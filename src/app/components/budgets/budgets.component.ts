@@ -7,8 +7,9 @@ import { OwnerRecord } from '../../models/ownerRecord';
 import { DraftStatus } from '../../models/DraftStatus';
 import { OwnerDraftStatus } from '../../models/OwnerDraftStatus';
 import { FormControl } from '@angular/forms';
-import { map, startWith } from 'rxjs/operators';
+import {map, min, startWith} from 'rxjs/operators';
 import { DraftedPlayerRecord } from 'src/app/models/draftedPlayerRecord';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-budgets',
@@ -26,9 +27,11 @@ export class BudgetsComponent implements OnInit {
   budgetTable = [];
   dataSource = new MatTableDataSource(this.budgetTable);
   displayedColumns: string[] = ['team', 'budget', 'QB', 'RB', 'WR', 'TE', 'K', 'DST'];
+  isMobile = false;
 
-  constructor(wannabeDAO: WannabeDAOService) {
+  constructor(wannabeDAO: WannabeDAOService, deviceService: DeviceDetectorService) {
     this.wannabeDAO = wannabeDAO;
+    this.isMobile = deviceService.isMobile();
   }
 
   ngOnInit() {
@@ -55,10 +58,28 @@ export class BudgetsComponent implements OnInit {
           this.createDataTable();
           this.dataSource = new MatTableDataSource(this.budgetTable);
 
-          console.log('done');
+          console.log('Done');
           });
         });
       });
+  }
+
+  adjustOwnerNameForMobile(team: string): string {
+    if (this.isMobile) {
+      let shortName = 'unassigned';
+      const words = team.split(' ');
+      if (words.length > 1) {
+        shortName = '';
+        for (const word of words) {
+          shortName += word[0];
+        }
+      } else {
+        shortName = words[0].substr(0, Math.min(words[0].length, 3));
+      }
+      return shortName.toUpperCase();
+    } else {
+      return team;
+    }
   }
 
   buildBudgetMap() {
@@ -113,7 +134,7 @@ export class BudgetsComponent implements OnInit {
       const maxBid = record.remainingBudget - Math.max(0, (15 - record.totalDraftedPlayers - 1));
 
       this.budgetTable.push({
-        team: owner,
+        team: this.adjustOwnerNameForMobile(owner),
         maxBid: '$' + maxBid,
         qbCount: record.positions.get('QB').playerCount,
         qbRating: record.positions.get('QB').maxRating,

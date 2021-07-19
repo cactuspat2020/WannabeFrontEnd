@@ -51,38 +51,33 @@
           <!-- <tr><td class="stat-table">K</td><td class="stat-table">2</td><td class="stat-table">Elite</td><td class="stat-table">Yes</td></tr> -->
           <!-- <tr><td class="stat-table">DST</td><td class="stat-table">0</td><td class="stat-table">n/a</td><td class="stat-table">no</td></tr> -->
         </table>
-      </div>
+        </div>
 
-      <div align=center>
-        <mat-card width=100%>
-          <mat-card-title>
-            My Draft
-          </mat-card-title>
-          <mat-card-content>
-            <table mat-table [dataSource]="dataSource2" matSort matSortActive="draftOrder" class="mat-elevation-z8">
+      <div class="table-container mat-elevation-z8" align=center>
+            <table mat-table [dataSource]="dataSource2" matSort matSortActive="draftOrder" class="mat-elevation-z8 table-overrides">
 
               <!-- Draft Order Column -->
-              <ng-container matColumnDef="draftOrder">
+              <ng-container matColumnDef="draftOrder" sticky>
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Pick </th>
                 <td mat-cell *matCellDef="let element"> {{element.draftOrder}} </td>
               </ng-container>
 
               <!-- Position Column -->
-              <ng-container matColumnDef="position">
+              <ng-container matColumnDef="position" sticky>
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Pos </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                <td mat-cell *matCellDef="let element" > {{element.position}} </td>
               </ng-container>
 
               <!-- Name Column -->
-              <ng-container matColumnDef="playerName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Player </th>
-                <td mat-cell *matCellDef="let element"> {{element.playerName}} </td>
+              <ng-container matColumnDef="playerName"  sticky>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="scroll-border"> Player </th>
+                <td mat-cell *matCellDef="let element" class="scroll-border"> {{element.playerName}} </td>
               </ng-container>
 
               <!-- NFL Team Column -->
               <ng-container matColumnDef="NFLTeam">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> NFLTeam </th>
-                <td mat-cell *matCellDef="let element"> {{element.NFLTeam}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="team-pad"> NFLTeam </th>
+                <td mat-cell *matCellDef="let element" class="team-pad"> {{element.NFLTeam}} </td>
               </ng-container>
 
               <!-- Bye Week Column -->
@@ -115,7 +110,7 @@
                 <td mat-cell *matCellDef="let element"> {{element.assessment}} </td>
               </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns2 sticky: true"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns2;" [ngClass]="[
                           row.position == 'QB' ? 'quarterback': 'none',
                           row.position == 'RB' ? 'runningback': 'none',
@@ -125,10 +120,9 @@
                           row.position == 'DST' ? 'defense': 'none'
                           ]"></tr>
             </table>
-          </mat-card-content>
-        </mat-card>
       </div>
 
+      <div class="table-container mat-elevation-z8" align=center>
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -141,11 +135,11 @@
             </mat-panel-description>
 
           </mat-expansion-panel-header>
-          <mat-card width=100%>
-            <mat-card-title>
-              Available Player List
-            </mat-card-title>
-            <mat-card-content>
+<!--          <mat-card width=100%>-->
+<!--            <mat-card-title>-->
+          <H4>Available Player List</H4>
+<!--            </mat-card-title>-->
+<!--            <mat-card-content>-->
 
               <div align=center>
                 <form #setupForm="ngForm" class="example-form">
@@ -165,8 +159,10 @@
                 <mat-form-field>
                   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
                 </mat-form-field>
+              </div>
 
-                <table mat-table [dataSource]="dataSource" matSort matSortActive="playerName" class="mat-elevation-z8">
+              <div class="table-container2 mat-elevation-z8" align=center>
+                <table width="100%" mat-table [dataSource]="dataSource" matSort matSortActive="playerName" class="mat-elevation-z8">
 
                   Position Column
                   <ng-container matColumnDef="position">
@@ -210,15 +206,16 @@
                     <td mat-cell *matCellDef="let element"> {{element.fantasyPoints}} </td>
                   </ng-container>
 
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="tst"></tr>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true" class="tst"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"
                     [ngClass]="{'highlight': row.playerName === selectedPlayer}" (click)="selectRow(row)"></tr>
                 </table>
-              </div>
-            </mat-card-content>
-          </mat-card>
+                </div>
+<!--            </mat-card-content>-->
+<!--          </mat-card>-->
         </mat-expansion-panel>
       </mat-accordion>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

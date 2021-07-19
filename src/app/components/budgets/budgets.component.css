@@ -4,20 +4,6 @@
   border-right: darkgray;
 }
 
-.tableData {
-  width: 200px;
-  font-size: 16pt;
-  text-align: left;
-}
-
-.stat-table {
-  width:  80px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom: 1px solid lightslategray;
-  text-align: center;
-}
-
 tr.mat-row {
   height: 32px;
 }
@@ -54,42 +40,63 @@ tr.mat-header-row {
 
 .legend {
   margin-top: 30px;
-  padding-left:10px;
-  padding-right:10px;
 }
 
 td {
   padding-left:10px;
   padding-right:10px;
-  /* height: 20px; */
-  /* width: 20px; */
-
 }
 
 .mat-column-budget{
-  width: 40px;
   padding-left: 10px;
-  padding-right: 30px;
-  text-align: right;
+  padding-right: 10px;
+  text-align: center;
 }
 .mat-column-team{
-  /* width: 80px; */
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+.mat-column-QB{
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+.mat-column-RB{
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+.mat-column-WR{
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+.mat-column-DST{
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+.mat-column-TE{
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+.mat-column-K{
   padding-left: 10px;
   padding-right: 10px;
   text-align: left;
 }
 td.mat-header-cell {
   width: 30px;
-  padding-left: 20px;
-  padding-right: 200px;
-}
-
-td.mat-cell {
-  /* width: 50px; */
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5px;
+  test-align: center;
+  /*padding-right: 200px;*/
 }
 
 teamnames {
   text-align: left;
+}
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+   padding-left: 5px;
 }

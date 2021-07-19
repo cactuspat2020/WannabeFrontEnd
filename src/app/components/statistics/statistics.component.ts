@@ -84,7 +84,7 @@ export class StatisticsComponent implements OnInit {
     draftData.map(x => teamNames.push(x.teamName));
     draftData.map(x => projections.push(x.fantasyPoints));
 
-    const ctx = document.getElementById('myChart');
+    const ctx = document.getElementById('barChart');
     const myChart = new Chart(ctx, {
       type: 'horizontalBar',
       data: {
@@ -123,7 +123,7 @@ export class StatisticsComponent implements OnInit {
         }]
       },
       options: {
-        responsive: false,
+        responsive: true,
         legend: { display: false },
         barPercentage: 0.5,
         barThickness: 6,
@@ -144,6 +144,7 @@ export class StatisticsComponent implements OnInit {
     const averages = spiderData.get('averages');
     const teamData = spiderData.get(team);
 
+    // const ctx = document.getElementById('spiderChart');
     const ctx = document.getElementById('spiderChart');
     const myChart = new Chart(ctx, {
       type: 'radar',
@@ -170,7 +171,7 @@ export class StatisticsComponent implements OnInit {
       ]
       },
       options: {
-        responsive: false,
+        responsive: true,
         legend: { display: true },
         events: [],
         scale: {

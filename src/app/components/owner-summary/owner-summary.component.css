@@ -70,3 +70,40 @@ tr.mat-row {
 tr.mat-header-row {
   height: 32px;
 }
+.table-container {
+  max-width: 560px;
+  /*max-height: 500px;*/
+  overflow: auto;
+  margin-bottom: 40px;
+  text-decoration: none;
+}
+
+.table-container2 {
+  /*max-width: 560px;*/
+  max-width: 100%;
+  max-height: 500px;
+  overflow: auto;
+  margin-bottom: 40px;
+}
+
+.mat-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky-border-elem-left {
+  border-right: 2px solid #e0e0e0;
+}
+
+.table-overrides {
+  line-height:  18px;
+  padding-left: 25px;
+}
+.team-pad {
+  padding-left: 5px;
+}
+
+.scroll-border {
+  border-right-color: darkgray;
+  border-right-width: 1px;
+  border-right-style: solid;
+}

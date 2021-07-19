@@ -11,18 +11,18 @@
     <mat-card-content>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <ng-container  matColumnDef="team">
-          <th mat-header-cell *matHeaderCellDef> Team </th>
+        <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef> Team</th>
           <td mat-cell class="mat-cell2" *matCellDef="let element"> {{element.team}} </td>
         </ng-container>
 
         <ng-container matColumnDef="budget">
-          <th mat-header-cell *matHeaderCellDef> MaxBid </th>
-          <td mat-cell *matCellDef="let element"> {{element.maxBid}} </td>
+          <th align="center" mat-header-cell *matHeaderCellDef>MaxBid</th>
+          <td align="center" mat-cell *matCellDef="let element"> {{element.maxBid}} </td>
         </ng-container>
 
         <ng-container matColumnDef="QB">
-          <th mat-header-cell *matHeaderCellDef > QBs </th>
+          <th mat-header-cell *matHeaderCellDef>QB</th>
           <td mat-cell *matCellDef="let element" [ngClass]="[
           element.qbRating == 'Elite' ? 'elite':
           element.qbRating == 'All Pro' ? 'allPro':
@@ -32,7 +32,7 @@
         </ng-container>
 
         <ng-container matColumnDef="RB">
-          <th mat-header-cell *matHeaderCellDef > RBs </th>
+          <th mat-header-cell *matHeaderCellDef>RB</th>
           <td mat-cell *matCellDef="let element" [ngClass]="[
           element.rbRating == 'Elite' ? 'elite':
           element.rbRating == 'All Pro' ? 'allPro':
@@ -42,7 +42,7 @@
         </ng-container>
 
         <ng-container matColumnDef="WR">
-          <th mat-header-cell *matHeaderCellDef > WRs </th>
+          <th mat-header-cell *matHeaderCellDef>WR</th>
           <td mat-cell *matCellDef="let element" [ngClass]="[
           element.wrRating == 'Elite' ? 'elite':
           element.wrRating == 'All Pro' ? 'allPro':
@@ -52,7 +52,7 @@
         </ng-container>
 
         <ng-container matColumnDef="TE">
-          <th mat-header-cell *matHeaderCellDef > TEs </th>
+          <th mat-header-cell *matHeaderCellDef>TE</th>
           <td mat-cell *matCellDef="let element" [ngClass]="[
           element.teRating == 'Elite' ? 'elite':
           element.teRating == 'All Pro' ? 'allPro':
@@ -62,7 +62,7 @@
         </ng-container>
 
         <ng-container matColumnDef="K">
-          <th mat-header-cell *matHeaderCellDef > Ks </th>
+          <th mat-header-cell *matHeaderCellDef>K</th>
           <td mat-cell *matCellDef="let element" [ngClass]="[
           element.kRating == 'Elite' ? 'elite':
           element.kRating == 'All Pro' ? 'allPro':
@@ -72,7 +72,7 @@
         </ng-container>
 
         <ng-container matColumnDef="DST">
-          <th mat-header-cell *matHeaderCellDef > DSTs </th>
+          <th mat-header-cell *matHeaderCellDef>DST</th>
           <td mat-cell *matCellDef="let element" [ngClass]="[
           element.dstRating == 'Elite' ? 'elite':
           element.dstRating == 'All Pro' ? 'allPro':
@@ -86,30 +86,30 @@
 
       </table>
 
-        <table class="legend">
-          <tr>
-            <td class="elite" width=30></td>
-            <td padding-left="25px" >Elite</td>
-            <td class="allPro" width=30></td>
-            <td>All Pro</td>
-            <td class="starter" width=30></td>
-            <td>Starter</td>
-            <td class="bench" width=30></td>
-            <td>Bench</td>
-          </tr>
-          <tr></tr>
-          <tr>
-            <td colspan=8>
+      <table class="legend">
+        <tr>
+          <td class="elite"></td>
+          <td>Elite</td>
+          <td class="allPro"></td>
+          <td>APro</td>
+          <td class="starter"></td>
+          <td>Starter</td>
+          <td class="bench"></td>
+          <td>Bench</td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <td colspan=8>
 
-              <br>
-              The Table coloring represents the highest ranking player at that position. <br>
-              <b>Elite </b>- The top 1-2 at the position<br>
-              <b>All Pro </b>- Fantasy studs, but not quite elite<br>
-              <b>Starter </b>- In the top n at the position (12 QB, 24 RB, 36 WR/TE, 12 K, 12 DST)<br>
-              <b>Bench </b>- Below the top n at the position<br>
-            </td>
-          </tr>
-        </table>
+            <br>
+            The Table coloring represents the highest ranking player at that position. <br>
+            <b>Elite </b>- The top 1-2 at the position<br>
+            <b>All Pro </b>- Fantasy studs, but not quite elite<br>
+            <b>Starter </b>- In the top n at the position (12 QB, 24 RB, 36 WR/TE, 12 K, 12 DST)<br>
+            <b>Bench </b>- Below the top n at the position<br>
+          </td>
+        </tr>
+      </table>
     </mat-card-content>
   </mat-card>
 </div>

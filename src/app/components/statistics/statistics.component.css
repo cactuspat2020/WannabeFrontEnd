@@ -34,10 +34,35 @@ h3 {
   border-bottom: 1px solid lightslategray;
 }
 
-.summaryStats {
-  margin-bottom: 60px;
-}
-
 .form-control {
   width: 150px;
+}
+
+.barChart{
+  width:120%;
+  margin-bottom: 60px;
+}
+.spiderChart{
+  width:130%;
+  align: center;
+}
+.summaryStats {
+  margin-bottom: 60px;
+  padding-left: 50px;
+  width:120%;
+}
+
+@media (min-width:500px) {
+  .barChart{
+    width:70%;
+    margin-bottom: 60px;
+  }
+  .spiderChart{
+    width:20%;
+  }
+  .summaryStats {
+    margin-bottom: 60px;
+    width: 100%;
+  }
+
 }

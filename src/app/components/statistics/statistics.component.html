@@ -4,11 +4,11 @@
 <H3>Draft Statistics</H3>
 
 <div align=center>
-  <mat-card>
-    <mat-card-title>
+<!--  <mat-card>-->
+<!--    <mat-card-title>-->
       Players remaining by category
-    </mat-card-title>
-    <mat-card-content>
+<!--    </mat-card-title>-->
+<!--    <mat-card-content>-->
       <div class="summaryStats">
         <table class="mat-elevation-z8">
           <tr>
@@ -29,32 +29,34 @@
           </ng-container>
         </table>
       </div>
-    </mat-card-content>
-  </mat-card>
+<!--    </mat-card-content>-->
+<!--  </mat-card>-->
 
-  <mat-card>
-    <mat-card-title>
-      Post-Draft Power Rankings
-    </mat-card-title>
-    <mat-card-content>
-      <div>
+<!--  <mat-card>-->
+<!--    <mat-card-title>-->
+  <B>Post-Draft Power Rankings</B>
+<!--    </mat-card-title>-->
+<!--    <mat-card-content>-->
+      <div align="center" padding-bottom="20px">
           <select (change)="setStatScope()" [(ngModel)]="startersOnlySelection">
             <option hidden [value]="" selected>Select Analysis Option</option>
             <option value=true> Starters Only </option>
             <option value=false> Starters + 1 Reserve per position </option>
           </select>
-          <canvas width=600px id="myChart"></canvas>
+      </div>
+      <div class="barChart">
+        <canvas id="barChart"></canvas>
       </div>
 
-    </mat-card-content>
-  </mat-card>
+<!--    </mat-card-content>-->
+<!--  </mat-card>-->
 
-  <mat-card>
-    <mat-card-title>
-      Performance against the average
-    </mat-card-title>
-    <mat-card-content>
-      <div align=center>
+<!--  <mat-card>-->
+<!--    <mat-card-title>-->
+  <B>Performance against the average</B>
+<!--    </mat-card-title>-->
+<!--    <mat-card-content>-->
+      <div>
         <form #setupForm="ngForm" class="example-form">
           <label for="position">Filter by Owner</label><br>
           <select width=30% (change)="selectPlayers()" type="string" class="form-control position-width" id="position"
@@ -66,9 +68,9 @@
           </select>
         </form>
       </div>
-      <div>
-        <canvas width=600px id="spiderChart"></canvas>
+      <div class="spiderChart">
+        <canvas  id="spiderChart"></canvas>
       </div>
-    </mat-card-content>
-  </mat-card>
+<!--    </mat-card-content>-->
+<!--  </mat-card>-->
 </div>
