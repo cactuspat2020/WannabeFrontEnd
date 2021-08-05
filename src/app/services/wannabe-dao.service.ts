@@ -303,7 +303,7 @@ public getAveCost(pick: number, position: string): number {
       if ( this.averagePlayerCostInitialized ) {
         observer.next(this.averagePlayerCost);
       } else {
-        this.http.get(this.getAveragePlayercostURL).subscribe((response: AveragePlayerCost[]) => {
+        this.csvDaoService.fetchCostRecords().subscribe((response: AveragePlayerCost[]) => {
           this.averagePlayerCost = response;
           this.averagePlayerCostInitialized = true;
           observer.next(this.averagePlayerCost);
