@@ -3,7 +3,7 @@ h3 {
   font-weight: 600;
 }
 .tableLabel {
-  width: 200px;
+  /*width: 200px;*/
   font-size: 16pt;
   font-weight: 800;
   text-align: right;
@@ -15,7 +15,7 @@ h3 {
 }
 
 .tableData {
-  width: 200px;
+  /*width: 200px;*/
   font-size: 16pt;
   text-align: left;
 }
@@ -28,33 +28,33 @@ h3 {
 }
 
 .stat-table {
-  width:  80px;
+  /*width:  80px;*/
   padding-left: 5px;
   padding-right: 5px;
   border-bottom: 1px solid lightslategray;
 }
 
 .form-control {
-  width: 150px;
+  /*width: 150px;*/
 }
 
 .barChart{
-  width:120%;
+  width:100%;
   margin-bottom: 60px;
 }
 .spiderChart{
-  width:130%;
+  width:100%;
   align: center;
 }
 .summaryStats {
   margin-bottom: 60px;
-  padding-left: 50px;
-  width:120%;
+  /*padding-left: 50px;*/
+  width:100%;
 }
 
 @media (min-width:500px) {
   .barChart{
-    width:70%;
+    /*width:70%;*/
     margin-bottom: 60px;
   }
   .spiderChart{

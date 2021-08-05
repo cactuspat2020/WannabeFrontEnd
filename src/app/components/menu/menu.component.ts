@@ -66,7 +66,7 @@ export class MenuComponent implements OnInit {
     this.isMobile = deviceService.isMobile();
     this.isDesktop = deviceService.isDesktop();
     this.isTablet = deviceService.isTablet();
-    console.log('Detected ' + this.isMobile ? ' Mobile' : '' + this.isDesktop ? ' Desktop' : '' + this.isTablet ? ' Tablet' : '');
+    console.log('Detected' + (this.isMobile ? ' Mobile' : '') + (this.isDesktop ? ' Desktop' : '') + (this.isTablet ? ' Tablet' : '') + ' configuration');
     const loggedInOwner = this.cookieService.get('loginTeam');
   }
 

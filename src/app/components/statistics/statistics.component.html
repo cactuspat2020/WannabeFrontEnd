@@ -1,7 +1,9 @@
 <app-menu></app-menu>
-<a (click)="refresh()"> click here to refresh </a>
+<div style="padding-top: 10px; padding-left: 20px">
+  <a (click)="refresh()"> click here to refresh </a>
+</div>
 
-<H3>Draft Statistics</H3>
+<H3 style="padding-left: 20px">Draft Statistics</H3>
 
 <div align=center>
 <!--  <mat-card>-->
@@ -38,7 +40,7 @@
 <!--    </mat-card-title>-->
 <!--    <mat-card-content>-->
       <div align="center" padding-bottom="20px">
-          <select (change)="setStatScope()" [(ngModel)]="startersOnlySelection">
+          <select width=30% (change)="setStatScope()" [(ngModel)]="startersOnlySelection">
             <option hidden [value]="" selected>Select Analysis Option</option>
             <option value=true> Starters Only </option>
             <option value=false> Starters + 1 Reserve per position </option>
@@ -59,7 +61,7 @@
       <div>
         <form #setupForm="ngForm" class="example-form">
           <label for="position">Filter by Owner</label><br>
-          <select width=30% (change)="selectPlayers()" type="string" class="form-control position-width" id="position"
+          <select width=30% (change)="selectPlayers()" type="string" id="position"
             [(ngModel)]="spiderTeamSelection" name="position" #position="ngModel">
             <option value="all">---</option>
             <option *ngFor="let team of teams">
