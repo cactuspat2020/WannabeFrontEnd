@@ -72,9 +72,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     const loggedInOwner = this.cookieService.get('loginTeam');
-    if (!loggedInOwner) {
-      this.router.navigate(['/login']);
-    }
 
     if (loggedInOwner === 'Gunslingers') {
       this.links = this.ownerLinks;
@@ -83,6 +80,27 @@ export class MenuComponent implements OnInit {
     } else {
       this.links = this.userLinks;
     }
+
+    let currentRoute = '/login';
+    const pathSegments = document.location.href.split('/');
+    if (pathSegments.length > 3) {
+      currentRoute = '/' + pathSegments[3];
+    }
+
+    if (loggedInOwner && this.isValidRoute(currentRoute)) {
+      this.router.navigate([currentRoute]);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  isValidRoute(route: string) {
+    for (const menuItem of this.links) {
+      if (menuItem.link === route) {
+        return true;
+      }
+    }
+    return false;
   }
 }
     // this.wannabeDAO.fetchTeams().subscribe((response: OwnerRecord[]) => {
