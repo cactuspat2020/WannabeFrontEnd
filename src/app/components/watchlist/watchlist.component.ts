@@ -96,7 +96,7 @@ export class WatchlistComponent implements OnInit {
     watchedPlayer.position = record.position;
 
     this.wannabeDAO.storeWatchlistPlayer(watchedPlayer).subscribe((x: any) => {
-      this.selectedPlayer.playerName = '';
+      // this.selectedPlayer.playerName = '';
       this.wannabeDAO.watchlistInitialized = false;
       this.wannabeDAO.fetchWatchList().subscribe((players: DraftedPlayerRecord[]) => {
         this.watchList = players;
