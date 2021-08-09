@@ -29,7 +29,9 @@ export class WatchlistComponent implements OnInit {
   // Table Variables
   watchList: DraftedPlayerRecord[] = [];
   watchlistDataSource = new MatTableDataSource(this.watchList);
-  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'rating', 'ownerName'];
+  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'assessment', 'ownerName' ];
+  limitedDisplayColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek' ];
+
   @ViewChild(MatSort, { static: true }) tableSort: MatSort;
 
 
@@ -48,6 +50,9 @@ export class WatchlistComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.playerName),
         map(playerName => playerName ? this._filterPlayers(playerName) : this.playerList.slice())
       );
+    if (this.wannabeDAO.getDraftOwner() !== 'Gunslingers') {
+      this.displayedColumns = this.limitedDisplayColumns;
+    }
   }
   selectPlayers() {
     this.playerList = this.wannabeDAO.getPlayers('all');

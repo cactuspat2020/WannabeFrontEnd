@@ -90,7 +90,7 @@ export class AuctionComponent implements OnInit {
     this.draftRound = this.wannabeDAO.getRound();
     this.remainingPlayersToDraft = this.wannabeDAO.getRemainingPlayerCount();
 
-    if (this.wannabeDAO.getDraftOwner() !== 'Gunslingers' && this.wannabeDAO.getDraftOwner() !== 'Diablos') {
+    if (this.wannabeDAO.getDraftOwner() !== 'Gunslingers') {
       this.displayedColumns = this.limitedDisplayColumns;
     }
     this.isLoaded = true;
