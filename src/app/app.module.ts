@@ -39,7 +39,6 @@ import { TeamStatisticsComponent } from './components/team-statistics/team-stati
 import { OwnerSummaryComponent } from './components/owner-summary/owner-summary.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { CookieService } from 'ngx-cookie-service';
-import { OwnerDraftedPlayersComponent } from './components/owner-drafted-players/owner-drafted-players.component';
 import { DialogSetupWarningDialog } from './components/setup/setup.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
@@ -57,7 +56,6 @@ import { BudgetsComponent } from './components/budgets/budgets.component';
     TeamStatisticsComponent,
     OwnerSummaryComponent,
     MenuComponent,
-    OwnerDraftedPlayersComponent,
     DialogSetupWarningDialog,
     WatchlistComponent,
     StatisticsComponent,
@@ -99,7 +97,7 @@ import { BudgetsComponent } from './components/budgets/budgets.component';
       { path: 'stats', component: TeamStatisticsComponent },
       { path: 'summary', component: OwnerSummaryComponent },
       { path: 'budgets', component: BudgetsComponent },
-      { path: 'owner', component: OwnerDraftedPlayersComponent },
+      // { path: 'owner', component: OwnerDraftedPlayersComponent },
       { path: 'watchlist', component: WatchlistComponent },
       { path: 'statistics', component: StatisticsComponent }
     ],
