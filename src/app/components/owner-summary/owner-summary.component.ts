@@ -116,6 +116,7 @@ export class OwnerSummaryComponent implements OnInit {
         });
       });
     });
+    this.wannabeDAO.storeAuditRecord('Owner Summary');
   }
 
   refresh() {

@@ -66,6 +66,7 @@ export class DraftSelectionsComponent implements OnInit {
           });
         });
     }
+    this.wannabeDAO.storeAuditRecord('Draft Results');
   }
   fetchData() {
     this.wannabeDAO.fetchDraftedPlayers()

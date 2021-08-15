@@ -51,6 +51,7 @@ export class StatisticsComponent implements OnInit {
       this.spiderData = spiderData;
       const spiderChart = this.buildSpiderChart(this.wannabeDAO.getDraftOwner(), spiderData);
     });
+    this.wannabeDAO.storeAuditRecord('Statistics');
   }
 
   refresh() {

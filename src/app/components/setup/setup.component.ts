@@ -102,6 +102,7 @@ export class SetupComponent implements OnInit {
         this.isLoaded = true;
       }
     });
+    this.wannabeDAO.storeAuditRecord('Setup');
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.draftData.teams, event.previousIndex, event.currentIndex);

@@ -67,6 +67,7 @@ export class AuctionComponent implements OnInit {
         });
       });
     });
+    this.wannabeDAO.storeAuditRecord('Auction');
   }
 
   refresh() {
@@ -142,7 +143,7 @@ export class AuctionComponent implements OnInit {
       next => { },
       response => {
         // error condition
-        console.log("POST call in error", response);
+        console.log('POST call in error', response);
       },
       () => {
         // success condition
@@ -150,7 +151,7 @@ export class AuctionComponent implements OnInit {
         this.currentBid = '';
         this.selectedPlayer = '';
         this.selectedTeam = '';
-        console.log("Success in action");
+        console.log('Success in action');
         this.dataSource = new MatTableDataSource(this.playerList);
         this.onTheClock = this.wannabeDAO.getOnTheClock();
         this.draftRound = this.wannabeDAO.getRound();

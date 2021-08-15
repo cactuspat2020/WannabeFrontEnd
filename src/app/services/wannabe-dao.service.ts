@@ -34,6 +34,7 @@ export class WannabeDAOService {
   saveWatchlistPlayerURL = this.baseURL + 'saveWatchlistPlayer';
   deleteWatchPlayerURL = this.baseURL + 'deleteWatchlistPlayer';
   getWatchlistURL = this.baseURL + 'getWatchlists';
+  auditURL = this.baseURL + 'audit';
   getAveragePlayercostURL = this.baseURL + 'getAveragePlayerCost';
 
   fullPlayerListInitialized = false;
@@ -104,6 +105,18 @@ export class WannabeDAOService {
       })
     };
     return this.http.post(this.saveWatchlistPlayerURL, jsonBody, httpOptions);
+  }
+
+  public storeAuditRecord(page: string) {
+    const jsonBody = '{"owner":"' + this.getDraftOwner() + '", "page":"' + page + '"}';
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    this.http.post(this.auditURL, jsonBody, httpOptions).subscribe(x => {
+      const ret = x;
+    });
   }
 
   public deleteWatchlistPlayer(player: DraftedPlayerRecord): Observable<any> {
@@ -274,6 +287,8 @@ export class WannabeDAOService {
         });
       }
     });
+    this.http.post(this.auditURL, '{"owner":"Gunslingers","page","Auction"}', {});
+
     return returnVal;
   }
 

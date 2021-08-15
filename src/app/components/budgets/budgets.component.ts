@@ -45,6 +45,7 @@ export class BudgetsComponent implements OnInit {
     } else {
       this.fetchData();
     }
+    this.wannabeDAO.storeAuditRecord('Budgets');
   }
 
   fetchData() {
