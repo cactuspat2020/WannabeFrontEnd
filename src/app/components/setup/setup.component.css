@@ -44,10 +44,20 @@ td, th {
   overflow: visible;
   -webkit-overflow-scrolling: touch;
 }
+.test {
+  width: 100%;
+}
 
 .continue {
   padding-top: 10px;
   padding-bottom: 10px;
   font-weight: 400;
   font-size: 1.5rem;
+}
+#my{
+  zoom: 100%;
+}
+body {
+  transform: scale(1.0);
+  transform-origin: 0 0;
 }

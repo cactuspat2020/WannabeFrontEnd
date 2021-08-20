@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import { WannabeDAOService } from '../../services/wannabe-dao.service';
 import { WannabeCsvDAOService } from '../../services/wannabe-csv-dao.service';
 import { OwnerRecord } from '../../models/ownerRecord';
 import { Router } from '@angular/router';
-import { SetupData } from '../../models/setupData';
 import { CookieService } from 'ngx-cookie-service';
+import { Hub, Logger, Auth } from 'aws-amplify';
+
+const logger = new Logger('My-Logger');
 
 
 @Component({
@@ -19,58 +21,116 @@ export class LoginComponent implements OnInit {
   cookieService: CookieService;
   teams: OwnerRecord[] = [];
   draftOwner: string;
-  password;
+  userName: string;
+  password: string;
+  newPassword = '';
+  authCode: string;
   isLoaded = false;
-  passwordList: { [user: string]: string } =
-    {
-      'Gunslingers': 'owner',
-      'Smack': 'admin',
-      'Diablos': 'wannabe',
-      'Vogue': 'wannabe',
-      'Davids Revenge': 'wannabe',
-      'Smokey': 'wannabe',
-      'Bud Light Man': 'wannabe',
-      'SKOL': 'wannabe',
-      'Mr. Suck It': 'wannabe',
-      'Corn Bread': 'wannabe',
-      'Bud Heavy': 'wannabe',
-      'Big Daddy': 'wannabe',
-    };
+  displayReset = false;
+  displayLogin = true;
+  displayvalidate = false;
+  displayPasswordChange = false;
 
-  constructor(wannabeDAO: WannabeDAOService, cookieService: CookieService, router: Router, csvDao: WannabeCsvDAOService) {
+  ngZone: NgZone;
+
+  constructor(ngZone: NgZone, wannabeDAO: WannabeDAOService, cookieService: CookieService, router: Router, csvDao: WannabeCsvDAOService) {
     this.wannabeDAO = wannabeDAO;
     this.wannabeCsvDAO = csvDao;
     this.router = router;
     this.draftOwner = 'none';
     this.cookieService = cookieService;
+    this.ngZone = ngZone;
   }
+
   ngOnInit() {
     this.wannabeDAO.fetchTeams().subscribe((response: OwnerRecord[]) => {
       this.teams = response;
       this.isLoaded = true;
     });
+    Hub.listen('auth', this.createAuthListener());
   }
 
+  createAuthListener() {
+    const listener = (data) => {
+      switch (data.payload.event) {
+        case 'signIn':
+          console.log('user signed in');
+          Auth.currentUserPoolUser().then(
+            authEntity => {
+              const ownerRecord = this.teams.filter(name => (name.teamName.toLowerCase().split(' ').join('_') == authEntity.username));
+              if (ownerRecord) {
+                this.draftOwner = ownerRecord[0].teamName;
+                this.wannabeDAO.setDraftOwner(this.draftOwner);
+                this.wannabeDAO.forceNewWatchList();
+                this.cookieService.set('loginTeam', this.draftOwner, 1);
+                this.ngZone.run(() => this.router.navigate(['/status']));
+              } else {
+                alert('Couldn\'t match your login to your team. Contact technical support');
+              }
+            });
+          break;
+        case 'signOut':
+          logger.info('user signed out');
+          console.log('user signed out');
+          this.ngZone.run(() => this.router.navigate(['/']));
+          break;
+      }
+    };
+    return listener;
+  }
   selectChange() {
     this.wannabeDAO.setDraftOwner(this.draftOwner);
     this.cookieService.set('loginTeam', this.draftOwner, 1);
   }
+  displayResetDiv() {
+    this.displayReset = true;
+    this.displayLogin = false;
+  }
+  resetPassword() {
+   Auth.forgotPassword(this.userName).then(x => {
+     this.displayReset = false;
+     this.displayvalidate = true;
+   }, err => {
+     alert (err.message);
+   });
+  }
+  setPassword() {
+    Auth.forgotPasswordSubmit(this.userName, this.authCode, this.password).then(x => {
+      alert('Success! You can log in with your new password');
+      this.displayvalidate = false;
+      this.displayLogin = true;
+      this.password = '';
+    }, err => {
+      alert (err.message);
+    });
+  }
+
+  returnToLogin() {
+    this.displayReset = false;
+    this.displayLogin = true;
+    this.displayvalidate = false;
+    this.displayPasswordChange = false;
+  }
 
   login() {
-    if (this.draftOwner === 'none') {
-      alert('Please choose your team before proceeding');
-    } else if (this.passwordList[this.draftOwner] === this.password ||
-      (this.password === 'wannabe' && this.draftOwner !== 'Gunslingers')) {
-      const isAdmin = this.teams.filter(team => team.teamName === this.draftOwner)[0].isAdmin;
-      this.wannabeDAO.forceNewWatchList();
-
-      if (isAdmin) {
-        this.router.navigate(['/setup']);
-      } else {
-        this.router.navigate(['/status']);
+    Auth.signIn(this.userName, this.password).then(x => {
+      if (x.challengeName === 'NEW_PASSWORD_REQUIRED') {
+        if (this.newPassword === '') {
+          this.displayPasswordChange = true;
+        } else {
+          Auth.completeNewPassword(x, this.newPassword).then(user => {
+            alert('Success!');
+            this.displayvalidate = false;
+            this.displayLogin = true;
+          }, err => {
+            const a = 11;
+            console.log(err.message);
+            alert (err.message);
+          });
+        }
       }
-    } else {
-      alert('Invalid Password. Please try again');
-    }
+    }, err => {
+      alert(err.message);
+    });
   }
 }

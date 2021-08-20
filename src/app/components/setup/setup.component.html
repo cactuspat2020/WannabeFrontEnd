@@ -1,32 +1,32 @@
 <app-menu></app-menu>
 
-<div *ngIf="isLoaded">
-<div align=center>
-  <H3>Draft Setup</H3>
-  <form   #setupForm="ngForm" >
+<!--<div *ngIf="isLoaded">-->
+  <div align=center class="test">
+    <H3>Draft Setup</H3>
+    <form #setupForm="ngForm">
 
-    <!-- <label for="draftName">Draft name</label><br> -->
-    <b>Draft Name<br></b>
-    <input width=150px type="text" class="form-control draft-name-width" id="draftName"
-      [(ngModel)]="draftData.draftName" name="draftName" #draftName="ngModel"><br>
+      <!-- <label for="draftName">Draft name</label><br> -->
+      <b>Draft Name<br></b>
+      <input width=150px type="text" class="form-control draft-name-width" id="draftName"
+             [(ngModel)]="draftData.draftName" name="draftName" #draftName="ngModel"><br>
 
-    <!-- <label for="budget">Budget</label><br> -->
-    <b>Budget<br></b>
-    <input type="text" width=80px class="form-control budget-width" id="budget" [(ngModel)]="draftData.budget"
-      name="budget" #budget="ngModel"><br>
+      <!-- <label for="budget">Budget</label><br> -->
+      <b>Budget<br></b>
+      <input type="text" width=80px class="form-control budget-width" id="budget" [(ngModel)]="draftData.budget"
+             name="budget" #budget="ngModel"><br>
 
-    <!-- <label for="leagueSize">League Size</label><br> -->
-    <b>League Size<br></b>
-    <select (change)="changeLeagueSize()" type="number" class="form-control league-size-width" id="leagueSize"
-      [(ngModel)]="draftData.leagueSize" name="leagueSize" #leagueSize="ngModel"><br>
-      <option value=8>8 teams</option>
-      <option value=10>10 teams</option>
-      <option value=12>12 teams</option>
-    </select>
+      <!-- <label for="leagueSize">League Size</label><br> -->
+      <b>League Size<br></b>
+      <select (change)="changeLeagueSize()" type="number" class="form-control league-size-width" id="leagueSize"
+              [(ngModel)]="draftData.leagueSize" name="leagueSize" #leagueSize="ngModel"><br>
+        <option value=8>8 teams</option>
+        <option value=10>10 teams</option>
+        <option value=12>12 teams</option>
+      </select>
 
-    <H3>League Teams</H3>
-    <div class=spacer>Drag to reorder</div>
-    <table>
+      <H3>League Teams</H3>
+      <div class=spacer>Drag to reorder</div>
+      <table>
         <ng-container>
           <tr>
             <th width=82px>Order</th>
@@ -35,64 +35,63 @@
             <!-- <th width=52px>Admin</th> -->
           </tr>
         </ng-container>
-    </table>
-    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let owner of draftData.teams; let i = index" cdkDrag>
-      <table>
-        <ng-container *ngIf='i < draftData.leagueSize'>
-          <tr>
-            <td align=center width=82px>
-            <mat-label width=82px>{{i+1}}</mat-label>
-              <!-- <select type="number" width=40px id="{{i}}" [(ngModel)]="draftData.teams[i].draftOrder" name="order{{i}}" -->
-                <!-- #order[i]="ngModel"> -->
-                <!-- <option [value]="position" *ngFor="let position of selectorIndex">{{position}}</option> -->
-              <!-- </select> -->
-            </td>
-            <td width=192px>
-              <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].teamName" name="team{{i}}"
-                #team[i]="ngModel">
-            </td>
-            <td width=192px>
-              <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].ownerName" name="owner{{i}}"
-                #owner[i]="ngModel">
-            </td>
-            <!-- <td width=83px> -->
-              <!-- <input type="checkbox" id="{{i}}" [(ngModel)]="draftData.teams[i].isAdmin" name="admin{{i}}" -->
-                <!-- #admin[i]="ngModel"> -->
-            <!-- </td> -->
-          </tr>
-        </ng-container>
       </table>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let owner of draftData.teams; let i = index" cdkDrag>
+          <table>
+            <ng-container *ngIf='i < draftData.leagueSize'>
+              <tr>
+                <td align=center width=82px>
+                  <mat-label width=82px>{{i + 1}}</mat-label>
+                  <!-- <select type="number" width=40px id="{{i}}" [(ngModel)]="draftData.teams[i].draftOrder" name="order{{i}}" -->
+                  <!-- #order[i]="ngModel"> -->
+                  <!-- <option [value]="position" *ngFor="let position of selectorIndex">{{position}}</option> -->
+                  <!-- </select> -->
+                </td>
+                <td width=192px>
+                  <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].teamName" name="team{{i}}"
+                         #team[i]="ngModel">
+                </td>
+                <td width=192px>
+                  <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].ownerName" name="owner{{i}}"
+                         #owner[i]="ngModel">
+                </td>
+                <!-- <td width=83px> -->
+                <!-- <input type="checkbox" id="{{i}}" [(ngModel)]="draftData.teams[i].isAdmin" name="admin{{i}}" -->
+                <!-- #admin[i]="ngModel"> -->
+                <!-- </td> -->
+              </tr>
+            </ng-container>
+          </table>
 
 
-      <!-- <label for={{i}}>Team{{i}}</label>
-    <input type="text" width=80px id="{{i}}"
-    [(ngModel)]="draftData.teams[i].teamName" name="{{i}}"
-    #[i]="ngModel"> -->
+          <!-- <label for={{i}}>Team{{i}}</label>
+        <input type="text" width=80px id="{{i}}"
+        [(ngModel)]="draftData.teams[i].teamName" name="{{i}}"
+        #[i]="ngModel"> -->
 
 
-    </div>
-    </div>
-    <button mat-raised-button color="primary" (click)="openDialog()">Start Draft</button>
-  </form>
-</div>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" (click)="openDialog()">Start Draft</button>
+    </form>
+  </div>
 
 
+  <!-- <p align=center padding-bottom=1cm >
+   Enter the Draft Name:
 
-<!-- <p align=center padding-bottom=1cm >
- Enter the Draft Name:
+    <mat-form-field class="inputFormField">
+      <input matInput placeholder="draftName">
+    </mat-form-field>
 
-  <mat-form-field class="inputFormField">
-    <input matInput placeholder="draftName">
-  </mat-form-field>
+    <mat-form-field>
+    <mat-select with=30%>
+        <mat-option value="8">8 Team</mat-option>
+        <mat-option value="10">10 Team</mat-option>
+        <mat-option value="12">12 Team</mat-option>
+    </mat-select>
+    </mat-form-field>
+  </p> -->
 
-  <mat-form-field>
-  <mat-select with=30%>
-      <mat-option value="8">8 Team</mat-option>
-      <mat-option value="10">10 Team</mat-option>
-      <mat-option value="12">12 Team</mat-option>
-  </mat-select>
-  </mat-form-field>
-</p> -->
-
-</div>
+<!--</div>-->

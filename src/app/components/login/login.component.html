@@ -1,19 +1,45 @@
-<mat-card align=center width=80% class="testCard">
+<mat-card align=center width=80% class="testCard" xmlns:width="http://www.w3.org/1999/xhtml">
   <H3><b>Welcome to the Wannabe Draft!</b></H3>
-  <img class=raiders width=50%
-    src="http://fantasy.img.cbssports.com/G/football/leagues/lbe/wannabbe/images/league-logo/32556800-8F81-11E9-9B43-D465D1DAD486-800x600.jpg"
-    alt="Photo of a Shiba Inu">
+  <img class=raiders
+       src="http://fantasy.img.cbssports.com/G/football/leagues/lbe/wannabbe/images/league-logo/32556800-8F81-11E9-9B43-D465D1DAD486-800x600.jpg"
+       alt="Photo of a Shiba Inu">
   <p></p>
   <mat-card-content>
-    <select (change)="selectChange()" [(ngModel)]="draftOwner">
-      <option hidden [value]="" selected>Select your team </option>
-      <option *ngFor="let team of teams ">
-        {{team.teamName}}
-      </option>
-    </select>
     <p></p>
-    <input matInput (keyup.enter)="login()" type="password" placeholder="password" [(ngModel)]="password"><br>
-    <button mat-raised-button (click)="login()" color="primary">Enter Draft</button>
+    <div *ngIf="displayLogin">
+      <input style="margin-bottom:10px" matInput [(ngModel)]="userName" placeholder="User Name"><br>
+      <input matInput (keyup.enter)="login()" type="password" placeholder="password" [(ngModel)]="password"><br>
+      <div *ngIf="displayPasswordChange">
+        Looks like you're new. Enter a new password. We're pretty lax here.
+        The only requirement is that it's longer than six characters.<br>
+        <input matInput  type="password" placeholder="new password"
+               [(ngModel)]="newPassword"><br>
+      </div>
+      <button style="margin-bottom:20px" mat-raised-button (click)="login()" color="primary">Enter Draft</button>
+      <br>
 
+      Need to reset your password?<br>
+      Click <a (click)="displayResetDiv()">here</a>
+    </div>
+
+    <div class="password_msg" *ngIf="displayReset">
+        <div style="padding-bottom: 20px">
+          Enter your username (i.e. smack, en_vogue, etc) and reset. You'll receive a code in your
+          email that you can use to reset your password.
+        </div>
+
+      <input matInput placeholder="User Name" [(ngModel)]="userName"><br>
+      <button mat-raised-button (click)="resetPassword()" color="primary">Reset Password</button><br>
+      <a (click)="returnToLogin()">Cancel</a>
+
+    </div>
+
+    <div *ngIf="displayvalidate">
+      Check your email for a validation code. Enter that along with the new password below<br>
+      <input style="margin-bottom:10px" matInput [(ngModel)]="authCode" placeholder="code"><br>
+      <input matInput (keyup.enter)="setPassword()" type="password" placeholder="new password" [(ngModel)]="password"><br>
+      <button style="margin-bottom:20px" mat-raised-button (click)="setPassword()" color="primary">Reset</button><br>
+      <a (click)="returnToLogin()">Cancel</a>
+    </div>
   </mat-card-content>
 </mat-card>

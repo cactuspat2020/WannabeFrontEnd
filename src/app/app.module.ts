@@ -30,6 +30,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 import { LoginComponent } from './components/login/login.component';
+import {LogoutComponent} from './components/logout/logout.component';
 import { WannabeDAOService } from './services/wannabe-dao.service';
 import { SetupComponent } from './components/setup/setup.component';
 import { RouterModule } from '@angular/router';
@@ -45,6 +46,12 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { StatisticsService } from './services/statistics.service';
 import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
 import { BudgetsComponent } from './components/budgets/budgets.component';
+import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import Amplify from 'aws-amplify';
+import awsconfig from '../aws-exports';
+
+/* Configure Amplify resources */
+Amplify.configure(awsconfig);
 
 @NgModule({
   declarations: [
@@ -62,6 +69,7 @@ import { BudgetsComponent } from './components/budgets/budgets.component';
     BudgetsComponent,
   ],
   imports: [
+    AmplifyUIAngularModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -93,6 +101,7 @@ import { BudgetsComponent } from './components/budgets/budgets.component';
       { path: 'setup', component: SetupComponent },
       { path: 'auction', component: AuctionComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'logout', component: LogoutComponent },
       { path: 'status', component: DraftSelectionsComponent },
       { path: 'stats', component: TeamStatisticsComponent },
       { path: 'summary', component: OwnerSummaryComponent },

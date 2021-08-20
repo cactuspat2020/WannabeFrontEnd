@@ -20,7 +20,6 @@ interface MenuItem {
 export class MenuComponent implements OnInit {
   title = 'wannabe';
   ownerLinks: MenuItem[] = [
-    {label: 'Login', link: '/login', disabled: false},
     {label: 'Setup', link: '/setup', disabled: false},
     {label: 'Auction', link: '/auction', disabled: false},
     {label: 'DraftBoard', link: '/status', disabled: false},
@@ -28,9 +27,9 @@ export class MenuComponent implements OnInit {
     {label: 'MyWatchlist', link: '/watchlist', disabled: false},
     {label: 'Budgets', link: '/budgets', disabled: false},
     {label: 'Statistics', link: '/statistics', disabled: false},
+    {label: 'Logout', link: '/logout', disabled: false},
   ];
   adminLinks: MenuItem[] = [
-    {label: 'Login', link: '/login', disabled: false},
     {label: 'Setup', link: '/setup', disabled: false},
     {label: 'Auction', link: '/auction', disabled: false},
     {label: 'DraftBoard', link: '/status', disabled: false},
@@ -38,15 +37,16 @@ export class MenuComponent implements OnInit {
     {label: 'MyWatchlist', link: '/watchlist', disabled: false},
     {label: 'Budgets', link: '/budgets', disabled: false},
     {label: 'Statistics', link: '/statistics', disabled: false},
+    {label: 'Logout', link: '/logout', disabled: false},
   ];
   userLinks: MenuItem[] = [
-    {label: 'Login', link: '/login', disabled: false},
     {label: 'Auction', link: '/auction', disabled: true},
     {label: 'DraftBoard', link: '/status', disabled: false},
     {label: 'MyDraft', link: '/summary', disabled: false},
     {label: 'MyWatchlist', link: '/watchlist', disabled: false},
     {label: 'Budgets', link: '/budgets', disabled: false},
     {label: 'Statistics', link: '/statistics', disabled: false},
+    {label: 'Logout', link: '/logout', disabled: false},
   ];
   links: MenuItem[] = [];
   activeLink = this.links[0];
