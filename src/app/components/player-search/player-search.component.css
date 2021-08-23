@@ -1,0 +1,89 @@
+
+.bid-information {
+  font-size: 16px;
+  font: Arial;
+  color: darkolivegreen;
+}
+.player-info {
+  font-size: 16px;
+  font: Arial;
+  color: black;
+}
+
+.draft-status {
+  margin-top: 30px;
+  margin-left: 30px;
+}
+.position-width {
+  width: 20%;
+}
+.head-label {
+  padding-right: 8px;
+  text-align: right;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  vertical-align: top;
+}
+.head-value {
+  padding-right: 8px;
+  text-align: left;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 14px;
+  /* font-weight: 800; */
+  vertical-align: top;
+}
+.ontheblock {
+  vertical-align: top;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+.top-table {
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.td.mat-cell {
+  padding-left: 10px;
+}
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+  padding-left: 10px;
+}
+td.mat-cell:first-of-type {
+  padding-left: 10px;
+}
+
+th.mat-header-cell {
+  padding-left: 0px;
+}
+
+.highlight{
+  background: antiquewhite;
+}
+h4 {
+  margin-bottom: 40px;
+}
+tr.mat-row {
+  height: 32px;
+}
+tr.mat-header-row {
+  height: 32px;
+}
+.table-container {
+  max-width: 700px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.mat-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
+}
+
+.table-overrides {
+  line-height: 14px;
+}

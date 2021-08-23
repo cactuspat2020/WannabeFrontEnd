@@ -35,6 +35,7 @@ import { WannabeDAOService } from './services/wannabe-dao.service';
 import { SetupComponent } from './components/setup/setup.component';
 import { RouterModule } from '@angular/router';
 import { AuctionComponent } from './components/auction/auction.component';
+import { PlayerSearchComponent } from './components/player-search/player-search.component';
 import { DraftSelectionsComponent } from './components/draft-selections/draft-selections.component';
 import { TeamStatisticsComponent } from './components/team-statistics/team-statistics.component';
 import { OwnerSummaryComponent } from './components/owner-summary/owner-summary.component';
@@ -60,6 +61,7 @@ Amplify.configure(awsconfig);
     LogoutComponent,
     SetupComponent,
     AuctionComponent,
+    PlayerSearchComponent,
     DraftSelectionsComponent,
     TeamStatisticsComponent,
     OwnerSummaryComponent,
@@ -101,6 +103,7 @@ Amplify.configure(awsconfig);
       { path: '', component: LoginComponent },
       { path: 'setup', component: SetupComponent },
       { path: 'auction', component: AuctionComponent },
+      { path: 'players', component: PlayerSearchComponent },
       { path: 'login', component: LoginComponent },
       { path: 'logout', component: LogoutComponent },
       { path: 'status', component: DraftSelectionsComponent },
