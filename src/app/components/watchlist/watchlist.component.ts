@@ -23,14 +23,17 @@ export class WatchlistComponent implements OnInit {
   playerControl = new FormControl();
   dataSource = new MatTableDataSource(this.playerList);
   removeButtonEnabled = false;
+  activeWatchList = 'default';
+  watchListFilter = 'default';
+  filterList = new Set();
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   // Table Variables
   watchList: DraftedPlayerRecord[] = [];
   watchlistDataSource = new MatTableDataSource(this.watchList);
-  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'assessment', 'ownerName' ];
-  limitedDisplayColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek' ];
+  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'assessment', 'watchList', 'ownerName' ];
+  limitedDisplayColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'watchList', 'ownerName' ];
 
   @ViewChild(MatSort, { static: true }) tableSort: MatSort;
 
@@ -100,18 +103,24 @@ export class WatchlistComponent implements OnInit {
     watchedPlayer.byeWeek = record.byeWeek;
     watchedPlayer.fantasyPoints = record.fantasyPoints;
     watchedPlayer.position = record.position;
+    watchedPlayer.draftOrder = 0;
+    watchedPlayer.watchList = this.watchListFilter === '' ? 'default' : this.watchListFilter;
 
     this.wannabeDAO.storeWatchlistPlayer(watchedPlayer).subscribe((x: any) => {
       // this.selectedPlayer.playerName = '';
+      this.watchListFilter = '';
       this.wannabeDAO.watchlistInitialized = false;
       this.wannabeDAO.fetchWatchList().subscribe((players: DraftedPlayerRecord[]) => {
         this.watchList = players;
+        this.filterList.clear();
         for (const player of this.watchList) {
           player.assessment = this.wannabeDAO.getPlayerRating(player);
+          this.filterList.add(player.watchList);
         }
         this.watchlistDataSource = new MatTableDataSource(this.watchList);
         this.watchlistDataSource.sort = this.tableSort;
         this.selectedPlayer = new DraftedPlayerRecord();
+        // this.watchListFilter = '';
       });
     });
   }
@@ -125,6 +134,15 @@ export class WatchlistComponent implements OnInit {
     return isAMatch;
   }
 
+  switchList() {
+    const filteredList: DraftedPlayerRecord[] = [];
+    for (const player of this.watchList) {
+      if (player.watchList === this.activeWatchList || this.activeWatchList === 'all') {
+        filteredList.push(player);
+      }
+      this.watchlistDataSource = new MatTableDataSource(filteredList);
+    }
+  }
   fetchTableData() {
     this.wannabeDAO.watchlistInitialized = false;
     this.wannabeDAO.fetchWatchList().subscribe((response2: DraftedPlayerRecord[]) => {
@@ -135,6 +153,7 @@ export class WatchlistComponent implements OnInit {
       this.wannabeDAO.fetchPlayerRankings().subscribe((response3) => {
         for (const player of this.watchList) {
           player.assessment = this.wannabeDAO.getPlayerRating(player);
+          this.filterList.add(player.watchList);
         }
       });
     });

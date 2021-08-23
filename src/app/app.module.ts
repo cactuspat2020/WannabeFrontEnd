@@ -57,6 +57,7 @@ Amplify.configure(awsconfig);
   declarations: [
     AppComponent,
     LoginComponent,
+    LogoutComponent,
     SetupComponent,
     AuctionComponent,
     DraftSelectionsComponent,

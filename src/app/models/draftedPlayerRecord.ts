@@ -8,4 +8,5 @@ export class DraftedPlayerRecord {
   ownerName: string;
   price: number;
   assessment: string;
+  watchList: string;
 }

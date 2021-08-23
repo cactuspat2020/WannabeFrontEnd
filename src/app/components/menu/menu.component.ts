@@ -40,7 +40,7 @@ export class MenuComponent implements OnInit {
     {label: 'Logout', link: '/logout', disabled: false},
   ];
   userLinks: MenuItem[] = [
-    {label: 'Auction', link: '/auction', disabled: true},
+    {label: 'Auction', link: '/auction', disabled: false},
     {label: 'DraftBoard', link: '/status', disabled: false},
     {label: 'MyDraft', link: '/summary', disabled: false},
     {label: 'MyWatchlist', link: '/watchlist', disabled: false},
