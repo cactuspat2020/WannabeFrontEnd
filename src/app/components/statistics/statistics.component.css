@@ -52,17 +52,13 @@ h3 {
   width:100%;
 }
 
-@media (min-width:500px) {
-  .barChart{
-    /*width:70%;*/
-    margin-bottom: 60px;
-  }
-  .spiderChart{
-    width:20%;
-  }
-  .summaryStats {
-    margin-bottom: 60px;
-    width: 100%;
-  }
-
+.barChart{
+  width:100%;
+  max-width:800px;
+  margin-bottom: 60px;
+}
+.spiderChart{
+  max-width:800px;
+  margin-bottom: 60px;
+  width:100%;
 }
