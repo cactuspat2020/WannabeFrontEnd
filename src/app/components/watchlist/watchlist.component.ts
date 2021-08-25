@@ -32,7 +32,7 @@ export class WatchlistComponent implements OnInit {
   // Table Variables
   watchList: DraftedPlayerRecord[] = [];
   watchlistDataSource = new MatTableDataSource(this.watchList);
-  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'assessment', 'watchList', 'ownerName' ];
+  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'fantasyPoints', 'assessment', 'price', 'watchList', 'ownerName' ];
   limitedDisplayColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek', 'watchList', 'ownerName' ];
 
   @ViewChild(MatSort, { static: true }) tableSort: MatSort;
@@ -153,6 +153,7 @@ export class WatchlistComponent implements OnInit {
       this.wannabeDAO.fetchPlayerRankings().subscribe((response3) => {
         for (const player of this.watchList) {
           player.assessment = this.wannabeDAO.getPlayerRating(player);
+          player.price = this.playerList.filter(x => x.playerName === player.playerName)[0].costEstimate;
           this.filterList.add(player.watchList);
         }
       });
