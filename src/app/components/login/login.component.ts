@@ -46,8 +46,14 @@ export class LoginComponent implements OnInit {
     this.wannabeDAO.fetchTeams().subscribe((response: OwnerRecord[]) => {
       this.teams = response;
       this.isLoaded = true;
+      Hub.listen('auth', this.createAuthListener());
+
+      if (this.cookieService.check('loginTeam')) {
+        this.draftOwner = this.cookieService.get('loginTeam');
+        this.wannabeDAO.setDraftOwner(this.draftOwner);
+        this.ngZone.run(() => this.router.navigate(['/summary']));
+      }
     });
-    Hub.listen('auth', this.createAuthListener());
   }
 
   createAuthListener() {
@@ -63,7 +69,7 @@ export class LoginComponent implements OnInit {
                 this.wannabeDAO.setDraftOwner(this.draftOwner);
                 this.wannabeDAO.forceNewWatchList();
                 this.cookieService.set('loginTeam', this.draftOwner, 1);
-                this.ngZone.run(() => this.router.navigate(['/status']));
+                this.ngZone.run(() => this.router.navigate(['/summary']));
               } else {
                 alert('Couldn\'t match your login to your team. Contact technical support');
               }
@@ -72,6 +78,7 @@ export class LoginComponent implements OnInit {
         case 'signOut':
           logger.info('user signed out');
           console.log('user signed out');
+          this.cookieService.delete('loginTeam');
           this.ngZone.run(() => this.router.navigate(['/']));
           break;
       }
@@ -80,7 +87,7 @@ export class LoginComponent implements OnInit {
   }
   selectChange() {
     this.wannabeDAO.setDraftOwner(this.draftOwner);
-    this.cookieService.set('loginTeam', this.draftOwner, 1);
+    this.cookieService.set('loginTeam', this.draftOwner, 7);
   }
   displayResetDiv() {
     this.displayReset = true;
