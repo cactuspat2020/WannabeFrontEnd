@@ -76,7 +76,8 @@ export class WannabeDAOService {
         if (this.watchlistInitialized) {
         observer.next(this.watchlistPlayers);
       } else {
-        this.http.get(this.getWatchlistURL).subscribe((response: DraftedPlayerRecord[]) => {
+          this.setDraftOwner(this.cookieService.get('loginTeam'));
+          this.http.get(this.getWatchlistURL).subscribe((response: DraftedPlayerRecord[]) => {
           this.watchlistPlayers = response.filter(x => x.ownerName === this.draftOwner);
           this.fetchDraftedPlayers().subscribe((playerList: DraftedPlayerRecord[]) => {
             for (const watchedPlayer of this.watchlistPlayers) {
