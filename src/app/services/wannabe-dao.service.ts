@@ -55,6 +55,7 @@ export class WannabeDAOService {
   bidCount = 0;
   draftOwner: string;
   ROUNDS = 15;
+  carryOverCount = 0;
 
   constructor(private httpClient: HttpClient, csvService: WannabeCsvDAOService, cookieService: CookieService) {
     this.http = httpClient;
@@ -248,7 +249,10 @@ export class WannabeDAOService {
 
   // Get team that's on the clock
   public getOnTheClock(): string {
-    const currentIndex = this.draftedPlayers.length % this.owners.length + 1;
+    var currentIndex = this.draftedPlayers.length % this.owners.length + 1 - this.carryOverCount;
+    if (currentIndex < 1 ) {
+      currentIndex = 1;
+    }
 
     for (const owner of this.owners) {
       if (owner.draftOrder === currentIndex) {
@@ -288,6 +292,7 @@ export class WannabeDAOService {
         });
       }
     });
+    this.carryOverCount = this.owners.filter(x => x.hasCarryOver === true).length;
     this.http.post(this.auditURL, '{"owner":"Gunslingers","page","Auction"}', {});
 
     return returnVal;

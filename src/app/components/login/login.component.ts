@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   displayLogin = true;
   displayvalidate = false;
   displayPasswordChange = false;
+  auth_object;
 
   ngZone: NgZone;
 
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
     this.draftOwner = 'none';
     this.cookieService = cookieService;
     this.ngZone = ngZone;
+    this.auth_object = Auth;
   }
 
   ngOnInit() {

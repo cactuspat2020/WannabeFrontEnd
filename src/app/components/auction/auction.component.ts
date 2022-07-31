@@ -24,6 +24,7 @@ export class AuctionComponent implements OnInit {
   onTheClock;
   draftRound;
   remainingPlayersToDraft;
+  preDraftPlayers=0;
 
   // Lists used for form elements
   playerList: PlayerRecord[] = [];

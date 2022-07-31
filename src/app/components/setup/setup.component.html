@@ -32,6 +32,7 @@
             <th width=82px>Order</th>
             <th width=192px>Team Name</th>
             <th width=192px>Owner</th>
+            <th width=80px>CarryOver</th>
             <!-- <th width=52px>Admin</th> -->
           </tr>
         </ng-container>
@@ -55,6 +56,9 @@
                 <td width=192px>
                   <input type="text" width=80px id="{{i}}" [(ngModel)]="draftData.teams[i].ownerName" name="owner{{i}}"
                          #owner[i]="ngModel">
+                </td>
+                <td width=80px>
+                  <mat-checkbox [(ngModel)]="draftData.teams[i].hasCarryOver" name="hasCarryOver{{i}}"></mat-checkbox>
                 </td>
                 <!-- <td width=83px> -->
                 <!-- <input type="checkbox" id="{{i}}" [(ngModel)]="draftData.teams[i].isAdmin" name="admin{{i}}" -->

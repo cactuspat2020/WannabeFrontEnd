@@ -5,6 +5,7 @@ export class OwnerRecord {
   public draftOrder: number;
   public isAdmin: boolean;
   public draftName: string;
+  public hasCarryOver: boolean;
 
   public constructor(init?: Partial<OwnerRecord>) {
     this.budget = 200;
@@ -12,6 +13,7 @@ export class OwnerRecord {
     this.ownerName = 'none';
     this.isAdmin = false;
     this.teamName = 'none';
+    this.hasCarryOver = false;
     Object.assign(this, init);
 }
 }

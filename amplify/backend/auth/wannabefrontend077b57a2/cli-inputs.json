@@ -1,14 +1,14 @@
 {
-    "identityPoolName": "wannabefrontend077b57a2_identitypool_077b57a2",
-    "allowUnauthenticatedIdentities": false,
+  "version": "1",
+  "cognitoConfig": {
     "resourceNameTruncated": "wannab077b57a2",
-    "userPoolName": "wannabefrontend077b57a2_userpool_077b57a2",
+    "userPoolName": "wannabefrontend077b57a2_userpool_077b57a2-dev",
     "autoVerifiedAttributes": [
-        "email"
+      "email"
     ],
     "mfaConfiguration": "OFF",
     "mfaTypes": [
-        "SMS Text Message"
+      "SMS Text Message"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
@@ -18,39 +18,51 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email"
+      "email"
     ],
     "aliasAttributes": [
-        "email"
+      "email"
     ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-        "email"
+      "email"
     ],
     "userpoolClientReadAttributes": [
-        "email"
+      "email"
     ],
     "userpoolClientLambdaRole": "wannab077b57a2_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "077b57a2",
+    "authSelections": "userPoolOnly",
     "resourceName": "wannabefrontend077b57a2",
-    "authSelections": "identityPoolAndUserPool",
+    "serviceName": "Cognito",
+    "useDefault": "manual",
+    "sharedId": "077b57a2",
+    "userPoolGroupList": [],
+    "usernameCaseSensitive": false,
     "authRoleArn": {
-        "Fn::GetAtt": [
-            "AuthRole",
-            "Arn"
-        ]
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
     },
     "unauthRoleArn": {
-        "Fn::GetAtt": [
-            "UnauthRole",
-            "Arn"
-        ]
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
     },
-    "useDefault": "default",
-    "userPoolGroupList": [],
-    "serviceName": "Cognito",
-    "usernameCaseSensitive": false,
-    "dependsOn": []
+    "breakCircularDependency": true,
+    "useEnabledMfas": false,
+    "dependsOn": [],
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": {},
+    "hostedUI": false,
+    "authProviders": [],
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": []
+  }
 }

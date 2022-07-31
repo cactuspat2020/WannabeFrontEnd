@@ -1,89 +1,84 @@
-Free Agent Kickers  CBS Average Projections Standard Categories
-,,,Upcoming,,,Trends,,Pos Rank,Total,,1-19,,20-29,,30-39,,40-49,,50+,,XPS,,FPTS,,
-Avail,Player,Opp,OVP,Bye,Rost,Start,Expert,FG,Att,FG,ATT,FG,ATT,FG,Att,FG,Att,FG,Att,XP,Att,Avg,Total,
-FA,Justin Tucker K | BAL ,@LV,27,8,98,91,2,32,35,0.251,0.252,9.1,9.1,9.1,9.2,10.7,11.9,2.66,4.07,58,58,8.88,151
-FA,Greg Zuerlein K | DAL ,@TB,12,7,46,33,5,37,47,0.547,0.548,8,8.1,12.6,13.2,10.7,15.1,5,10.1,48,49,8.71,148
-FA,Harrison Butker K | KC ,CLE,13,12,97,87,1,33,37,0.502,0.503,8.9,9,10.3,11.3,8.9,9.9,4.43,5.9,48,53,8.12,138
-FA,Ryan Succop K | TB ,DAL,20,9,63,48,7,32,37,0.48,0.48,10.2,10.3,11.8,11.9,7.4,11,1.68,3.37,47,51,7.88,134
-FA,Tyler Bass K | BUF ,PIT,6,7,77,66,17,30,36,0.443,0.443,9.4,9.5,7.7,9.1,7.6,10.1,5,6.5,49,51,7.71,131
-FA,Jason Sanders K | MIA ,@NE,8,14,86,74,6,31,36,0.471,0.471,8,8.1,8.2,8.7,9,12.2,5.3,6.8,43,44,7.65,130
-FA,Robbie Gould K | SF ,@DET,3,6,37,22,11,29,36,0.234,0.234,8.3,8.4,8.9,10.7,9.9,11.7,1.79,4.48,50,52,7.53,128
-FA,Younghoe Koo K | ATL ,PHI,24,6,93,83,3,32,36,0.255,0.255,8.5,8.6,10.6,11.7,8,9.6,4.78,6,38,41,7.47,127
-FA,Cairo Santos K | CHI ,@LAR,10,10,17,12,22,30,36,0.237,0.237,7.6,7.7,10.2,11.9,9.3,11,2.54,5.1,43,44,7.41,126
-FA,Rodrigo Blankenship K | IND ,SEA,17,14,79,71,4,29,35,0.233,0.234,8.8,8.9,11.1,12.8,8,9.7,1.17,2.92,42,44,7.12,121
-FA,Mike Badgley K | LAC ,@WAS,16,7,43,30,16,28,36,0.23,0.23,9.2,9.3,7.5,7.6,9.8,14.6,1.55,3.88,43,45,6.88,117
-FA,Mason Crosby K | GB ,@NO,7,13,69,52,N/R,24,26,0.357,0.357,5.2,5.3,9,9.2,6.8,7.6,2.83,3.55,50,53,6.88,117
-FA,Daniel Carlson K | LV ,BAL,1,8,68,55,15,29,36,0.262,0.262,10.5,10.7,8.5,9.4,7.5,11.2,2.52,3.88,40,44,6.82,116
-FA,Chris Boswell K | PIT ,@BUF,5,7,46,25,18,26,28,0.403,0.404,8.6,8.7,7.1,7.2,9.1,10.2,1.1,1.65,41,43,6.76,115
-FA,Jason Myers K | SEA ,@IND,9,9,65,52,13,27,31,0.21,0.211,5.8,5.8,9.3,9.8,8.9,10.4,3.09,4.65,41,45,6.71,114
-FA,Cody Parkey K | CLE ,@KC,4,13,9,4,20,26,29,0.235,0.235,7,7.1,7.6,9.1,10,11.1,1.17,1.47,42,45,6.71,114
-FA,Greg Joseph K | MIN ,@CIN,30,7,1,0,14,23,28,0.224,0.226,6.2,6.4,8.5,9.3,6.3,8.5,1.94,3.4,48,49,6.53,111
-FA,Matt Prater K | ARI ,@TEN,11,12,51,32,9,25,31,0.204,0.204,8.1,8.2,6.6,7.4,5.9,8.8,4.34,6,43,45,6.47,110
-FA,Matt Gay K | LAR,CHI,18,11,18,12,10,26,31,0.21,0.21,5.8,5.8,7.6,9,8.9,10.9,3.5,5.3,39,42,6.41,109
-FA,Tucker McCann K | TEN ,ARI,15,13,0,0,N/R,25,29,0.246,0.248,6.9,7.1,7.9,8.7,6.9,8.9,2.7,4.36,45,52,6.41,109
-FA,Nick Folk K | NE ,MIA,2,14,8,4,23,25,28,0.386,0.387,7.4,7.4,6.7,6.8,8.8,11.1,1.84,2.45,37,39,6.29,107
-FA,Brandon McManus K | DEN,@NYG,25,11,27,16,12,27,31,0.22,0.22,6,6.1,7.1,7.7,8.7,9.6,4.67,7.3,33,36,6.29,107
-FA,Graham Gano K | NYG,DEN,32,10,12,6,24,27,29,0.203,0.205,5.6,5.7,9.7,9.8,7.4,8.2,4.1,5.1,31,34,6.29,107
-FA,Joey Slye K | CAR,NYJ,28,13,33,22,8,27,33,0.212,0.212,7.3,8.2,7.3,7.4,7.3,9.3,4.41,8.3,34,38,6.18,105
-FA,Dustin Hopkins K | WAS,LAC,21,9,7,4,21,25,31,0.213,0.213,6,6.5,8,9,9,11.6,2.01,3.51,35,37,6.00,102
-FA,Ka'imi Fairbairn K | HOU ,JAC,29,10,59,47,28,25,30,0.193,0.193,6.7,6.8,8.7,8.8,5.5,7.5,3.37,6.3,34,37,5.94,101
-FA,Evan McPherson K | CIN,MIN,31,10,1,0,19,26,31,0.259,0.261,7.2,7.5,8.3,9.2,7.2,9.4,2.85,4.6,34,40,5.94,101
-FA,Randy Bullock K | DET,SF,26,9,13,2,27,23,27,0.184,0.184,6.2,6.3,6.7,7.7,7.8,9.2,1.92,3.85,35,36,5.82,99
-FA,Josh Lambo K | JAC,@HOU,23,7,5,2,26,23,24,0.18,0.18,7.1,7.2,6.5,6.6,5.3,5.9,3.55,4.43,33,36,5.76,98
-FA,Matt Ammendola K | NYJ,@CAR,22,6,0,0,N/R,21,25,0.205,0.207,5.7,5.9,6.6,7.3,5.7,7.5,2.25,3.63,26,29,4.82,82
-FA,Wil Lutz K | NO ,GB,14,6,90,80,32,17,21,0.27,0.27,4.89,5.2,4.89,4.94,6.1,7.5,1.22,2.75,33,33,6.67,80
-FA,Jake Elliott K | PHI ,@ATL,19,14,18,7,25,17,21,0.138,0.138,3.98,4.43,6.6,6.6,4.87,5.8,1.77,3.98,33,35,4.59,78
-FA,Blair Walsh K | NO,GB,14,6,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Roberto Aguayo K | NE,MIA,2,14,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Chandler Catanzaro K | NYG,DEN,32,10,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Dan Conroy K | FA,BYE,---,0,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Adam Vinatieri K | IND,SEA,17,14,2,1,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Austin MacGinnis K | LAR ,CHI,18,11,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Brett Maher K | NO ,GB,14,6,3,1,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Corey Acosta K | SF,@DET,3,6,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Eddy Pineiro K | IND,SEA,17,14,1,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,John Baron K | CHI,@LAR,10,10,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Tristan Vizcaino K | LAC,@WAS,16,7,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Kaare Vedvik K | WAS ,LAC,21,9,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Clayton Hatfield K | IND,SEA,17,14,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Ty Long K | LAC,@WAS,16,7,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Matt McCrane K | CLE,@KC,4,13,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Zane Gonzalez K | DET,SF,26,9,30,13,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Austin Seibert K | CIN,MIN,31,10,4,2,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Anthony Cantele K | FA,BYE,---,0,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Lirim Hajrullahu K | DAL ,@TB,12,7,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Jake Verity K | BAL,@LV,27,8,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Taylor Bertolet K | MIN,@CIN,30,7,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Brian Johnson K | CHI,@LAR,10,10,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Kai Forbath K | LAR,CHI,18,11,1,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Justin Rohrwasser K | NE,MIA,2,14,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Matt Bryant K | ATL,PHI,24,6,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Sergio Castillo K | NYJ,@CAR,22,6,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Giorgio Tavecchio K | TEN,ARI,15,13,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Blake Haubeil K | TEN,ARI,15,13,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Elliott Fry K | ATL,PHI,24,6,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Sam Sloman K | PIT ,@BUF,5,7,2,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Jaden Oberkrom K | CLE,@KC,4,13,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Anthony Fera K | FA,BYE,---,0,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Stephen Gostkowski K | TEN,ARI,15,13,28,19,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Jose Borregales K | TB,DAL,20,9,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Quinn Nordin K | NE,MIA,2,14,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Jared Roberts K | FA,BYE,---,0,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Aldrick Rosas K | JAC ,@HOU,23,7,1,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Stephen Hauschka K | JAC,@HOU,23,7,2,1,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Mike Nugent K | ARI,@TEN,11,12,2,1,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Jon Brown K | JAC,@HOU,23,7,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Brad Craddock K | CLE,@KC,4,13,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,JJ Molson K | GB,@NO,7,13,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Dan Bailey K | MIN,@CIN,30,7,38,24,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Alex Kessman K | LAC ,@WAS,16,7,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Chase McLaughlin K | CLE,@KC,4,13,1,0,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.00,0
-FA,Taylor Russolino K | DEN,@NYG,25,11,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Sam Ficken K | TEN,ARI,15,13,1,0,31,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Matthew Wright K | DET,SF,26,9,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Riley Patterson K | MIN ,@CIN,30,7,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Andrew Furney K | NYJ,@CAR,22,6,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Brandon Wright K | LAR,CHI,18,11,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Dominik Eberle K | LV ,BAL,1,8,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-FA,Chris Naggar K | NYJ ,@CAR,22,6,0,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
-Report Updated as of  8/20/21 11:57 AM EST
+All Kickers  CBS Average Projections Scoring Categories
+,,,Upcoming,,,Pos Rank,Passing,,,,Rushing,,,Receiving,,,Fumbles,Field Goals,,Extra Points,,FPTS,,
+Avail,Player,Opp,OVP,Bye,Expert,Yds,TD,Int,2Pt,Yds,TD,2Pt,Yds,TD,2Pt,Lost,FG,MFG,XP,MXP,Avg,Total,
+SKOL,Justin Tucker K | BAL,@NYJ,32,10,1,0,0,0,0,0,0,0,0,0,0,0,33,3,44,0,8.24,140
+"Ryans Rebles",Tyler Bass K | BUF ,@LAR,20,7,3,0,0,0,0,0,0,0,0,0,0,0,31,6,53,2,8.12,138
+FA,Evan McPherson K | CIN,PIT,26,10,5,0,0,0,0,0,0,0,0,0,0,0,31,4,44,2,7.71,131
+Smack,Matt Gay K | LAR,BUF,5,7,6,0,0,0,0,0,0,0,0,0,0,0,30,4,45,1,7.65,130
+Gunslingers,Harrison Butker K | KC,@ARI,10,8,2,0,0,0,0,0,0,0,0,0,0,0,30,3,45,3,7.59,129
+FA,Rodrigo Blankenship K | IND ,@HOU,23,14,10,0,0,0,0,0,0,0,0,0,0,0,32,6,42,4,7.53,128
+Wolf Pack,Daniel Carlson K | LV,@LAC,28,6,8,0,0,0,0,0,0,0,0,0,0,0,34,4,32,3,7.47,127
+FA,Jake Elliott K | PHI,@DET,31,7,12,0,0,0,0,0,0,0,0,0,0,0,28,3,45,1,7.35,125
+David's Revenge,Greg Joseph K | MIN,GB,6,7,4,0,0,0,0,0,0,0,0,0,0,0,31,5,40,4,7.29,124
+Bud Light Man,Younghoe Koo K | ATL,NO,17,14,9,0,0,0,0,0,0,0,0,0,0,0,29,2,39,1,7.24,123
+FA,Dustin Hopkins K | LAC,LV,24,8,7,0,0,0,0,0,0,0,0,0,0,0,29,4,43,4,7.18,122
+FA,Jonathan Garibay K | DAL ,TB,14,9,14,0,0,0,0,0,0,0,0,0,0,0,30,5,41,4,7.18,122
+Corn Bread,Robbie Gould K | SF,@CHI,19,9,11,0,0,0,0,0,0,0,0,0,0,0,28,4,42,1,7.12,121
+Smack,Ryan Succop K | TB,@DAL,16,11,21,0,0,0,0,0,0,0,0,0,0,0,28,6,46,3,7.12,121
+FA,Matt Prater K | ARI,KC,9,13,15,0,0,0,0,0,0,0,0,0,0,0,28,7,43,1,7.00,119
+Smokey,Chris Boswell K | PIT ,@CIN,11,9,20,0,0,0,0,0,0,0,0,0,0,0,31,4,32,2,7.00,119
+Gunslingers,Nick Folk K | NE,@MIA,25,10,26,0,0,0,0,0,0,0,0,0,0,0,30,3,35,4,6.94,118
+Diablo s,Mason Crosby K | GB ,@MIN,27,14,16,0,0,0,0,0,0,0,0,0,0,0,27,6,45,2,6.94,118
+Big Daddy,Brandon McManus K | DEN,@SEA,12,9,22,0,0,0,0,0,0,0,0,0,0,0,28,5,40,2,6.88,117
+Diablo s,Jason Sanders K | MIA ,NE,1,11,13,0,0,0,0,0,0,0,0,0,0,0,27,8,43,1,6.76,115
+FA,Riley Patterson K | DET,PHI,4,6,32,0,0,0,0,0,0,0,0,0,0,0,26,4,39,0,6.65,113
+FA,Randy Bullock K | TEN,NYG,30,6,27,0,0,0,0,0,0,0,0,0,0,0,26,5,42,2,6.65,113
+FA,Graham Gano K | NYG ,@TEN,18,9,19,0,0,0,0,0,0,0,0,0,0,0,28,3,31,1,6.53,111
+Corn Bread,Cairo Santos K | CHI ,SF,3,14,23,0,0,0,0,0,0,0,0,0,0,0,27,3,34,1,6.53,111
+FA,Wil Lutz K | NO ,@ATL,15,14,28,0,0,0,0,0,0,0,0,0,0,0,25,5,41,1,6.47,110
+FA,Zane Gonzalez K | CAR,CLE,13,13,30,0,0,0,0,0,0,0,0,0,0,0,26,3,34,1,6.35,108
+FA,Joey Slye K | WAS,JAC,29,14,25,0,0,0,0,0,0,0,0,0,0,0,26,3,28,4,5.82,99
+FA,Cade York K | CLE,@CAR,22,9,29,0,0,0,0,0,0,0,0,0,0,0,21,4,37,4,5.41,92
+En Vogue,Greg Zuerlein K | NYJ,BAL,8,10,17,0,0,0,0,0,0,0,0,0,0,0,22,5,29,3,5.12,87
+Big Daddy,Jason Myers K | SEA,DEN,7,11,18,0,0,0,0,0,0,0,0,0,0,0,20,5,31,2,4.94,84
+FA,Ka'imi Fairbairn K | HOU,IND,2,6,24,0,0,0,0,0,0,0,0,0,0,0,22,5,26,4,4.88,83
+FA,Ryan Santoso K | JAC ,@WAS,21,11,31,0,0,0,0,0,0,0,0,0,0,0,21,5,24,4,4.59,78
+FA,John Parker Romo K | NO ,@ATL,15,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Justin Rohrwasser K | NE,@MIA,25,10,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Matthew Wright K | JAC,@WAS,21,11,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Andrew Furney K | NYJ,BAL,8,10,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Eddy Pineiro K | NYJ ,BAL,8,10,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Chris Naggar K | DAL,TB,14,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Taylor Bertolet K | MIN,GB,6,7,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,James McCourt K | LAC,LV,24,8,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Alex Kessman K | CAR,CLE,13,13,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Jose Borregales K | TB,@DAL,16,11,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Sam Ficken K | TEN ,NYG,30,6,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,John Baron K | CHI,SF,3,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Elliott Fry K | CIN ,PIT,26,10,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Lirim Hajrullahu K | DAL ,TB,14,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Chris Blewitt K | CLE,@CAR,22,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Matt Ammendola K | NYJ,BAL,8,10,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Aldrick Rosas K | DET ,PHI,4,6,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Chase McLaughlin K | CLE,@CAR,22,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Tristan Vizcaino K | NE ,@MIA,25,10,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Sam Sloman K | PIT,@CIN,11,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Gabe Brkic K | GB ,@MIN,27,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Ty Long K | LAC,LV,24,8,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Cody Parkey K | NO ,@ATL,15,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Dan Conroy K | FA,BYE,---,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Jake Verity K | IND ,@HOU,23,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Corey Acosta K | SF,@CHI,19,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Matt McCrane K | PHI,@DET,31,7,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Anthony Fera K | FA,BYE,---,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Anthony Cantele K | FA,BYE,---,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Jaden Oberkrom K | CLE,@CAR,22,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Josh Lambo K | PIT,@CIN,11,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,JJ Molson K | GB ,@MIN,27,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Caleb Shudak K | TEN ,NYG,30,6,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Dominik Eberle K | GB ,@MIN,27,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Austin MacGinnis K | LAR,BUF,5,7,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Brett Maher K | NO,@ATL,15,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Brad Craddock K | CLE,@CAR,22,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Jared Roberts K | FA,BYE,---,0,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Nick Sciba K | PIT,@CIN,11,9,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Clayton Hatfield K | IND,@HOU,23,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+Smokey,Mike Badgley K | IND,@HOU,23,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Blake Haubeil K | CAR,CLE,13,13,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Quinn Nordin K | NE ,@MIA,25,10,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Brian Johnson K | WAS ,JAC,29,14,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Tucker McCann K | TEN ,NYG,30,6,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Andrew Mevis K | JAC,@WAS,21,11,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Austin Seibert K | DET ,PHI,4,6,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+FA,Cameron Dicker K | LAR,BUF,5,7,N/R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-,0
+Report Updated as of  7/26/22 12:55 AM EST
