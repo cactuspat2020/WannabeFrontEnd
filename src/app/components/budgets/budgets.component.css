@@ -90,7 +90,7 @@ td {
 td.mat-header-cell {
   width: 30px;
   padding-left: 5px;
-  test-align: center;
+  text-align: center;
   /*padding-right: 200px;*/
 }
 

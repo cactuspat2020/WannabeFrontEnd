@@ -10,6 +10,7 @@ table {
 .taken {
   background: lightgray;
 }
+
 .highlight{
   background: antiquewhite;
 }
@@ -70,3 +71,17 @@ tr.mat-header-row {
 .table-overrides {
   line-height: 14px;
 }
+
+/* .example-form {
+  height: 50px;
+  font-size: x-small;
+  padding-top: 0px;
+  padding-left: 0px;
+  border: 11px;
+  mat-input {
+    padding-left: 0px;
+  }
+
+  background-color: white;
+  color: white;
+} */

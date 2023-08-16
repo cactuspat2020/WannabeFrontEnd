@@ -30,16 +30,16 @@ export class AuctionComponent implements OnInit {
   playerList: PlayerRecord[] = [];
   // playerFilterValues: string[] = [];
   teamLookAheadValues: string[] = [];
-  teams: OwnerRecord[];
-  positionSelection: string;
-  maxBid;
+  teams: OwnerRecord[] = [];
+  positionSelection: string = "";
+  maxBid = 0;
   statusMessage = 'Initializing...';
   isLoaded = false;
 
   // AutoSelect Configurations
   teamControl = new FormControl();
   playerControl = new FormControl();
-  teamFilteredOptions: Observable<OwnerRecord[]>;
+  teamFilteredOptions: Observable<OwnerRecord[]> = new Observable<OwnerRecord[]>();
   playerFilteredOptions: Observable<PlayerRecord[]>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -161,7 +161,7 @@ export class AuctionComponent implements OnInit {
   }
 
   undoLastSelection() {
-    this.wannabeDAO.undoLastSelection().subscribe((response2: OwnerRecord[]) => {
+    this.wannabeDAO.undoLastSelection().subscribe((response2: DraftedPlayerRecord[]) => {
       // this.initVariables();
       this.ngOnInit();
       alert('Last selection successfully removed');

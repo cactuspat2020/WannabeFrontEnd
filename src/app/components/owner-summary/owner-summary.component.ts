@@ -248,7 +248,7 @@ export class OwnerSummaryComponent implements OnInit {
       },
       () => {
         // success condition
-        this.playerList = this.wannabeDAO.getPlayers(this.selectPlayers);
+        this.playerList = this.wannabeDAO.getPlayers(this.selectedPlayer);
         this.currentBid = '';
         this.selectedPlayer = '';
         this.selectedTeam = '';

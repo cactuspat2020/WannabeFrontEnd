@@ -1,12 +1,12 @@
 <div *ngIf="isDesktop||isTablet">
-  <nav mat-tab-nav-bar [backgroundColor]="background">
+  <nav mat-tab-nav-bar [tabPanel] = "tabPanel" [backgroundColor]="background">
     <a mat-tab-link *ngFor="let link of links" [routerLink]=link.link [disabled]=link.disabled
        tabindex=$index+10> {{link.label}} </a>
   </nav>
 </div>
 <div *ngIf="isMobile">
   <div class="spacer"></div>
-<!--  <div class="spacer2"></div>-->
+ <div class="spacer2"></div>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon class="material-icons md-36, ng-star-inserted-mobile">menu</mat-icon>
   </button>
@@ -14,3 +14,6 @@
     <button mat-menu-item *ngFor="let link of links" [routerLink]=link.link> {{link.label}}</button>
   </mat-menu>
 </div>
+<mat-tab-nav-panel #tabPanel>
+    <router-outlet></router-outlet>
+</mat-tab-nav-panel>

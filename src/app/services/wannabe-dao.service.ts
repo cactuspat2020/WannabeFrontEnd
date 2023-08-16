@@ -9,7 +9,7 @@ import { DraftedPlayerRecord } from '../models/draftedPlayerRecord';
 import { WannabeCsvDAOService } from './wannabe-csv-dao.service';
 import { CookieService } from 'ngx-cookie-service';
 
-import { delay } from 'q';
+// import { delay } from 'q';
 import { ObserversModule } from '@angular/cdk/observers';
 
 
@@ -44,7 +44,7 @@ export class WannabeDAOService {
   watchlistInitialized = false;
   averagePlayerCostInitialized = false;
 
-  playerRankings;
+  playerRankings:Map<string, string> = new Map<string, string>()
   players: PlayerRecord[] = [];
   playerTest: PlayerRecord[] = [];
   draftedPlayers: DraftedPlayerRecord[] = [];
@@ -53,7 +53,7 @@ export class WannabeDAOService {
   averagePlayerCost: AveragePlayerCost[] = [];
   setupData: SetupData = new SetupData(' ', 0, 0, []);
   bidCount = 0;
-  draftOwner: string;
+  draftOwner: string = "";
   ROUNDS = 15;
   carryOverCount = 0;
 
@@ -61,6 +61,7 @@ export class WannabeDAOService {
     this.http = httpClient;
     this.csvDaoService = csvService;
     this.cookieService = cookieService;
+    this.playerRankings = new Map<string, string>()
 
     this.fetchPlayers().subscribe();
     this.fetchWatchList().subscribe();
@@ -78,7 +79,7 @@ export class WannabeDAOService {
         observer.next(this.watchlistPlayers);
       } else {
           this.setDraftOwner(this.cookieService.get('loginTeam'));
-          this.http.get(this.getWatchlistURL).subscribe((response: DraftedPlayerRecord[]) => {
+          this.http.get<DraftedPlayerRecord[]>(this.getWatchlistURL).subscribe((response: DraftedPlayerRecord[]) => {
           this.watchlistPlayers = response.filter(x => x.ownerName === this.draftOwner);
           this.fetchDraftedPlayers().subscribe((playerList: DraftedPlayerRecord[]) => {
             for (const watchedPlayer of this.watchlistPlayers) {
@@ -141,7 +142,7 @@ export class WannabeDAOService {
     return observable;
   }
 
-  public getRankingMap(response) {
+  public getRankingMap(response:any) {
     const rankingMap = new Map();
 
     for (const row of response) {
@@ -153,15 +154,19 @@ export class WannabeDAOService {
     return rankingMap;
   }
 
-  public getPlayerRating(playerRecord) {
+  public getPlayerRating(playerRecord:any) {
     const fantasyPoints = playerRecord.fantasyPoints;
     const position = playerRecord.position;
+    const eliteThreshold = this.playerRankings.get(position + 'ELITE');
+    const allProThreshold = this.playerRankings.get(position + 'ALL_PRO');
+    const starterThreshold = this.playerRankings.get(position + 'STARTER');
 
-    if (fantasyPoints >= this.playerRankings.get(position + 'ELITE')) {
+
+    if (eliteThreshold && fantasyPoints >= eliteThreshold) {
       return 'Elite';
-    } else if (fantasyPoints >= this.playerRankings.get(position + 'ALL_PRO')) {
+    } else if (allProThreshold && fantasyPoints >= allProThreshold) {
       return 'All Pro';
-    } else if (fantasyPoints >= this.playerRankings.get(position + 'STARTER')) {
+    } else if (starterThreshold && fantasyPoints >= starterThreshold) {
       return 'Starter';
     } else {
       return 'Bench';
@@ -203,8 +208,8 @@ export class WannabeDAOService {
 
 
   // Get players by position
-  public getPlayers(position): PlayerRecord[] {
-    const names = [];
+  public getPlayers(position:string): PlayerRecord[] {
+    const names:string[] = [];
 
     for (const player of this.draftedPlayers) {
       names.push(player.playerName);
@@ -220,7 +225,7 @@ export class WannabeDAOService {
   }
 
   // Get Drafted players
-  public getDraftedPlayers(teamName): DraftedPlayerRecord[] {
+  public getDraftedPlayers(teamName:string): DraftedPlayerRecord[] {
 
     if (teamName === 'all') {
       return this.draftedPlayers;
@@ -259,6 +264,7 @@ export class WannabeDAOService {
         return owner.teamName;
       }
     }
+    return "";
   }
 
   // Get remaining players to be drafted
@@ -281,7 +287,7 @@ export class WannabeDAOService {
       if (this.draftInfoInitialized) {
         observer.next(this.setupData.teams);
       } else {
-        this.http.get(this.getDraftInfoURL).subscribe((response: OwnerRecord[]) => {
+        this.http.get<OwnerRecord[]>(this.getDraftInfoURL).subscribe((response: OwnerRecord[]) => {
           this.setupData.teams = response;
           this.setupData.budget = response[0].budget;
           this.setupData.draftName = response[0].draftName;
@@ -333,12 +339,13 @@ public getAveCost(pick: number, position: string): number {
     });
     return returnVal;
   }
-  public undoLastSelection(): Observable<object> {
+
+  public undoLastSelection(): Observable<DraftedPlayerRecord[]> {
     const player = this.getLastPlayerDrafted();
 
     const jsonBody = JSON.stringify(player);
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', }) };
-    const observable = this.http.post(this.undoLastPickURL, jsonBody, httpOptions);
+    const observable = this.http.post<DraftedPlayerRecord[]>(this.undoLastPickURL, jsonBody, httpOptions);
 
     observable.subscribe((response: DraftedPlayerRecord[]) => {
       this.draftedPlayers = response;
@@ -356,12 +363,12 @@ public getAveCost(pick: number, position: string): number {
     return lastPlayer;
   }
 
-  public fetchDraftedPlayers(): Observable<object> {
+  public fetchDraftedPlayers(): Observable<DraftedPlayerRecord[]> {
     const returnVal = new Observable<DraftedPlayerRecord[]>(observer => {
       if (this.draftedPlayerListInitialized) {
         observer.next(this.draftedPlayers);
       } else {
-        this.http.get(this.getDraftedPlayersURL).subscribe((response: DraftedPlayerRecord[]) => {
+        this.http.get<DraftedPlayerRecord[]>(this.getDraftedPlayersURL).subscribe((response: DraftedPlayerRecord[]) => {
           this.draftedPlayers = response;
           observer.next(this.draftedPlayers);
         });
@@ -415,7 +422,7 @@ public getAveCost(pick: number, position: string): number {
     }
   }
   // get a specfic team record
-  public getTeamRecord(teamName): OwnerRecord {
+  public getTeamRecord(teamName: string): OwnerRecord {
     return this.owners.filter(owner => owner.teamName === teamName)[0];
   }
 

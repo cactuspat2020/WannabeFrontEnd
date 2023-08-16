@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     this.draftOwner = 'none';
     this.cookieService = cookieService;
     this.ngZone = ngZone;
-    this.auth_object = Auth;
+    // this.auth_object = Auth;
   }
 
   ngOnInit() {

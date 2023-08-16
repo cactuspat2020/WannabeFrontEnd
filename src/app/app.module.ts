@@ -1,63 +1,87 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http'; // replaces previous Http service
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'; // replaces previous Http service
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+// Stuff I imported
+// import  { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js'
+import { Amplify } from 'aws-amplify'
+import { CookieService } from 'ngx-cookie-service';
+import { DeviceDetectorService } from 'ngx-device-detector'
+import { IgxExcelExporterService } from "igniteui-angular"
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDialogModule } from '@angular/material/dialog';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { IgxExcelExporterService } from "igniteui-angular";
-import { IgxGridModule } from "igniteui-angular";
-import { ChartsModule } from 'ng2-charts';
-import { DeviceDetectorModule } from 'ngx-device-detector';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
-
-import { LoginComponent } from './components/login/login.component';
-import {LogoutComponent} from './components/logout/logout.component';
+// Stuff I built
+import { StatisticsService } from './services/statistics.service';
 import { WannabeDAOService } from './services/wannabe-dao.service';
-import { SetupComponent } from './components/setup/setup.component';
-import { RouterModule } from '@angular/router';
+import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
+import { MenuComponent } from './components/menu/menu.component';
 import { AuctionComponent } from './components/auction/auction.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { SetupComponent } from './components/setup/setup.component';
 import { PlayerSearchComponent } from './components/player-search/player-search.component';
 import { DraftSelectionsComponent } from './components/draft-selections/draft-selections.component';
 import { TeamStatisticsComponent } from './components/team-statistics/team-statistics.component';
 import { OwnerSummaryComponent } from './components/owner-summary/owner-summary.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { CookieService } from 'ngx-cookie-service';
 import { DialogSetupWarningDialog } from './components/setup/setup.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
-import { StatisticsService } from './services/statistics.service';
-import { WannabeCsvDAOService } from './services/wannabe-csv-dao.service';
 import { BudgetsComponent } from './components/budgets/budgets.component';
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-import Amplify from 'aws-amplify';
-import awsconfig from '../aws-exports';
 
-/* Configure Amplify resources */
-Amplify.configure(awsconfig);
+Amplify.configure({
+  Auth: {
+    region: 'us-west-2',
+    userPoolId: 'us-west-2_J11Utme53',
+    userPoolWebClientId: '6m8chq35fnokj8gq0dg2t0paem',
+    mandatorySignIn: false,
+    signUpVerificationMethod: 'code', // 'code' | 'link'
+    // cookieStorage: {
+    //   domain: '.wannabe-draft.org',
+    //   path: '/',
+    //   expires: 365,
+    //   sameSite: 'lax',
+    //   secure: false,
+    // },
+    oauth: {
+      domain: 'https://wannabe.auth.us-west-2.amazoncognito.com',
+      scope: [
+        'email'
+      ],
+      redirectSignIn: 'http://localhost/auction',
+      redirectSignOut: 'http://localhost/login',
+      responseType: 'code', // or 'token', note that REFRESH token wil0l only be generated when the responseType is code
+    },
+  },
+});
 
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent,
     LoginComponent,
+    AuctionComponent,
     LogoutComponent,
     SetupComponent,
     AuctionComponent,
@@ -72,16 +96,15 @@ Amplify.configure(awsconfig);
     BudgetsComponent,
   ],
   imports: [
-    AmplifyUIAngularModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    DragDropModule,
     FormsModule,
     ReactiveFormsModule,
-    DragDropModule,
+    HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule,
     MatDialogModule,
+    MatButtonModule,
     MatExpansionModule,
     MatAutocompleteModule,
     MatSortModule,
@@ -95,35 +118,17 @@ Amplify.configure(awsconfig);
     MatCardModule,
     MatToolbarModule,
     MatTabsModule,
-    MatSelectModule,
-    IgxGridModule,
-    ChartsModule,
-    DeviceDetectorModule.forRoot(),
-    RouterModule.forRoot([
-      { path: '', component: LoginComponent },
-      { path: 'setup', component: SetupComponent },
-      { path: 'auction', component: AuctionComponent },
-      { path: 'players', component: PlayerSearchComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'logout', component: LogoutComponent },
-      { path: 'status', component: DraftSelectionsComponent },
-      { path: 'stats', component: TeamStatisticsComponent },
-      { path: 'summary', component: OwnerSummaryComponent },
-      { path: 'budgets', component: BudgetsComponent },
-      // { path: 'owner', component: OwnerDraftedPlayersComponent },
-      { path: 'watchlist', component: WatchlistComponent },
-      { path: 'statistics', component: StatisticsComponent }
-    ],
-    {onSameUrlNavigation: 'reload'})
+    MatSelectModule
   ],
   providers: [
-    WannabeDAOService,
-    WannabeCsvDAOService,
-    IgxExcelExporterService,
+    // CognitoUserPool, AuthenticationDetails, CognitoUser,
     CookieService,
-    StatisticsService],
-  entryComponents: [DialogSetupWarningDialog],
+    IgxExcelExporterService,
+    DeviceDetectorService,
+    StatisticsService,
+    WannabeCsvDAOService, 
+    WannabeDAOService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

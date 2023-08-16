@@ -2,7 +2,7 @@ export class OwnerRecord {
   public ownerName: string;
   public teamName: string;
   public budget: number;
-  public draftOrder: number;
+  public draftOrder: number = 0;
   public isAdmin: boolean;
   public draftName: string;
   public hasCarryOver: boolean;

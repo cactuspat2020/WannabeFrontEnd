@@ -1,12 +1,12 @@
 export class DraftedPlayerRecord {
-  draftOrder: number;
-  position: string;
-  playerName: string;
-  NFLTeam: string;
-  byeWeek: number;
-  fantasyPoints: number;
-  ownerName: string;
-  price: number;
-  assessment: string;
-  watchList: string;
+  draftOrder: number = 0;
+  position: string ="";
+  playerName: string ="";
+  NFLTeam: string ="";
+  byeWeek: number = 0;
+  fantasyPoints: number = 0;
+  ownerName: string ="";
+  price: number = 0;
+  assessment: string ="";
+  watchList: string ="";
 }

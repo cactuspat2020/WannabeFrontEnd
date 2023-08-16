@@ -22,7 +22,8 @@
 // import 'classlist.js';  // Run `npm install --save classlist.js`.
 
 /** ES7 `Object.entries` needed for igxGrid to render in IE. */
-import 'core-js/es7/object';
+// import 'core-js/es7/object';
+// import 'core-js/es/object'
 
 /**
  * Web Animations `@angular/platform-browser/animations`

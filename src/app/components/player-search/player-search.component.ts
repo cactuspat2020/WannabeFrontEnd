@@ -117,6 +117,9 @@ export class PlayerSearchComponent implements OnInit {
 
   }
 
+  submit() {
+
+  }
   // Callback when keys are pressed on the table filter
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

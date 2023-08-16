@@ -3,21 +3,20 @@ import { WannabeDAOService } from './wannabe-dao.service';
 import { Observable } from 'rxjs';
 import { DraftedPlayerRecord } from '../models/draftedPlayerRecord';
 import { OwnerRecord } from '../models/ownerRecord';
-import { stringify } from '@angular/compiler/src/util';
 import { PlayerRecord } from '../models/playerRecord';
 
 
 export class Ranking {
-  teamName: string;
-  fantasyPoints: number;
+  teamName: string = "";
+  fantasyPoints: number = 0;
 }
 
 export class PlayersRemaining {
-  position: string;
-  elite: number;
-  allPro: number;
-  starter: number;
-  reserve: number;
+  position: string = "";
+  elite: number = 0;
+  allPro: number = 0;
+  starter: number = 0;
+  reserve: number = 0;
 }
 
 export function sortOnFantasy(a: DraftedPlayerRecord, b: DraftedPlayerRecord) {
@@ -31,10 +30,13 @@ export function sortOnFantasy(a: DraftedPlayerRecord, b: DraftedPlayerRecord) {
 })
 export class StatisticsService {
   wannabeDAO: WannabeDAOService;
+  DEF_NBR: number = 0;
+  DEF_STR: string = "";
 
   constructor(wannabeDAO: WannabeDAOService) {
     this.wannabeDAO = wannabeDAO;
   }
+  
 
   /*********************************************/
   /* Get team's ranking against the rest of the leaue
@@ -123,35 +125,70 @@ export class StatisticsService {
               if (QBs.length > 0) {
                 qbCount++;
                 teamMap.set('QB', QBs.map(x => x.fantasyPoints).reduce((sum, current) => sum + current) / QBs.length);
-                spiderData.get('averages').set('QB', (spiderData.get('averages').get('QB') + teamMap.get('QB')));
+                const averages = spiderData.get('averages')
+                if(averages) {
+                  const qb_averages = averages.get('QB');
+                  const team_qb = teamMap.get('QB')
+                  if(qb_averages && team_qb) {
+                    averages.set('QB', qb_averages + team_qb)
+                  }
+                }
               } else {
                 teamMap.set('QB', 0);
               }
               if (RBs.length > 0) {
                 rbCount++;
                 teamMap.set('RB', RBs.map(x => x.fantasyPoints).reduce((sum, current) => sum + current) / RBs.length);
-                spiderData.get('averages').set('RB', (spiderData.get('averages').get('RB') + teamMap.get('RB')));
+                const averages = spiderData.get('averages')
+                if(averages) {
+                  const rb_averages = averages.get('RB');
+                  const team_rb = teamMap.get('RB')
+                  if(rb_averages && team_rb) {
+                    averages.set('QB', rb_averages + team_rb)
+                  }
+                }
               } else {
                 teamMap.set('RB', 0);
               }
               if (rec.length > 0) {
                 recCount++;
                 teamMap.set('Rec', rec.map(x => x.fantasyPoints).reduce((sum, current) => sum + current) / rec.length);
-                spiderData.get('averages').set('Rec', (spiderData.get('averages').get('Rec') + teamMap.get('Rec')));
+                const averages = spiderData.get('averages')
+                if(averages) {
+                  const rec_averages = averages.get('Rec');
+                  const team_rec = teamMap.get('Rec')
+                  if(rec_averages && team_rec) {
+                    averages.set('Rec', rec_averages + team_rec)
+                  }
+                }
               } else {
                 teamMap.set('Rec', 0);
               }
               if (DSTs.length > 0) {
                 dstCount++;
                 teamMap.set('DST', DSTs.map(x => x.fantasyPoints).reduce((sum, current) => sum + current) / DSTs.length);
-                spiderData.get('averages').set('DST', (spiderData.get('averages').get('DST') + teamMap.get('DST')));
+                const averages = spiderData.get('averages')
+                if(averages) {
+                  const dst_averages = averages.get('DST');
+                  const team_dst = teamMap.get('DST')
+                  if(dst_averages && team_dst) {
+                    averages.set('DST', dst_averages + team_dst)
+                  }
+                }
               } else {
                 teamMap.set('DST', 0);
               }
               if (Ks.length > 0) {
                 kCount++;
                 teamMap.set('K', Ks.map(x => x.fantasyPoints).reduce((sum, current) => sum + current) / Ks.length);
-                spiderData.get('averages').set('K', (spiderData.get('averages').get('K') + teamMap.get('K')));
+                const averages = spiderData.get('averages')
+                if(averages) {
+                  const k_averages = averages.get('K');
+                  const team_k = teamMap.get('K')
+                  if(k_averages && team_k) {
+                    averages.set('K', k_averages + team_k)
+                  }
+                }
               } else {
                 teamMap.set('K', 0);
               }
@@ -169,16 +206,24 @@ export class StatisticsService {
             // Normalize All the data
             for (const team of Array.from(spiderData.keys())) {
               if (team !== 'averages') {
-                for (const position of Array.from(spiderData.get(team).keys())) {
-                  const positionValue = spiderData.get(team).get(position);
-                  const averageValue = spiderData.get('averages').get(position) / countMap.get(position);
-                  spiderData.get(team).set(position, positionValue / averageValue);
+                const team_data = spiderData.get(team);
+                const averages = spiderData.get('averages');
+                if (team_data && averages) {
+                  for (const position of Array.from(team_data.keys())) {
+                    const positionValue = team_data.get(position) || this.DEF_NBR;
+                    const averagePositionValue = averages.get(position) || this.DEF_NBR;
+                    const posCount = countMap.get(position) || this.DEF_NBR;
+                    const averageValue = averagePositionValue / posCount;
+
+                    team_data.set(position, positionValue / averageValue);
+                  }
                 }
               }
             }
             // Reset the normalized averages to 1
-            for (const position of Array.from(spiderData.get('averages').keys())) {
-              spiderData.get('averages').set(position, 1.0);
+            const averages = spiderData.get('averages') || new Map<string, number>()
+            for (const position of Array.from(averages.keys())) {
+              averages.set(position, 1.0);
             }
 
             observer.next(spiderData);
@@ -193,7 +238,7 @@ export class StatisticsService {
   /* get power ranking data
   /*********************************************/
   public getPowerRankings(startersOnly: boolean): Observable<any> {
-    const rankings = [];
+    const rankings: Ranking[] = [];
     const adder = startersOnly ? 0 : 1;
 
     const returnVal = new Observable(observer => {
