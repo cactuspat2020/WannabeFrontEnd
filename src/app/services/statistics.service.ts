@@ -109,7 +109,8 @@ export class StatisticsService {
             // Update the projected points with most recent statistics
             for (const player of draftedPlayers) {
               const updatedPlayer = allPlayers.filter(x => x.playerName === player.playerName)[0];
-              player.fantasyPoints = updatedPlayer.fantasyPoints;
+              if (updatedPlayer)
+                player.fantasyPoints = updatedPlayer.fantasyPoints;
             }
 
             for (const team of teams) {
@@ -250,7 +251,9 @@ export class StatisticsService {
             // Update the fantasy points with most recent statistics
             for (const player of draftedPlayers) {
               const updatedPlayer = allPlayers.filter(x => x.playerName === player.playerName)[0];
-              player.fantasyPoints = updatedPlayer.fantasyPoints;
+              if(updatedPlayer) {
+                player.fantasyPoints = updatedPlayer.fantasyPoints;
+              }
             }
 
             for (const team of teams) {

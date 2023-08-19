@@ -6,73 +6,66 @@
 <H3 style="padding-left: 20px">Draft Statistics</H3>
 
 <div align=center>
-<!--  <mat-card>-->
-<!--    <mat-card-title>-->
-      Players remaining by category
-<!--    </mat-card-title>-->
-<!--    <mat-card-content>-->
-      <div class="summaryStats">
-        <table class="mat-elevation-z8">
-          <tr>
-            <th class="stat-table">Pos</th>
-            <th class="stat-table">Elite</th>
-            <th class="stat-table">All-Pro</th>
-            <th class="stat-table">Starters</th>
-            <th class="stat-table">Reserves</th>
-          </tr>
-          <ng-container *ngFor="let pos of playerMapKeys">
-            <tr>
-              <td class="stat-table">{{playerMap.get(pos).position}}</td>
-              <td class="stat-table">{{playerMap.get(pos).elite}}</td>
-              <td class="stat-table">{{playerMap.get(pos).allPro}}</td>
-              <td class="stat-table">{{playerMap.get(pos).starter}}</td>
-              <td class="stat-table">{{playerMap.get(pos).reserve}}</td>
-            </tr>
-          </ng-container>
-        </table>
-      </div>
-<!--    </mat-card-content>-->
-<!--  </mat-card>-->
+  Players remaining by category
+  <div class="summaryStats">
+    <table class="mat-elevation-z8">
+      <tr>
+        <th class="stat-table">Pos</th>
+        <th class="stat-table">Elite</th>
+        <th class="stat-table">All-Pro</th>
+        <th class="stat-table">Starters</th>
+        <th class="stat-table">Reserves</th>
+      </tr>
+      <ng-container *ngFor="let pos of playerMapKeys">
+        <tr>
+          <td class="stat-table">{{playerMap.get(pos).position}}</td>
+          <td class="stat-table">{{playerMap.get(pos).elite}}</td>
+          <td class="stat-table">{{playerMap.get(pos).allPro}}</td>
+          <td class="stat-table">{{playerMap.get(pos).starter}}</td>
+          <td class="stat-table">{{playerMap.get(pos).reserve}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
 
-<!--  <mat-card>-->
-<!--    <mat-card-title>-->
   <B>Post-Draft Power Rankings</B>
-<!--    </mat-card-title>-->
-<!--    <mat-card-content>-->
-      <div align="center" padding-bottom="20px">
-          <select width=30% (change)="setStatScope()" [(ngModel)]="startersOnlySelection">
-            <option hidden [value]="" selected>Select Analysis Option</option>
-            <option value=true> Starters Only </option>
-            <option value=false> Starters + 1 Reserve per position </option>
-          </select>
-      </div>
-      <div class="barChart">
-        <canvas id="barChart"></canvas>
-      </div>
+  <div align="center" padding-bottom="20px">
+    <select width=30% (change)="setStatScope()" [(ngModel)]="startersOnlySelection">
+      <option hidden [value]="" selected>Select Analysis Option</option>
+      <option value=true> Starters Only </option>
+      <option value=false> Starters + 1 Reserve per position </option>
+    </select>
+  </div>
+  <div class="barChart">
+    <canvas 
+      baseChart 
+      [data]="barChartData" 
+      [options]="barChartOptions" 
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend" 
+      [type]="'bar'"
+      ></canvas>
 
-<!--    </mat-card-content>-->
-<!--  </mat-card>-->
+  </div>
 
-<!--  <mat-card>-->
-<!--    <mat-card-title>-->
   <B>Performance against the average</B>
-<!--    </mat-card-title>-->
-<!--    <mat-card-content>-->
-      <div>
-        <form #setupForm="ngForm" class="example-form">
-          <label for="position">Filter by Owner</label><br>
-          <select width=30% (change)="selectPlayers()" type="string" id="position"
-            [(ngModel)]="spiderTeamSelection" name="position" #position="ngModel">
-            <option value="all">---</option>
-            <option *ngFor="let team of teams">
-              {{team.teamName}}
-            </option>
-          </select>
-        </form>
-      </div>
-      <div class="spiderChart">
-        <canvas  id="spiderChart"></canvas>
-      </div>
-<!--    </mat-card-content>-->
-<!--  </mat-card>-->
+  <div>
+    <form #setupForm="ngForm" class="example-form">
+      <label for="position">Filter by Owner</label><br>
+      <select width=30% (change)="selectPlayers()" type="string" id="position" [(ngModel)]="spiderTeamSelection"
+        name="position" #position="ngModel">
+        <option value="all">---</option>
+        <option *ngFor="let team of teams">
+          {{team.teamName}}
+        </option>
+      </select>
+    </form>
+  </div>
+  <div class="spiderChart">
+    <canvas baseChart class="chart" 
+      [data]="radarChartData" 
+      [options]="radarChartOptions"
+      [type]="radarChartType">
+    </canvas>
+  </div>
 </div>

@@ -17,11 +17,11 @@ export interface DialogData {
   styleUrls: ['./setup.component.css']
 })
 export class SetupComponent implements OnInit {
-  draftData: SetupData = new SetupData('Initial', 200, 12, []);
+  draftData: SetupData = new SetupData('Initial', 200, 14, []);
   wannabeDAO: WannabeDAOService;
   router: Router;
   index: number;
-  draftOrderIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  draftOrderIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   selectorIndex = this.draftOrderIndex;
   dialog: MatDialog;
   isLoaded = false;

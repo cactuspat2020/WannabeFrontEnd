@@ -31,6 +31,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgChartsModule } from 'ng2-charts'
 
 // Stuff I built
 import { StatisticsService } from './services/statistics.service';
@@ -118,7 +119,8 @@ Amplify.configure({
     MatCardModule,
     MatToolbarModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    NgChartsModule
   ],
   providers: [
     // CognitoUserPool, AuthenticationDetails, CognitoUser,
