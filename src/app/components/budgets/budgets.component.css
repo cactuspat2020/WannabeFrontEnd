@@ -1,13 +1,13 @@
-.mat-table {
+.mat-mdc-table {
   border-bottom: darkgray;
   border-left: darkgray;
   border-right: darkgray;
 }
 
-tr.mat-row {
+tr.mat-mdc-row {
   height: 32px;
 }
-tr.mat-header-row {
+tr.mat-mdc-header-row {
   height: 32px;
 }
 .elite {
@@ -87,7 +87,7 @@ td {
   padding-right: 10px;
   text-align: left;
 }
-td.mat-header-cell {
+td.mat-mdc-header-cell {
   width: 30px;
   padding-left: 5px;
   text-align: center;
@@ -97,6 +97,6 @@ td.mat-header-cell {
 teamnames {
   text-align: left;
 }
-td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+td.mat-mdc-cell:first-of-type, td.mat-mdc-footer-cell:first-of-type, th.mat-mdc-header-cell:first-of-type {
    padding-left: 5px;
 }

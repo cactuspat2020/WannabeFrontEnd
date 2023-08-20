@@ -3,56 +3,28 @@
   margin-right: 8px;
 }
 
-.mat-background-primary {
-  ng-reflect-background-color: primary
-}
 
-.mat-tab-link {
+.mat-mdc-tab-link {
   min-width: 10px;
 }
 
-.material-icons {
+.mat-mdc-icons {
   font-size: 40px;
 }
 
 .ng-star-inserted-mobile {
   height: 64px;
   position: fixed;
-  z-index: 100;
-  /*width: 100%  !important;*/
 }
 .spacer {
   height:52px;
   background-color:white;
   position: fixed;
-  z-index: 90;
   width: 100%;
   padding-bottom: 20px;
 }
 .spacer2 {
   height:75px;
-  background-color:blue;
   position: fixed;
   width: 100%;
-}
-.mat-menu-item {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  outline: 0;
-  border: none;
-  -webkit-tap-highlight-color: transparent;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  line-height: 48px;
-  height: 48px;
-  padding: 0 16px;
-  text-align: left;
-  text-decoration: none;
-  max-width: 100%;
-  position: relative;
 }

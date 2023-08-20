@@ -17,15 +17,15 @@ h3 {
   margin-bottom: 30px;
 }
 
-mat-card {align-content: center}
-mat-card-title.testCard {page-break-after: always}
-mat-label.selectLabel {font-size: 20px}
+.mat-mdc-card {align-content: center}
+.mat-mdc-card-title.testCard {page-break-after: always}
+.mat-mdc-label.selectLabel {font-size: 20px}
 
-mat-select { page-break-after: always}
+.mat-mdc-select { page-break-after: always}
 
-mat-form-field {align-content: center}
+.mat-mdc-form-field {align-content: center}
 
-.mat-raised-button { margin-top: 30px}
+.mat-mdc-raised-button { margin-top: 30px}
 
 .password_msg {
   width: 80%;

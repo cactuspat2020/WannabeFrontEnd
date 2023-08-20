@@ -42,6 +42,15 @@ export class StatisticsComponent implements OnInit {
   public radarChartLabels = [];
   public radarChartOptions: ChartConfiguration['options'] = {
     responsive: true,
+     scales: {
+        r: {
+            suggestedMax: 1.2,
+            suggestedMin: 0,
+            ticks: {
+                stepSize: 0.2
+            }
+        }
+    }
   };
 
   constructor(stasticsService: StatisticsService, wannabe: WannabeDAOService) {

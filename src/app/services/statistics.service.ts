@@ -130,9 +130,7 @@ export class StatisticsService {
                 if(averages) {
                   const qb_averages = averages.get('QB');
                   const team_qb = teamMap.get('QB')
-                  if(qb_averages && team_qb) {
-                    averages.set('QB', qb_averages + team_qb)
-                  }
+                  averages.set('QB', qb_averages + team_qb)
                 }
               } else {
                 teamMap.set('QB', 0);
@@ -144,9 +142,7 @@ export class StatisticsService {
                 if(averages) {
                   const rb_averages = averages.get('RB');
                   const team_rb = teamMap.get('RB')
-                  if(rb_averages && team_rb) {
-                    averages.set('QB', rb_averages + team_rb)
-                  }
+                  averages.set('RB', rb_averages + team_rb)
                 }
               } else {
                 teamMap.set('RB', 0);
@@ -158,9 +154,7 @@ export class StatisticsService {
                 if(averages) {
                   const rec_averages = averages.get('Rec');
                   const team_rec = teamMap.get('Rec')
-                  if(rec_averages && team_rec) {
-                    averages.set('Rec', rec_averages + team_rec)
-                  }
+                  averages.set('Rec', rec_averages + team_rec)
                 }
               } else {
                 teamMap.set('Rec', 0);
@@ -172,9 +166,7 @@ export class StatisticsService {
                 if(averages) {
                   const dst_averages = averages.get('DST');
                   const team_dst = teamMap.get('DST')
-                  if(dst_averages && team_dst) {
-                    averages.set('DST', dst_averages + team_dst)
-                  }
+                  averages.set('DST', dst_averages + team_dst)
                 }
               } else {
                 teamMap.set('DST', 0);
@@ -186,9 +178,7 @@ export class StatisticsService {
                 if(averages) {
                   const k_averages = averages.get('K');
                   const team_k = teamMap.get('K')
-                  if(k_averages && team_k) {
-                    averages.set('K', k_averages + team_k)
-                  }
+                  averages.set('K', k_averages + team_k)
                 }
               } else {
                 teamMap.set('K', 0);

@@ -9,7 +9,7 @@ select.form-control {
   padding-right: 10px;
 
 }
-.mat-table {
+.mat-mdc-table {
   border-bottom: darkgray;
 }
 
@@ -64,10 +64,10 @@ select.form-control {
 .defense {
   background: cyan;
 }
-tr.mat-row {
+tr.mat-mdc-row {
   height: 32px;
 }
-tr.mat-header-row {
+tr.mat-mdc-header-row {
   height: 32px;
 }
 .table-container {
@@ -86,11 +86,11 @@ tr.mat-header-row {
   margin-bottom: 40px;
 }
 
-.mat-table-sticky-border-elem-right {
+.mat-mdc-table-sticky-border-elem-right {
   border-left: 1px solid #e0e0e0;
 }
 
-.mat-table-sticky-border-elem-left {
+.mat-mdc-table-sticky-border-elem-left {
   border-right: 2px solid #e0e0e0;
 }
 
