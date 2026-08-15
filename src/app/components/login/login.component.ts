@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
           console.log('user signed in');
           Auth.currentUserPoolUser().then(
             authEntity => {
-              const ownerRecord = this.teams.filter(name => (name.teamName.toLowerCase().split(' ').join('_') == authEntity.username));
+              const ownerRecord = this.teams.filter(name => (name.teamName.toLowerCase().split(' ').join('_') == authEntity.username.toLowerCase()));
               if (ownerRecord) {
                 this.draftOwner = ownerRecord[0].teamName;
                 this.wannabeDAO.setDraftOwner(this.draftOwner);

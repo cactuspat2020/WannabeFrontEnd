@@ -36,8 +36,8 @@ export class PlayerSearchComponent implements OnInit {
 
   // Table Variables
   dataSource = new MatTableDataSource(this.playerList);
-  displayedColumns: string[] = ['position', 'playerName', 'NFLTeam', 'fantasyPoints',
-    'percentOwn', 'percentStart', 'byeWeek', 'assessment', 'cost'];
+  displayedColumns: string[] = ['rank', 'position', 'playerName', 'NFLTeam', 'fantasyPoints',
+    'cost', 'byeWeek', 'assessment' ];
 
   limitedDisplayColumns: string[] = ['position', 'playerName', 'NFLTeam', 'byeWeek' ];
   constructor(wannabeDAO: WannabeDAOService) {

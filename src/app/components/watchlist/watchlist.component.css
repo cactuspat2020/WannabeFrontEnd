@@ -1,8 +1,8 @@
-td.mat-mdc-cell {
-  padding-right: 20px;
-}
 .td.player-column {
-  column-width: 190px;
+  column-width: 1090px;
+}
+.td.assessment-column {
+  column-width: 300px;
 }
 table {
   margin-bottom: 30px;
@@ -23,39 +23,19 @@ tr.mat-mdc-row {
 tr.mat-mdc-header-row {
   height: 32px;
 }
-.table-container {
-  max-width: 700px;
-  max-height: 480px;
-  overflow: auto;
-}
-.td.mat-mdc-cell {
-  padding-left: 10px;
-}
 td.mat-mdc-cell:first-of-type, td.mat-mdc-footer-cell:first-of-type, th.mat-mdc-header-cell:first-of-type {
-  padding-left: 10px;
+  padding-left: 8px;
 }
 td.mat-mdc-cell:first-of-type {
-  padding-left: 10px;
+  padding-left: 8px;
 }
 
 th.mat-mdc-header-cell {
   padding-left: 0px;
 }
 
-.highlight{
-  background: antiquewhite;
-}
-h4 {
-  margin-bottom: 40px;
-}
-tr.mat-mdc-row {
-  height: 32px;
-}
-tr.mat-mdc-header-row {
-  height: 32px;
-}
 .table-container {
-  max-width: 700px;
+  max-width: 800px;
   max-height: 500px;
   overflow: auto;
 }
@@ -71,17 +51,3 @@ tr.mat-mdc-header-row {
 .table-overrides {
   line-height: 14px;
 }
-
-/* .example-form {
-  height: 50px;
-  font-size: x-small;
-  padding-top: 0px;
-  padding-left: 0px;
-  border: 11px;
-  mat-input {
-    padding-left: 0px;
-  }
-
-  background-color: white;
-  color: white;
-} */

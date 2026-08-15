@@ -7,6 +7,7 @@ import { OwnerRecord } from 'src/app/models/ownerRecord';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/components/login/login.component';
+import { TmplAstDeferredBlockError } from '@angular/compiler';
 
 export interface DialogData {
   proceedWithSetup: boolean;
@@ -106,11 +107,16 @@ export class SetupComponent implements OnInit {
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.draftData.teams, event.previousIndex, event.currentIndex);
-    let index = 1;
-    this.draftData.teams.forEach((value) => {
-      value.draftOrder = index;
-      index++;
-    });
+    // let index = 1;
+    // this.draftData.teams.forEach((value) => {
+    //   value.draftOrder = index;
+    //   index++;
+    // });
+    // let tmp = this.draftData.teams;
+    // this.draftData.teams = [];
+    // tmp.forEach((value) => {
+    //   this.draftData.teams.push(value)
+    // });
   }
 }
 

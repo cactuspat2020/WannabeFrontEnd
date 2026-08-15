@@ -71,7 +71,7 @@ tr.mat-mdc-header-row {
   height: 32px;
 }
 .table-container {
-  max-width: 560px;
+  max-width: 750px;
   /*max-height: 500px;*/
   overflow: auto;
   margin-bottom: 40px;

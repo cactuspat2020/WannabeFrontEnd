@@ -130,6 +130,15 @@ export class WannabeCsvDAOService {
     return returnVal;
   }
 
+  public getRanking(rankingMap:Map<string, number>, pos:string) {
+    if(rankingMap.has(pos)) {
+      const ranking = rankingMap.get(pos) + 1
+      rankingMap.set(pos, ranking)
+    } else {
+      rankingMap.set(pos,1)
+    }
+    return rankingMap.get(pos);
+  }
   /**
    * Parses the player records from Kickers, Offense and Defense CSV files.
    * @param data - the full set of records loaded from the textfile.
@@ -139,6 +148,8 @@ export class WannabeCsvDAOService {
   const defenses: string[] = data.split('\n');
 
   let rowCount = 0;
+  const rankings: Map<string,number> = new Map()
+
   for (const row of defenses) {
     if (rowCount > 2 && rowCount < defenses.length - 2) {
 
@@ -159,7 +170,7 @@ export class WannabeCsvDAOService {
         fantasyPoints: +elements[elements.length - 1],
         assessment: ' ',
         costEstimate: 0,
-        rank: 0
+        rank: this.getRanking(rankings, pos)
       };
       records.push(playerRecord);
     }

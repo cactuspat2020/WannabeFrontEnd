@@ -54,8 +54,8 @@ import { BudgetsComponent } from './components/budgets/budgets.component';
 Amplify.configure({
   Auth: {
     region: 'us-west-2',
-    userPoolId: 'us-west-2_J11Utme53',
-    userPoolWebClientId: '6m8chq35fnokj8gq0dg2t0paem',
+    userPoolId: 'us-west-2_1z7mDB9Q9',
+    userPoolWebClientId: 'ik3geu8ffneimt3u3q8tdc8hd',
     mandatorySignIn: false,
     signUpVerificationMethod: 'code', // 'code' | 'link'
     // cookieStorage: {

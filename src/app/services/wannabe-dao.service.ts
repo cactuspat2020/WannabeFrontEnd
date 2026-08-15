@@ -23,19 +23,19 @@ export class WannabeDAOService {
   http: HttpClient;
   csvDaoService: WannabeCsvDAOService;
   cookieService: CookieService;
-  baseURL = 'https://u4oe9qvb4k.execute-api.us-west-2.amazonaws.com/default/';
-  getPlayersURL = this.baseURL + 'getPlayers';
-  getDraftInfoURL = this.baseURL + 'getDraftInfo';
-  getDraftedPlayersURL = this.baseURL + 'getDraftedPlayers';
-  getPlayerRankingsURL = this.baseURL + 'getPlayerRankings';
-  saveDraftInfoURL = this.baseURL + 'saveDraftInfo';
-  saveDraftPickURL = this.baseURL + 'saveDraftPick';
-  undoLastPickURL = this.baseURL + 'undoLastPick';
-  saveWatchlistPlayerURL = this.baseURL + 'saveWatchlistPlayer';
-  deleteWatchPlayerURL = this.baseURL + 'deleteWatchlistPlayer';
-  getWatchlistURL = this.baseURL + 'getWatchlists';
+  baseURL = 'https://njvg4ick3k.execute-api.us-west-2.amazonaws.com/Prod/';
+  getPlayersURL = this.baseURL + 'players';
+  getDraftInfoURL = this.baseURL + 'draft/info';
+  getDraftedPlayersURL = this.baseURL + 'draft/players';
+  getPlayerRankingsURL = this.baseURL + 'players/rankings';
+  saveDraftInfoURL = this.baseURL + 'draft/info';
+  saveDraftPickURL = this.baseURL + 'draft/pick';
+  undoLastPickURL = this.baseURL + 'draft/undo';
+  saveWatchlistPlayerURL = this.baseURL + 'watchlist/player';
+  deleteWatchPlayerURL = this.baseURL + 'watchlist/player/delete';
+  getWatchlistURL = this.baseURL + 'watchlists';
   auditURL = this.baseURL + 'audit';
-  getAveragePlayercostURL = this.baseURL + 'getAveragePlayerCost';
+  getAveragePlayercostURL = this.baseURL + 'players/averagecost';
 
   fullPlayerListInitialized = false;
   draftedPlayerListInitialized = false;
@@ -299,7 +299,7 @@ export class WannabeDAOService {
       }
     });
     this.carryOverCount = this.owners.filter(x => x.hasCarryOver === true).length;
-    this.http.post(this.auditURL, '{"owner":"Gunslingers","page","Auction"}', {});
+    this.http.post(this.auditURL, '{"owner":"Gunslingers","page":"Auction"}', {});
 
     return returnVal;
   }

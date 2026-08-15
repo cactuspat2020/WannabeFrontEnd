@@ -32,6 +32,12 @@
             <table mat-table [dataSource]="dataSource" matSort matSortActive="fantasyPoints" matSortDirection="desc"
                    class="mat-elevation-z8 table-overrides">
 
+              <!-- Rank Column -->
+              <ng-container class="rank-column" matColumnDef="rank" sticky>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Rnk</th>
+                <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+              </ng-container>
+
               <!-- Position Column -->
               <ng-container class="position-column" matColumnDef="position" sticky>
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Pos</th>
@@ -44,31 +50,31 @@
                 <td mat-cell *matCellDef="let element"> {{element.playerName}} </td>
               </ng-container>
 
-              <!-- Weight Column -->
+              <!-- Team Column -->
               <ng-container matColumnDef="NFLTeam">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> NFLTeam</th>
                 <td mat-cell *matCellDef="let element"> {{element.NFLTeam}} </td>
               </ng-container>
 
-              <!-- Name Column -->
+              <!-- % Start Column -->
               <ng-container matColumnDef="percentStart">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> % Start</th>
                 <td mat-cell *matCellDef="let element"> {{element.percentStart}} </td>
               </ng-container>
 
-              <!-- Name Column -->
+              <!-- % Own Column -->
               <ng-container matColumnDef="percentOwn">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> % Own</th>
                 <td mat-cell *matCellDef="let element"> {{element.percentOwn}} </td>
               </ng-container>
 
-              <!-- Name Column -->
+              <!-- Bye Week Column -->
               <ng-container matColumnDef="byeWeek">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Bye Week</th>
                 <td mat-cell *matCellDef="let element"> {{element.byeWeek}} </td>
               </ng-container>
 
-              <!-- Symbol Column -->
+              <!-- Points Column -->
               <ng-container matColumnDef="fantasyPoints">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Points</th>
                 <td mat-cell *matCellDef="let element"> {{element.fantasyPoints}} </td>
