@@ -47,7 +47,9 @@
         <br>
         <a (click)="undoLastSelection()">Undo last selection</a>
 
-        <mat-label [(ngModel)]="statusMessage" name="statusLable" ngDefaultControl></mat-label>
+        <div *ngIf="statusMessage" style="color: #b00020; font-weight: 600; margin-top: 12px;">
+          {{statusMessage}}
+        </div>
         <br>
       </div>
 

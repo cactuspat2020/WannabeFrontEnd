@@ -51,7 +51,7 @@ export class WannabeDAOService {
   watchlistPlayers: DraftedPlayerRecord[] = [];
   owners: OwnerRecord[] = [];
   averagePlayerCost: AveragePlayerCost[] = [];
-  setupData: SetupData = new SetupData(' ', 0, 0, []);
+  setupData: SetupData = new SetupData(' ', 0, 0, 14, []);
   bidCount = 0;
   draftOwner: string = "";
   ROUNDS = 14;
@@ -239,6 +239,7 @@ export class WannabeDAOService {
     let amountSpent = 0;
     let playerCount = 0;
     const ownerRecord: OwnerRecord = this.owners.filter(owner => owner.teamName === teamName)[0];
+    const rosterSize = this.getRosterSize();
 
     for (const player of this.draftedPlayers) {
       if (player.ownerName === teamName) {
@@ -247,7 +248,7 @@ export class WannabeDAOService {
       }
     }
 
-    const neededReserve = playerCount === this.ROUNDS ? 0 : this.ROUNDS - (playerCount + 1);
+    const neededReserve = playerCount === rosterSize ? 0 : rosterSize - (playerCount + 1);
     const remainingBudget = ownerRecord.budget - amountSpent - neededReserve;
     return remainingBudget;
   }
@@ -269,7 +270,7 @@ export class WannabeDAOService {
 
   // Get remaining players to be drafted
   public getRemainingPlayerCount(): number {
-    const totalPlayersToDraft = this.owners.length * this.ROUNDS;
+    const totalPlayersToDraft = this.owners.length * this.getRosterSize();
     return totalPlayersToDraft - this.draftedPlayers.length;
   }
   // Get Current Round
@@ -292,6 +293,7 @@ export class WannabeDAOService {
           this.setupData.budget = response[0].budget;
           this.setupData.draftName = response[0].draftName;
           this.setupData.leagueSize = response.length;
+          this.setupData.rosterSize = this.getRosterSize();
           this.owners = response;
           this.draftInfoInitialized = true;
           observer.next(this.setupData.teams);
@@ -436,9 +438,25 @@ public getAveCost(pick: number, position: string): number {
     return this.setupData;
   }
 
+  public getRosterSize(): number {
+    const rosterSize = Number(this.setupData?.rosterSize ?? this.ROUNDS);
+    if (!Number.isFinite(rosterSize) || rosterSize < 1) {
+      return this.ROUNDS;
+    }
+    this.ROUNDS = rosterSize;
+    return rosterSize;
+  }
+
+  public setRosterSize(rosterSize: number) {
+    const normalizedSize = Number(rosterSize);
+    this.ROUNDS = Number.isFinite(normalizedSize) && normalizedSize > 0 ? normalizedSize : this.ROUNDS;
+    this.setupData.rosterSize = this.ROUNDS;
+  }
+
   public storeSetupData(data: SetupData): Observable<any> {
     const jsonBody = JSON.stringify(data);
     this.setupData = data;
+    this.setRosterSize(Number(data.rosterSize) > 0 ? Number(data.rosterSize) : this.ROUNDS);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

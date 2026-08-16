@@ -18,7 +18,7 @@ export interface DialogData {
   styleUrls: ['./setup.component.css']
 })
 export class SetupComponent implements OnInit {
-  draftData: SetupData = new SetupData('Initial', 200, 14, []);
+  draftData: SetupData = new SetupData('Initial', 200, 14, 14, []);
   wannabeDAO: WannabeDAOService;
   router: Router;
   index: number;
@@ -48,6 +48,7 @@ export class SetupComponent implements OnInit {
   }
   submit() {
     this.draftData.teams = this.draftData.teams.slice(0, this.draftData.leagueSize);
+    this.wannabeDAO.setRosterSize(this.draftData.rosterSize);
     this.wannabeDAO.storeSetupData(this.draftData).subscribe(
       next => { },
       response => {
@@ -100,6 +101,7 @@ export class SetupComponent implements OnInit {
         this.draftData.budget = response[0].budget;
         this.draftData.leagueSize = response.length;
         this.draftData.draftName = response[0].draftName;
+        this.draftData.rosterSize = this.wannabeDAO.getRosterSize() || 14;
         this.isLoaded = true;
       }
     });

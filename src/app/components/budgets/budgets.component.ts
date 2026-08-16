@@ -132,7 +132,8 @@ export class BudgetsComponent implements OnInit {
 
     owners.forEach(owner => {
       const record = this.draftMap.get(owner);
-      const maxBid = record.remainingBudget - Math.max(0, (this.wannabeDAO.ROUNDS - record.totalDraftedPlayers - 1));
+      const rosterSize = this.wannabeDAO.getRosterSize();
+      const maxBid = record.remainingBudget - Math.max(0, (rosterSize - record.totalDraftedPlayers - 1));
 
       this.budgetTable.push({
         team: this.adjustOwnerNameForMobile(owner),

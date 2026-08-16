@@ -33,7 +33,7 @@ export class AuctionComponent implements OnInit {
   teams: OwnerRecord[] = [];
   positionSelection: string = "";
   maxBid = 0;
-  statusMessage = 'Initializing...';
+  statusMessage = '';
   isLoaded = false;
 
   // AutoSelect Configurations
@@ -129,16 +129,40 @@ export class AuctionComponent implements OnInit {
 
   }
   submit() {
+    this.statusMessage = '';
+
+    if (!this.selectedPlayer || !this.selectedTeam) {
+      this.statusMessage = 'Please select both a player and a team before submitting a bid.';
+      return;
+    }
+
+    const teamName = this.selectedTeam.teamName;
+    const bidAmount = Number(this.currentBid);
+    const maxBid = this.wannabeDAO.getMaxBid(teamName);
+
+    if (!Number.isFinite(bidAmount) || bidAmount <= 0) {
+      this.statusMessage = 'Please enter a valid bid amount.';
+      return;
+    }
+
+    if (bidAmount > maxBid) {
+      this.statusMessage = 'Bid exceeds max bid for ' + teamName + '. Maximum allowed is $' + maxBid + '.';
+      this.maxBid = maxBid;
+      return;
+    }
+
     const draftedPlayer = new DraftedPlayerRecord();
     const record = this.selectedPlayer;
 
-    draftedPlayer.price = Number(this.currentBid);
-    draftedPlayer.ownerName = this.selectedTeam.teamName;
+    draftedPlayer.price = bidAmount;
+    draftedPlayer.ownerName = teamName;
     draftedPlayer.playerName = record.playerName;
     draftedPlayer.NFLTeam = record.NFLTeam;
     draftedPlayer.byeWeek = record.byeWeek;
     draftedPlayer.fantasyPoints = record.fantasyPoints;
     draftedPlayer.position = record.position;
+
+    this.statusMessage = 'Submitting bid...';
 
     this.wannabeDAO.storeDraftPick(draftedPlayer).subscribe(
       next => { },
@@ -152,6 +176,7 @@ export class AuctionComponent implements OnInit {
         this.currentBid = '';
         this.selectedPlayer = '';
         this.selectedTeam = '';
+        this.statusMessage = 'Bid submitted successfully.';
         console.log('Success in action');
         this.dataSource = new MatTableDataSource(this.playerList);
         this.onTheClock = this.wannabeDAO.getOnTheClock();

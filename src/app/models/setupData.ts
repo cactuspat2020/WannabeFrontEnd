@@ -6,6 +6,7 @@ export class SetupData {
     public draftName: string = "",
     public budget: number = 0,
     public leagueSize: number = 0,
+    public rosterSize: number = 14,
     public teams: OwnerRecord[] = []
   ) { }
 }

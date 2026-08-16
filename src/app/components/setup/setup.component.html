@@ -15,6 +15,10 @@
       <input type="text" width=80px class="form-control budget-width" id="budget" [(ngModel)]="draftData.budget"
              name="budget" #budget="ngModel"><br>
 
+      <b>Roster Size<br></b>
+      <input type="number" min="1" class="form-control budget-width" id="rosterSize"
+             [(ngModel)]="draftData.rosterSize" name="rosterSize" #rosterSize="ngModel"><br>
+
       <!-- <label for="leagueSize">League Size</label><br> -->
       <b>League Size<br></b>
       <select (change)="changeLeagueSize()" type="number" class="form-control league-size-width" id="leagueSize"

@@ -96,7 +96,7 @@ export class OwnerSummaryComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.playerList);
           this.dataSource.sort = this.sort;
           this.owner = this.wannabeDAO.getDraftOwner();
-          this.PlayersTakenLabel = this.wannabeDAO.getDraftedPlayers(this.owner).length + ' of ' + this.wannabeDAO.ROUNDS;
+          this.PlayersTakenLabel = this.wannabeDAO.getDraftedPlayers(this.owner).length + ' of ' + this.wannabeDAO.getRosterSize();
           this.maxBid = this.wannabeDAO.getMaxBid(this.owner);
 
           // Finaly get the drafted players and generate the summary.
