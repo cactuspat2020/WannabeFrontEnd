@@ -74,7 +74,7 @@ export class DraftSelectionsComponent implements OnInit {
         this.draftedPlayers = response;
         this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
           this.teams = response2;
-          this.totalCount = response2.length * 15;
+          this.totalCount = response2.length * this.wannabeDAO.ROUNDS;
           this.selectedCount = this.draftedPlayers.length;
           this.dataSource = new MatTableDataSource(this.draftedPlayers);
           this.dataSource.sort = this.sort;
@@ -86,7 +86,7 @@ export class DraftSelectionsComponent implements OnInit {
   selectPlayers() {
     this.draftedPlayers = this.wannabeDAO.getDraftedPlayers(this.playerFilter);
     this.selectedCount = this.draftedPlayers.length;
-    this.totalCount = this.playerFilter === 'all' ? this.teams.length * 15 : 15;
+    this.totalCount = this.playerFilter === 'all' ? this.teams.length * this.wannabeDAO.ROUNDS : this.wannabeDAO.ROUNDS;
     this.dataSource = new MatTableDataSource(this.draftedPlayers);
     this.dataSource.sort = this.sort;
     if ( this.playerFilter !== 'all') {

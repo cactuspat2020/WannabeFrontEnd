@@ -54,7 +54,7 @@ export class WannabeDAOService {
   setupData: SetupData = new SetupData(' ', 0, 0, []);
   bidCount = 0;
   draftOwner: string = "";
-  ROUNDS = 15;
+  ROUNDS = 14;
   carryOverCount = 0;
 
   constructor(private httpClient: HttpClient, csvService: WannabeCsvDAOService, cookieService: CookieService) {
