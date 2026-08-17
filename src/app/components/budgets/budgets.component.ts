@@ -91,6 +91,8 @@ export class BudgetsComponent implements OnInit {
     ratingMap.set('Bench', 1);
     ratingMap.set('none', 0);
 
+    this.draftMap.clear();
+
     // Initialize the draftMap by creating empty records for each team
     this.teams.forEach(team => {
       const positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DST'];
@@ -106,10 +108,20 @@ export class BudgetsComponent implements OnInit {
     // evaluate each drafted player
     this.draftedPlayers.forEach(player => {
       const ownerDraftStatus = this.draftMap.get(player.ownerName);
+      if (!ownerDraftStatus) {
+        console.warn('Skipping drafted player for unknown owner:', player.ownerName, player.playerName);
+        return;
+      }
+
       ownerDraftStatus.remainingBudget -= player.price;
       ownerDraftStatus.totalDraftedPlayers++;
 
       const draftStatus = ownerDraftStatus.positions.get(player.position);
+      if (!draftStatus) {
+        console.warn('Skipping drafted player for unknown position:', player.position, player.playerName);
+        return;
+      }
+
       draftStatus.playerCount++;
 
       console.log('getting player Rating for ' + player.playerName);
@@ -132,6 +144,10 @@ export class BudgetsComponent implements OnInit {
 
     owners.forEach(owner => {
       const record = this.draftMap.get(owner);
+      if (!record) {
+        return;
+      }
+
       const rosterSize = this.wannabeDAO.getRosterSize();
       const maxBid = record.remainingBudget - Math.max(0, (rosterSize - record.totalDraftedPlayers - 1));
 

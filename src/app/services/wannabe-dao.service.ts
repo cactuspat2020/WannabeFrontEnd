@@ -255,8 +255,9 @@ export class WannabeDAOService {
 
   // Get team that's on the clock
   public getOnTheClock(): string {
-    var currentIndex = this.draftedPlayers.length % this.owners.length + 1 - this.carryOverCount;
-    if (currentIndex < 1 ) {
+    const actualDraftPicks = Math.max(this.draftedPlayers.length - this.carryOverCount, 0);
+    let currentIndex = (actualDraftPicks % this.owners.length) + 1;
+    if (currentIndex < 1) {
       currentIndex = 1;
     }
 
@@ -270,12 +271,13 @@ export class WannabeDAOService {
 
   // Get remaining players to be drafted
   public getRemainingPlayerCount(): number {
-    const totalPlayersToDraft = this.owners.length * this.getRosterSize();
-    return totalPlayersToDraft - this.draftedPlayers.length;
+    const totalPlayersToDraft = (this.owners.length * this.getRosterSize()) - this.carryOverCount;
+    return Math.max(totalPlayersToDraft - this.draftedPlayers.length, 0);
   }
   // Get Current Round
   public getRound(): number {
-    return Math.ceil((this.draftedPlayers.length + 1) / this.owners.length);
+    const actualDraftPicks = Math.max(this.draftedPlayers.length - this.carryOverCount, 0);
+    return Math.max(1, Math.ceil((actualDraftPicks + 1) / this.owners.length));
   }
 
   // Get all the teams for the draft
