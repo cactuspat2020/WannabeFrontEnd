@@ -45,6 +45,7 @@ export class PlayerSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.wannabeDAO.draftDataUpdated$.subscribe(() => this.refresh());
     this.wannabeDAO.fetchPlayers().subscribe(playerList => {
       this.wannabeDAO.draftedPlayerListInitialized = false;
       this.wannabeDAO.fetchDraftedPlayers().subscribe((draftedPlayers: DraftedPlayerRecord[]) => {
@@ -55,7 +56,6 @@ export class PlayerSearchComponent implements OnInit {
         this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
           this.teams = response2;
           this.initVariables();
-          // this.assessCosts();
         });
       });
     });
@@ -63,7 +63,19 @@ export class PlayerSearchComponent implements OnInit {
   }
 
   refresh() {
-    this.ngOnInit();
+    this.wannabeDAO.fetchPlayers().subscribe(playerList => {
+      this.wannabeDAO.draftedPlayerListInitialized = false;
+      this.wannabeDAO.fetchDraftedPlayers().subscribe((draftedPlayers: DraftedPlayerRecord[]) => {
+        for (const player of draftedPlayers) {
+          playerList = playerList.filter(x => x.playerName !== player.playerName);
+        }
+        this.playerList = playerList;
+        this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
+          this.teams = response2;
+          this.initVariables();
+        });
+      });
+    });
   }
   private initVariables() {
     this.playerFilteredOptions = this.playerControl.valueChanges

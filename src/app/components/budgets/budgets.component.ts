@@ -35,6 +35,8 @@ export class BudgetsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.wannabeDAO.draftDataUpdated$.subscribe(() => this.refresh());
+
     if (this.wannabeDAO.dataAvalable()) {
       this.draftedPlayers = this.wannabeDAO.getDraftedPlayers('all');
       this.teams = this.wannabeDAO.getTeams();

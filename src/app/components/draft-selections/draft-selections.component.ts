@@ -39,32 +39,22 @@ export class DraftSelectionsComponent implements OnInit {
     this.excelExportService = excelExportService;
   }
   ngOnInit() {
+    this.wannabeDAO.draftDataUpdated$.subscribe(() => this.refresh());
+
     if (this.wannabeDAO.dataAvalable() ) {
-      // this.draftedPlayers = this.wannabeDAO.getDraftedPlayers('all');
       this.teams = this.wannabeDAO.getTeams();
       this.isLoaded = true;
-      // this.totalCount = this.teams.length * 15;
-      // this.selectedCount = this.draftedPlayers.length;
-      // this.dataSource = new MatTableDataSource(this.draftedPlayers);
-      // this.dataSource.sort = this.sort;
-      // this.budgetMessage = '-';
       this.selectPlayers();
     } else {
-        // this.fetchData();
-        this.wannabeDAO.fetchDraftedPlayers()
-        .subscribe((response: DraftedPlayerRecord[]) => {
-          this.draftedPlayers = response;
-          this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
-            this.teams = response2;
-            this.isLoaded = true;
-            // this.totalCount = response2.length * 15;
-            // this.selectedCount = this.draftedPlayers.length;
-            // this.dataSource = new MatTableDataSource(this.draftedPlayers);
-            // this.dataSource.sort = this.sort;
-            // this.budgetMessage = '-';
-            this.selectPlayers();
-          });
+      this.wannabeDAO.fetchDraftedPlayers()
+      .subscribe((response: DraftedPlayerRecord[]) => {
+        this.draftedPlayers = response;
+        this.wannabeDAO.fetchTeams().subscribe((response2: OwnerRecord[]) => {
+          this.teams = response2;
+          this.isLoaded = true;
+          this.selectPlayers();
         });
+      });
     }
     this.wannabeDAO.storeAuditRecord('Draft Results');
   }

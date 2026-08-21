@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, range } from 'rxjs';
+import { Observable, Subject, Subscription, interval } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { PlayerRecord } from '../models/playerRecord';
 import { OwnerRecord } from '../models/ownerRecord';
@@ -23,7 +23,8 @@ export class WannabeDAOService {
   http: HttpClient;
   csvDaoService: WannabeCsvDAOService;
   cookieService: CookieService;
-  baseURL = 'https://njvg4ick3k.execute-api.us-west-2.amazonaws.com/Prod/';
+
+  baseURL = 'https://3ua86t0df1.execute-api.us-west-2.amazonaws.com/Prod/';
   getPlayersURL = this.baseURL + 'players';
   getDraftInfoURL = this.baseURL + 'draft/info';
   getDraftedPlayersURL = this.baseURL + 'draft/players';
@@ -56,6 +57,9 @@ export class WannabeDAOService {
   draftOwner: string = "";
   ROUNDS = 14;
   carryOverCount = 0;
+  private draftDataUpdated = new Subject<void>();
+  public draftDataUpdated$ = this.draftDataUpdated.asObservable();
+  private refreshPoller?: Subscription;
 
   constructor(private httpClient: HttpClient, csvService: WannabeCsvDAOService, cookieService: CookieService) {
     this.http = httpClient;
@@ -67,6 +71,32 @@ export class WannabeDAOService {
     this.fetchWatchList().subscribe();
     this.fetchTeams().subscribe();
     this.fetchAveragePlayerCost().subscribe();
+    this.startPolling();
+  }
+
+  private startPolling() {
+    if (this.refreshPoller) {
+      return;
+    }
+
+    this.refreshPoller = interval(10000).subscribe(() => {
+      this.refreshDraftDataFromServer();
+    });
+  }
+
+  public refreshDraftDataFromServer() {
+    this.fullPlayerListInitialized = false;
+    this.draftedPlayerListInitialized = false;
+    this.draftInfoInitialized = false;
+    this.playerRankingsInitialized = false;
+    this.watchlistInitialized = false;
+
+    this.fetchPlayers().subscribe();
+    this.fetchDraftedPlayers().subscribe();
+    this.fetchTeams().subscribe();
+    this.fetchWatchList().subscribe();
+
+    this.draftDataUpdated.next();
   }
 
   public forceNewWatchList() {

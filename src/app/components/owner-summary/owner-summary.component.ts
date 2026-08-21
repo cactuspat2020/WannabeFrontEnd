@@ -71,6 +71,8 @@ export class OwnerSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.wannabeDAO.draftDataUpdated$.subscribe(() => this.refresh());
+
     // First get all the players
     this.wannabeDAO.fetchPlayers().subscribe((response: PlayerRecord[]) => {
       this.playerList = response;

@@ -43,6 +43,7 @@ export class WatchlistComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.wannabeDAO.draftDataUpdated$.subscribe(() => this.refresh());
     this.wannabeDAO.storeAuditRecord('WatchList');
     this.wannabeDAO.watchlistInitialized = false;
     this.wannabeDAO.fetchPlayers().subscribe((players: PlayerRecord[]) => {
